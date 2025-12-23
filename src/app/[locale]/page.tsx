@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslations } from 'next-intl';
@@ -239,10 +240,12 @@ export default function HomePage() {
                 
                 {/* Main Image Container */}
                 <div className="relative h-full w-full rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl backdrop-blur-sm">
-                  <img 
-                    src="/images/wbt-image-1.webp" 
+                  <Image
+                    src="/images/wbt-image-1.webp"
                     alt="Prince Alwaleed bin Talal"
-                    className="absolute inset-0 w-full h-full object-cover object-top z-0"
+                    fill
+                    className="object-cover object-top z-0"
+                    priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/60 via-transparent to-transparent z-10" />
                 </div>
