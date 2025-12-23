@@ -2,6 +2,23 @@
  * Site-wide constants
  */
 
+// GitHub Pages base path - used for static asset URLs
+export const REPO_NAME = 'waleed-bin-talal-website';
+
+// Get base path for assets (detects GitHub Pages at runtime)
+export function getBasePath(): string {
+  if (typeof window === 'undefined') return '';
+  return window.location.hostname.includes('github.io') ? `/${REPO_NAME}` : '';
+}
+
+// Get full asset path with base path prefix
+export function assetPath(path: string): string {
+  const base = getBasePath();
+  // Ensure path starts with /
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  return `${base}${normalizedPath}`;
+}
+
 export const SITE_CONFIG = {
   name: 'Prince Alwaleed bin Talal',
   title: 'Prince Alwaleed bin Talal | Investor & Philanthropist',

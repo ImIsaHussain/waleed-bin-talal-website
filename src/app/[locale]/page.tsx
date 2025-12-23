@@ -1,7 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
-import Image from 'next/image';
+import { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslations } from 'next-intl';
@@ -22,7 +21,7 @@ import ParallaxSection, {
   FadeIn
 } from '@/components/animations/ParallaxSection';
 import { MagneticButton } from '@/components/animations';
-import { STATS } from '@/lib/constants';
+import { STATS, assetPath } from '@/lib/constants';
 import { ArrowRight, ArrowUpRight, Building2, Heart, Landmark, Globe2, Award, Users } from 'lucide-react';
 
 // Register GSAP plugins
@@ -34,6 +33,12 @@ export default function HomePage() {
   const t = useTranslations('home');
   const heroRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
+  const [heroImageSrc, setHeroImageSrc] = useState('/images/wbt-image-1.webp');
+
+  // Set correct image path for GitHub Pages
+  useEffect(() => {
+    setHeroImageSrc(assetPath('/images/wbt-image-1.webp'));
+  }, []);
 
   useEffect(() => {
     if (!heroRef.current || !nameRef.current) return;
@@ -240,12 +245,11 @@ export default function HomePage() {
                 
                 {/* Main Image Container */}
                 <div className="relative h-full w-full rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl backdrop-blur-sm">
-                  <Image
-                    src="/images/wbt-image-1.webp"
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={heroImageSrc}
                     alt="Prince Alwaleed bin Talal"
-                    fill
-                    className="object-cover object-top z-0"
-                    priority
+                    className="absolute inset-0 w-full h-full object-cover object-top z-0"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/60 via-transparent to-transparent z-10" />
                 </div>
