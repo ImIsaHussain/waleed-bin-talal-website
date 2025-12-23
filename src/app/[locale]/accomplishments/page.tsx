@@ -11,7 +11,6 @@ import {
   GeometricGrid,
   ArabesqueCorner,
   GeometricDivider,
-  FloatingShapes,
 } from '@/components/ui/GeometricPatterns';
 import { AnimatedHeading, AnimatedCounter } from '@/components/animations/TextReveal';
 import ParallaxSection, { FadeIn } from '@/components/animations/ParallaxSection';
@@ -612,7 +611,7 @@ export default function AccomplishmentsPage() {
                     { icon: TrendingUp, title: 'Early Tech Investor', desc: 'Pioneering investments in Apple, Twitter, and emerging platforms' },
                     { icon: Globe2, title: 'Global Presence', desc: 'Strategic holdings across Americas, Europe, Middle East, and Asia' },
                     { icon: Briefcase, title: 'Diversified Portfolio', desc: '18+ sectors from hospitality to healthcare, finance to technology' },
-                  ].map((item, index) => (
+                  ].map((item) => (
                     <div
                       key={item.title}
                       className="flex gap-4 p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl hover:bg-white/10 hover:border-regal-gold/30 transition-all duration-300"

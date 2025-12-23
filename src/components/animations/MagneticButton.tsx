@@ -70,7 +70,7 @@ export default function MagneticButton({
     ...(as === 'a' && href ? { href } : {}),
   };
 
-  return <Component {...(props as any)}>{children}</Component>;
+  return <Component {...(props as Record<string, unknown>)}>{children}</Component>;
 }
 
 // Magnetic wrapper for any element

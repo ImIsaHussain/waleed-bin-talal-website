@@ -11,7 +11,6 @@ import {
   ArabesqueCorner,
   GeometricDivider,
 } from '@/components/ui/GeometricPatterns';
-import { AnimatedHeading } from '@/components/animations/TextReveal';
 import ParallaxSection, { FadeIn } from '@/components/animations/ParallaxSection';
 import {
   Camera,
@@ -19,10 +18,6 @@ import {
   Video,
   Calendar,
   Play,
-  X,
-  ChevronLeft,
-  ChevronRight,
-  Filter,
   Grid3X3,
   LayoutGrid,
 } from 'lucide-react';

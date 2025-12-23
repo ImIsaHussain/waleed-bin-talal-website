@@ -27,7 +27,6 @@ import {
   Building2,
   Briefcase,
   Newspaper,
-  ExternalLink,
   ArrowUpRight,
   Heart,
 } from 'lucide-react';

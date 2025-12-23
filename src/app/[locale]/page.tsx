@@ -13,7 +13,7 @@ import {
   FloatingShapes,
   GeometricDivider
 } from '@/components/ui/GeometricPatterns';
-import TextReveal, {
+import {
   AnimatedHeading,
   AnimatedCounter
 } from '@/components/animations/TextReveal';
@@ -245,7 +245,6 @@ export default function HomePage() {
                 
                 {/* Main Image Container */}
                 <div className="relative h-full w-full rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl backdrop-blur-sm">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={heroImageSrc}
                     alt="Prince Alwaleed bin Talal"

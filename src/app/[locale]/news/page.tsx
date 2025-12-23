@@ -11,12 +11,10 @@ import {
   ArabesqueCorner,
   GeometricDivider,
 } from '@/components/ui/GeometricPatterns';
-import { AnimatedHeading } from '@/components/animations/TextReveal';
 import ParallaxSection, { FadeIn } from '@/components/animations/ParallaxSection';
 import {
   Newspaper,
   Calendar,
-  ExternalLink,
   Rss,
   TrendingUp,
   Heart,

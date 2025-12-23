@@ -256,7 +256,7 @@ export default function AchievementsPage() {
 
             {/* Highlight badges */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {highlights.map((item, index) => (
+              {highlights.map((item) => (
                 <div
                   key={item.label}
                   className="ach-highlight p-4 lg:p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl text-center group hover:bg-white/10 hover:border-regal-gold/30 transition-all duration-500"

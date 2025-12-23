@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
-  const [isClicking, setIsClicking] = useState(false);
+  const [, setIsClicking] = useState(false);
   const [cursorText, setCursorText] = useState('');
   const cursorRef = useRef<HTMLDivElement>(null);
 
@@ -66,7 +66,7 @@ export default function CustomCursor() {
       window.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('mouseover', handleElementHover);
     };
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, clickScale]);
 
   // Hide on touch devices
   const [isTouchDevice, setIsTouchDevice] = useState(true);
