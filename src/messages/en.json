@@ -1,0 +1,300 @@
+{
+  "metadata": {
+    "title": "Prince Alwaleed bin Talal | Investor & Philanthropist",
+    "description": "Official website of Prince Alwaleed bin Talal - global investor, philanthropist, and advocate for sustainable development."
+  },
+  "navigation": {
+    "home": "Home",
+    "biography": "Biography",
+    "accomplishments": "Accomplishments",
+    "achievements": "Achievements",
+    "family": "Family",
+    "philanthropy": "Philanthropy",
+    "gallery": "Gallery",
+    "news": "News & Media",
+    "contact": "Contact"
+  },
+  "common": {
+    "readMore": "Read More",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "backToTop": "Back to Top",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "close": "Close",
+    "search": "Search",
+    "share": "Share",
+    "download": "Download"
+  },
+  "home": {
+    "hero": {
+      "title": "Prince Alwaleed bin Talal",
+      "subtitle": "Global Investor | Philanthropist | Visionary Leader",
+      "cta": {
+        "biography": "Explore Biography",
+        "philanthropy": "View Philanthropy"
+      }
+    },
+    "welcome": {
+      "title": "A Legacy of Innovation and Impact",
+      "description": "For over five decades, I've dedicated my career to identifying transformative investment opportunities and supporting communities across 190 countries. From founding Kingdom Holding Company to joining the Giving Pledge, my journey reflects a commitment to creating lasting value and positive change.",
+      "cta": "Read My Story"
+    },
+    "stats": {
+      "sectors": "Industry Sectors",
+      "countries": "Countries Reached",
+      "years": "Years in Business",
+      "givingPledge": "Giving Pledge"
+    },
+    "focus": {
+      "title": "Areas of Focus",
+      "investments": {
+        "title": "Investments",
+        "description": "Strategic investments across 18 sectors including technology, hospitality, finance, and media.",
+        "cta": "View Portfolio"
+      },
+      "philanthropy": {
+        "title": "Philanthropy",
+        "description": "Alwaleed Philanthropies reaches 190+ countries, focusing on empowerment, disaster relief, and bridging cultures.",
+        "cta": "Our Impact"
+      },
+      "vision": {
+        "title": "Vision 2030",
+        "description": "Contributing to Saudi Arabia's transformation through strategic investments and social development initiatives.",
+        "cta": "Learn More"
+      }
+    },
+    "cta": {
+      "title": "Join the Conversation",
+      "description": "Share your story, explore my work, or connect with our team.",
+      "button": "Get in Touch"
+    }
+  },
+  "biography": {
+    "title": "Biography",
+    "subtitle": "The Lineage of Innovation",
+    "earlyLife": {
+      "title": "Early Life and Royal Lineage",
+      "content": "Born on March 7, 1955, into the esteemed Saudi royal family, I am the grandson of King Abdulaziz, the visionary founder of the Kingdom of Saudi Arabia. My father, Prince Talal bin Abdulaziz, was known as a progressive reformer who championed social development and modernization. My mother, Princess Mona El Solh, daughter of Lebanon's first Prime Minister Riad El Solh, brought a unique international perspective to my upbringing."
+    },
+    "education": {
+      "title": "Education",
+      "content": "I pursued my education in the United States, earning a degree in Business Administration from Menlo College in California, followed by a Master's degree in Social Science from Syracuse University. These formative years abroad provided me with a global outlook that would later shape my approach to business and philanthropy."
+    },
+    "career": {
+      "title": "Career and Business Ventures",
+      "content": "In 1980, I founded Kingdom Holding Company with modest capital and a bold vision. Through strategic investments in undervalued companies and sectors poised for growth, I built an empire spanning finance, technology, hospitality, media, and real estate. My approach has always been to seek long-term value creation aligned with positive societal impact."
+    },
+    "values": {
+      "title": "Personal Values",
+      "content": "Beyond business, I am committed to progressive values, philanthropy, and social development. My passion for women's empowerment, interfaith dialogue, and sustainable development has driven countless initiatives aimed at creating a more equitable world."
+    }
+  },
+  "accomplishments": {
+    "title": "Accomplishments",
+    "subtitle": "Building a Global Investment Empire",
+    "intro": "Through Kingdom Holding Company, I've built strategic positions across 18 sectors, from technology giants to luxury hospitality, always seeking investments that combine financial returns with positive impact.",
+    "sectors": {
+      "finance": {
+        "title": "Finance",
+        "description": "Major stakeholder in Citigroup since 1991, playing a pivotal role in stabilizing global banking during critical periods."
+      },
+      "technology": {
+        "title": "Technology",
+        "description": "Early investor in transformative platforms including Apple, X (Twitter), Snapchat, xAI, Meta, and Uber."
+      },
+      "hospitality": {
+        "title": "Hospitality",
+        "description": "Owner of iconic properties including The Savoy, The Plaza, George V, and Four Seasons hotels worldwide."
+      },
+      "media": {
+        "title": "Media",
+        "description": "Founded Rotana Group, the largest entertainment company in the Middle East, and invested in 21st Century Fox and News Corp."
+      },
+      "realEstate": {
+        "title": "Real Estate",
+        "description": "Developer of Jeddah Tower through Jeddah Economic Company, pioneering the future of urban infrastructure."
+      }
+    },
+    "saudiContribution": {
+      "title": "Contributing to Saudi Arabia's Development",
+      "content": "My investments have played a vital role in Saudi Arabia's economic transformation, creating thousands of jobs, developing major infrastructure, and supporting Vision 2030's objectives to diversify the economy beyond oil."
+    }
+  },
+  "achievements": {
+    "title": "Achievements",
+    "subtitle": "Global Recognition and Impact",
+    "intro": "Awards and recognition are humbling reminders of responsibility. Each honor represents not just past achievements, but future commitments to the communities and causes that matter most.",
+    "categories": {
+      "influence": {
+        "title": "Global Influence",
+        "items": [
+          "TIME 100 Most Influential People",
+          "Forbes World's Most Powerful People",
+          "Arabian Business Power 100"
+        ]
+      },
+      "humanitarian": {
+        "title": "Humanitarian Recognition",
+        "items": [
+          "Order of the Republic - Multiple Nations",
+          "UNESCO Humanitarian Award",
+          "Global Philanthropist Recognition"
+        ]
+      },
+      "business": {
+        "title": "Business Excellence",
+        "items": [
+          "Forbes Billionaires List",
+          "Top Global Investor Recognition",
+          "Hospitality Industry Leadership"
+        ]
+      }
+    },
+    "diplomacy": {
+      "title": "International Diplomacy",
+      "content": "Through strategic investments and philanthropic initiatives, I've worked to build bridges between nations and foster interfaith dialogue, contributing to global peace and understanding."
+    }
+  },
+  "family": {
+    "title": "Family",
+    "subtitle": "Heritage and Legacy",
+    "intro": "I am the product of three remarkable lineages: my grandfather King Abdulaziz's vision for Saudi Arabia, my father Prince Talal's commitment to reform, and my mother's family's dedication to Arab independence and democracy.",
+    "lineage": {
+      "title": "Royal Lineage",
+      "grandfather": {
+        "name": "King Abdulaziz Al Saud",
+        "role": "Founder of the Kingdom of Saudi Arabia",
+        "description": "United disparate tribes into one sovereign nation, laying the foundation for modern Saudi Arabia."
+      },
+      "father": {
+        "name": "Prince Talal bin Abdulaziz",
+        "role": "Progressive Reformer",
+        "description": "Champion of social development, modernization, and economic progress in the Kingdom."
+      },
+      "mother": {
+        "name": "Princess Mona El Solh",
+        "role": "Lebanese Heritage",
+        "description": "Daughter of Riad El Solh, Lebanon's first Prime Minister, bringing international perspective to our family."
+      }
+    },
+    "nextGeneration": {
+      "title": "The Next Generation",
+      "content": "My children continue the family legacy of leadership and service. Princess Reem and Prince Khaled bin Alwaleed carry forward our values through their own philanthropic and business endeavors, including Prince Khaled's role as Chairman of the Saudi Sports for All Federation."
+    }
+  },
+  "philanthropy": {
+    "title": "Philanthropy",
+    "subtitle": "Alwaleed Philanthropies",
+    "intro": "Wealth carries responsibility. Through Alwaleed Philanthropies, we've reached over 190 countries, impacting more than 1 billion lives. In 2015, I became the first Arab Muslim to join the Giving Pledge, committing the majority of my wealth to charitable causes.",
+    "pillars": {
+      "title": "Four Pillars of Impact",
+      "empowerment": {
+        "title": "Empowering Women & Youth",
+        "description": "Funding scholarships, entrepreneurship programs, and leadership initiatives to create opportunities for the next generation."
+      },
+      "community": {
+        "title": "Developing Communities",
+        "description": "Building infrastructure, providing housing, and supporting sustainable development in underserved communities."
+      },
+      "disaster": {
+        "title": "Disaster Relief",
+        "description": "Rapid response funding for natural disasters and humanitarian crises worldwide."
+      },
+      "culture": {
+        "title": "Bridging Cultures",
+        "description": "Supporting interfaith dialogue and cultural understanding through endowments at leading universities."
+      }
+    },
+    "impact": {
+      "title": "Impact by the Numbers",
+      "countries": "Countries Reached",
+      "beneficiaries": "Lives Impacted",
+      "initiatives": "Active Initiatives",
+      "partners": "Global Partners"
+    },
+    "givingPledge": {
+      "title": "The Giving Pledge",
+      "content": "In 2015, I joined Warren Buffett and Bill Gates' Giving Pledge, becoming the first Arab Muslim to make this commitment. This wasn't a new direction—it was a public formalization of a lifelong commitment inspired by my grandfather's principle that leadership means service."
+    }
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "A Visual Journey",
+    "intro": "Explore a visual journey through my life and achievements. From business milestones to charitable endeavors, these images and videos highlight the remarkable impact we've made together.",
+    "categories": {
+      "all": "All",
+      "business": "Business",
+      "philanthropy": "Philanthropy",
+      "family": "Family",
+      "diplomatic": "Diplomatic"
+    },
+    "timeline": "Interactive Timeline"
+  },
+  "news": {
+    "title": "News & Media",
+    "subtitle": "Latest Updates",
+    "intro": "Stay current with the latest investments, philanthropic initiatives, and public engagements. These updates come from official Kingdom Holding Company announcements, Alwaleed Philanthropies news, and media appearances.",
+    "categories": {
+      "all": "All Updates",
+      "investments": "Investments",
+      "philanthropy": "Philanthropy",
+      "media": "Media Appearances",
+      "awards": "Awards"
+    },
+    "readMore": "Read Full Article",
+    "source": "Source"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Share Your Story",
+    "intro": "Throughout my journey, I've been privileged to meet remarkable people from every corner of the world. This space is for you to share how our paths have crossed, or how my work has touched your life or community.",
+    "guestbook": {
+      "title": "Guest Registry",
+      "categories": {
+        "impact": "Philanthropic Impact",
+        "business": "Business Partnership",
+        "inspiration": "Inspiration",
+        "general": "General Message"
+      },
+      "form": {
+        "name": "Your Name",
+        "email": "Email Address",
+        "category": "Message Category",
+        "message": "Your Message",
+        "submit": "Submit Message",
+        "success": "Thank you for your message! It will be reviewed before appearing in our guestbook.",
+        "error": "There was an error submitting your message. Please try again."
+      }
+    },
+    "info": {
+      "title": "Contact Information",
+      "sponsor": "Site Sponsor",
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "mediaInquiries": "For media inquiries",
+      "businessInquiries": "For business inquiries"
+    }
+  },
+  "footer": {
+    "about": {
+      "title": "About",
+      "description": "Prince Alwaleed bin Talal is a global investor, philanthropist, and advocate for sustainable development, reaching communities in over 190 countries."
+    },
+    "quickLinks": {
+      "title": "Quick Links"
+    },
+    "connect": {
+      "title": "Connect"
+    },
+    "legal": {
+      "copyright": "© {year} Prince Alwaleed bin Talal. All rights reserved.",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use",
+      "sponsor": "Site managed by Alpha International Group"
+    }
+  }
+}
