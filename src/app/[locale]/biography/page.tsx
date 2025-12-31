@@ -415,20 +415,11 @@ export default function BiographyPage() {
               <Quote className="w-12 h-12 text-regal-gold mx-auto mb-8 opacity-60" />
 
               {/* Quote text */}
-              <blockquote className="text-2xl lg:text-3xl font-serif text-white leading-relaxed mb-8">
-                &ldquo;His grandfather taught him that leadership means service. His father
-                showed him that reform requires courage. His mother gave him a global
-                perspective. These three pillars guide every decision he makes.&rdquo;
+              <blockquote className="text-2xl lg:text-3xl font-serif text-white leading-relaxed">
+                &ldquo;My grandfather taught me that leadership means service. My father
+                showed me that reform requires courage. My mother gave me a global
+                perspective. These three pillars guide every decision I make.&rdquo;
               </blockquote>
-
-              {/* Attribution */}
-              <div className="flex items-center justify-center gap-4">
-                <div className="w-12 h-px bg-regal-gold" />
-                <cite className="text-regal-gold font-medium text-lg not-italic">
-                  HRH Prince Alwaleed bin Talal
-                </cite>
-                <div className="w-12 h-px bg-regal-gold" />
-              </div>
             </FadeIn>
           </Container>
         </section>

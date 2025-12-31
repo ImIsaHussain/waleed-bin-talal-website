@@ -589,18 +589,10 @@ export default function FamilyPage() {
           <FadeIn className="text-center">
             <GeometricDivider variant="star" className="text-regal-gold mx-auto mb-8" />
 
-            <blockquote className="text-xl lg:text-2xl font-serif text-charcoal leading-relaxed mb-8 italic">
+            <blockquote className="text-xl lg:text-2xl font-serif text-charcoal leading-relaxed italic">
               &ldquo;The values passed down through generations—service, courage, and
-              global perspective—are the foundation upon which the family builds its future.&rdquo;
+              global perspective—are the foundation upon which my family builds its future.&rdquo;
             </blockquote>
-
-            <div className="flex items-center justify-center gap-4">
-              <div className="w-12 h-px bg-regal-gold" />
-              <cite className="text-regal-gold font-medium not-italic">
-                Prince Alwaleed bin Talal
-              </cite>
-              <div className="w-12 h-px bg-regal-gold" />
-            </div>
           </FadeIn>
         </Container>
       </section>
