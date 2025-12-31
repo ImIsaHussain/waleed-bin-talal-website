@@ -235,21 +235,36 @@ export default function PhilanthropyPage() {
           <GeometricGrid className="text-regal-gold/5" />
         </div>
 
-        {/* Decorative stars */}
+        {/* Decorative stars with rotation */}
         <EightPointStar
-          className="philanthropy-star absolute top-20 right-[15%] text-regal-gold/20"
+          className="philanthropy-star absolute top-20 right-[15%] text-regal-gold/20 rotate-[22deg]"
           size={120}
           strokeWidth={0.5}
         />
         <EightPointStar
-          className="philanthropy-star absolute bottom-32 left-[10%] text-regal-gold/10"
+          className="philanthropy-star absolute bottom-32 left-[10%] text-regal-gold/10 -rotate-[15deg]"
           size={180}
           strokeWidth={0.5}
         />
         <EightPointStar
-          className="philanthropy-star absolute top-1/2 right-[5%] text-regal-gold/5"
+          className="philanthropy-star absolute top-1/2 right-[5%] text-regal-gold/8 rotate-[40deg]"
           size={250}
           strokeWidth={0.3}
+        />
+        <EightPointStar
+          className="philanthropy-star absolute top-1/4 left-[5%] text-regal-gold/12 -rotate-[28deg]"
+          size={160}
+          strokeWidth={0.4}
+        />
+        <EightPointStar
+          className="philanthropy-star absolute bottom-20 right-[25%] text-regal-gold/15 rotate-12"
+          size={90}
+          strokeWidth={0.6}
+        />
+        <EightPointStar
+          className="philanthropy-star absolute top-36 left-[20%] text-regal-gold/8 rotate-[55deg]"
+          size={70}
+          strokeWidth={0.7}
         />
 
         {/* Corner accents */}
@@ -329,7 +344,7 @@ export default function PhilanthropyPage() {
           {/* Section header */}
           <div className="text-center mb-16">
             <FadeIn>
-              <span className="text-label text-regal-gold mb-4 block">Our Approach</span>
+              <span className="text-label text-regal-gold mb-4 block">The Approach</span>
             </FadeIn>
             <AnimatedHeading as="h2" className="text-title font-serif text-charcoal">
               {t('pillars.title')}
@@ -345,7 +360,7 @@ export default function PhilanthropyPage() {
                 key={pillar.key}
                 className="pillar-card group flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-[45vw] lg:w-[380px] snap-center"
               >
-                <div className="relative bg-white rounded-3xl overflow-hidden border border-border hover:border-regal-gold/30 transition-all duration-500 hover:shadow-2xl h-full">
+                <div className="relative bg-white rounded-3xl overflow-hidden border border-border hover:border-regal-gold/30 transition-all duration-500 hover:shadow-xl h-full">
                   {/* Top Visual Area */}
                   <div className={`relative h-40 bg-gradient-to-br ${pillar.gradient} overflow-hidden`}>
                     {/* Large background icon */}

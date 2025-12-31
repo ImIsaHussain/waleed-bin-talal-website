@@ -259,16 +259,36 @@ export default function NewsPage() {
           <GeometricGrid className="text-regal-gold/5" />
         </div>
 
-        {/* Decorative stars */}
+        {/* Decorative stars with rotation */}
         <EightPointStar
-          className="news-star absolute top-28 right-[15%] text-regal-gold/20"
+          className="news-star absolute top-28 right-[15%] text-regal-gold/20 rotate-[20deg]"
           size={130}
           strokeWidth={0.5}
         />
         <EightPointStar
-          className="news-star absolute bottom-32 left-[10%] text-regal-gold/10"
+          className="news-star absolute bottom-32 left-[10%] text-regal-gold/10 -rotate-[25deg]"
           size={180}
           strokeWidth={0.5}
+        />
+        <EightPointStar
+          className="news-star absolute top-1/3 left-[4%] text-regal-gold/12 rotate-[38deg]"
+          size={150}
+          strokeWidth={0.4}
+        />
+        <EightPointStar
+          className="news-star absolute top-1/2 right-[8%] text-regal-gold/8 -rotate-[12deg]"
+          size={220}
+          strokeWidth={0.3}
+        />
+        <EightPointStar
+          className="news-star absolute bottom-20 right-[28%] text-regal-gold/15 rotate-[52deg]"
+          size={75}
+          strokeWidth={0.6}
+        />
+        <EightPointStar
+          className="news-star absolute top-24 left-[22%] text-regal-gold/10 -rotate-[35deg]"
+          size={60}
+          strokeWidth={0.7}
         />
 
         {/* Corner accents */}

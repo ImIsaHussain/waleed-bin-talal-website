@@ -67,13 +67,14 @@
    BASE STYLES
    ============================================ */
 
-* {
-  cursor: none;
+/* Custom cursor - only hide default cursor when custom cursor is active */
+.custom-cursor-active * {
+  cursor: none !important;
 }
 
 @media (hover: none) {
-  * {
-    cursor: auto;
+  .custom-cursor-active * {
+    cursor: auto !important;
   }
 }
 

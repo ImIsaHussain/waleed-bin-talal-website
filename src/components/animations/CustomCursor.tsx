@@ -68,13 +68,29 @@ export default function CustomCursor() {
     };
   }, [mouseX, mouseY, clickScale]);
 
-  // Hide on touch devices
-  const [isTouchDevice, setIsTouchDevice] = useState(true);
+  // Only show on Chrome desktop (not mobile, not other browsers)
+  const [shouldShow, setShouldShow] = useState(false);
   useEffect(() => {
-    setIsTouchDevice('ontouchstart' in window);
+    const isChrome = /Chrome/.test(navigator.userAgent) && !/Edg|OPR/.test(navigator.userAgent);
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    const shouldShowCursor = isChrome && !isMobile && !isTouchDevice;
+    setShouldShow(shouldShowCursor);
+
+    // Add/remove class on body to control default cursor visibility
+    if (shouldShowCursor) {
+      document.body.classList.add('custom-cursor-active');
+    } else {
+      document.body.classList.remove('custom-cursor-active');
+    }
+
+    return () => {
+      document.body.classList.remove('custom-cursor-active');
+    };
   }, []);
 
-  if (isTouchDevice) return null;
+  if (!shouldShow) return null;
 
   return (
     <>

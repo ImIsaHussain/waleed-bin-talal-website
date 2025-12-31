@@ -174,20 +174,35 @@ export default function GalleryPage() {
           <GeometricGrid className="text-regal-gold/5" />
         </div>
 
-        {/* Decorative stars */}
+        {/* Decorative stars with rotation */}
         <EightPointStar
-          className="gallery-star absolute top-24 right-[12%] text-regal-gold/20"
+          className="gallery-star absolute top-24 right-[12%] text-regal-gold/20 rotate-[28deg]"
           size={140}
           strokeWidth={0.5}
         />
         <EightPointStar
-          className="gallery-star absolute bottom-36 left-[8%] text-regal-gold/10"
+          className="gallery-star absolute bottom-36 left-[8%] text-regal-gold/10 -rotate-[18deg]"
           size={200}
           strokeWidth={0.5}
         />
         <EightPointStar
-          className="gallery-star absolute top-1/3 left-[20%] text-regal-gold/5"
+          className="gallery-star absolute top-1/3 left-[20%] text-regal-gold/8 rotate-[42deg]"
           size={80}
+          strokeWidth={0.5}
+        />
+        <EightPointStar
+          className="gallery-star absolute top-1/2 right-[6%] text-regal-gold/12 -rotate-[32deg]"
+          size={180}
+          strokeWidth={0.4}
+        />
+        <EightPointStar
+          className="gallery-star absolute bottom-24 right-[22%] text-regal-gold/15 rotate-[15deg]"
+          size={65}
+          strokeWidth={0.7}
+        />
+        <EightPointStar
+          className="gallery-star absolute top-20 left-[5%] text-regal-gold/10 -rotate-45"
+          size={110}
           strokeWidth={0.5}
         />
 

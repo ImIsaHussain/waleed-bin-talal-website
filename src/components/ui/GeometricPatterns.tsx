@@ -8,18 +8,20 @@ export function EightPointStar({
   size = 100,
   strokeWidth = 2,
   animated = false,
+  doubled = false,
 }: {
   className?: string;
   size?: number;
   strokeWidth?: number;
   animated?: boolean;
+  doubled?: boolean;
 }) {
-  return (
+  const starSvg = (extraClass?: string) => (
     <svg
       width={size}
       height={size}
       viewBox="0 0 100 100"
-      className={cn(animated && 'animate-spin-slow', className)}
+      className={cn(animated && 'animate-spin-slow', doubled ? 'absolute inset-0' : '', extraClass, !doubled && className)}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -49,6 +51,17 @@ export function EightPointStar({
       />
     </svg>
   );
+
+  if (doubled) {
+    return (
+      <div className={cn('relative', className)} style={{ width: size, height: size }}>
+        {starSvg()}
+        {starSvg('rotate-45')}
+      </div>
+    );
+  }
+
+  return starSvg();
 }
 
 // Enhanced Islamic geometric grid pattern - more visible

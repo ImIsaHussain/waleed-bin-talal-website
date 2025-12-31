@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslations } from 'next-intl';
@@ -14,6 +14,7 @@ import {
 import { AnimatedHeading } from '@/components/animations/TextReveal';
 import ParallaxSection, { FadeIn } from '@/components/animations/ParallaxSection';
 import { Crown, Users, Heart, Sparkles } from 'lucide-react';
+import { assetPath } from '@/lib/constants';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -25,6 +26,27 @@ export default function FamilyPage() {
   const heroRef = useRef<HTMLDivElement>(null);
   const lineageRef = useRef<HTMLDivElement>(null);
 
+  // Image paths state for GitHub Pages compatibility
+  const [imagePaths, setImagePaths] = useState({
+    grandfather: '/images/King Abdulaziz Al Saud.png',
+    father: '/images/Prince Talal bin Abdulaziz.jpg',
+    mother: '/images/Princess Mona El Solh.jpeg',
+    princeKhaled: '/images/Prince Khaled.jpg',
+    princessReem: '/images/Princess Reem.jpg',
+    heroImage: '/images/wbt-image-10.png',
+  });
+
+  useEffect(() => {
+    setImagePaths({
+      grandfather: assetPath('/images/King Abdulaziz Al Saud.png'),
+      father: assetPath('/images/Prince Talal bin Abdulaziz.jpg'),
+      mother: assetPath('/images/Princess Mona El Solh.jpeg'),
+      princeKhaled: assetPath('/images/Prince Khaled.jpg'),
+      princessReem: assetPath('/images/Princess Reem.jpg'),
+      heroImage: assetPath('/images/wbt-image-10.png'),
+    });
+  }, []);
+
   // Grandfather data (founder)
   const grandfather = {
     key: 'grandfather',
@@ -34,6 +56,7 @@ export default function FamilyPage() {
     era: '1875 - 1953',
     icon: Crown,
     relationship: 'Grandfather',
+    image: imagePaths.grandfather,
   };
 
   // Parents data
@@ -46,15 +69,35 @@ export default function FamilyPage() {
       era: '1931 - 2018',
       icon: Sparkles,
       relationship: 'Father',
+      image: imagePaths.father,
     },
     {
       key: 'mother',
       name: t('lineage.mother.name'),
       role: t('lineage.mother.role'),
       description: t('lineage.mother.description'),
-      era: 'Lebanese Heritage',
+      era: '1938 - 2025',
       icon: Heart,
       relationship: 'Mother',
+      image: imagePaths.mother,
+    },
+  ];
+
+  // Children data
+  const children = [
+    {
+      key: 'khaled',
+      name: 'Prince Khaled bin Alwaleed',
+      role: 'Investor & Philanthropist',
+      description: 'Chairman of the Saudi Sports for All Federation and advocate for sustainable investment.',
+      image: imagePaths.princeKhaled,
+    },
+    {
+      key: 'reem',
+      name: 'Princess Reem bint Alwaleed',
+      role: 'Businesswoman',
+      description: 'Continuing the family legacy of leadership and philanthropic endeavors.',
+      image: imagePaths.princessReem,
     },
   ];
 
@@ -175,23 +218,38 @@ export default function FamilyPage() {
           ============================================ */}
       <section
         ref={heroRef}
-        className="relative min-h-[70vh] flex items-center bg-deep-navy overflow-hidden"
+        className="relative min-h-[80vh] flex items-center bg-deep-navy overflow-hidden"
       >
         {/* Background Pattern */}
         <div className="absolute inset-0">
           <GeometricGrid className="text-regal-gold/8" />
         </div>
 
-        {/* Decorative floating stars */}
+        {/* Decorative floating stars with rotation */}
         <EightPointStar
-          className="fam-float-star absolute top-24 right-[12%] text-regal-gold/20"
+          className="fam-float-star absolute top-24 right-[12%] text-regal-gold/20 rotate-[18deg]"
           size={140}
-          strokeWidth={1.5}
+          strokeWidth={0.6}
         />
         <EightPointStar
-          className="fam-float-star absolute bottom-32 left-[8%] text-regal-gold/15"
+          className="fam-float-star absolute bottom-32 left-[8%] text-regal-gold/15 -rotate-[25deg]"
           size={100}
-          strokeWidth={1.5}
+          strokeWidth={0.5}
+        />
+        <EightPointStar
+          className="fam-float-star absolute top-1/3 left-[3%] text-regal-gold/12 rotate-[35deg]"
+          size={200}
+          strokeWidth={0.4}
+        />
+        <EightPointStar
+          className="fam-float-star absolute bottom-20 right-[20%] text-regal-gold/18 -rotate-12"
+          size={80}
+          strokeWidth={0.7}
+        />
+        <EightPointStar
+          className="fam-float-star absolute top-40 left-[25%] text-regal-gold/10 rotate-45"
+          size={60}
+          strokeWidth={0.8}
         />
 
         {/* Corner accents */}
@@ -200,33 +258,50 @@ export default function FamilyPage() {
         <ArabesqueCorner position="bottom-left" className="text-regal-gold/40" />
         <ArabesqueCorner position="bottom-right" className="text-regal-gold/40" />
 
-        {/* Softer gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/20 via-deep-navy/5 to-deep-navy/40" />
+        {/* Hero image - positioned at bottom right, behind gradient */}
+        <div className="absolute bottom-0 right-0 z-[1] hidden lg:block">
+          <div className="fam-hero-image relative w-[560px] h-[680px]">
+            <img
+              src={imagePaths.heroImage}
+              alt="Prince Alwaleed bin Talal"
+              className="w-full h-full object-cover object-top opacity-90"
+            />
+            {/* Gradient fade to blend with background */}
+            <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-deep-navy/80" />
+            <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-deep-navy/60 z-[1]" />
+          </div>
+        </div>
+
+        {/* Softer bottom fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/50 to-transparent z-[1]" />
 
         <Container className="relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            {/* Hero Icon */}
-            <div className="fam-hero-icon relative w-28 h-28 mx-auto mb-8">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-regal-gold/20 to-regal-gold/5 blur-xl" />
-              <div className="relative w-full h-full rounded-full bg-gradient-to-br from-regal-gold/30 to-transparent flex items-center justify-center border border-regal-gold/30">
-                <Users className="w-14 h-14 text-regal-gold" />
+          <div className="lg:mr-[420px]">
+            {/* Text content - pushed right on desktop */}
+            <div className="text-center lg:text-left">
+              {/* Hero Icon */}
+              <div className="fam-hero-icon relative w-28 h-28 mx-auto lg:mx-0 mb-8">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-regal-gold/20 to-regal-gold/5 blur-xl" />
+                <div className="relative w-full h-full rounded-full bg-gradient-to-br from-regal-gold/30 to-transparent flex items-center justify-center border border-regal-gold/30">
+                  <Users className="w-14 h-14 text-regal-gold" />
+                </div>
               </div>
+
+              {/* Title */}
+              <h1 className="fam-hero-title text-display font-serif text-white mb-6">
+                {t('title')}
+              </h1>
+
+              {/* Subtitle */}
+              <p className="fam-hero-subtitle text-subtitle text-regal-gold-light font-light max-w-2xl mx-auto lg:mx-0">
+                {t('subtitle')}
+              </p>
             </div>
-
-            {/* Title */}
-            <h1 className="fam-hero-title text-display font-serif text-white mb-6">
-              {t('title')}
-            </h1>
-
-            {/* Subtitle */}
-            <p className="fam-hero-subtitle text-subtitle text-regal-gold-light font-light max-w-2xl mx-auto">
-              {t('subtitle')}
-            </p>
           </div>
         </Container>
 
         {/* Softer bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/50 to-transparent z-[1]" />
       </section>
 
       {/* ============================================
@@ -272,21 +347,23 @@ export default function FamilyPage() {
           </div>
 
           {/* Family Tree Layout */}
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             {/* Grandfather - Top (Founder) */}
             <div className="grandfather-card mb-8">
-              <div className="relative bg-white rounded-2xl border-2 border-regal-gold/30 p-8 text-center shadow-lg max-w-lg mx-auto">
+              <div className="relative bg-white rounded-2xl border-2 border-regal-gold/30 p-8 text-center shadow-lg max-w-lg mx-auto hover:shadow-xl hover:-translate-y-1 hover:border-regal-gold/50 transition-all duration-300">
                 {/* Crown badge */}
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-regal-gold rounded-full">
                   <span className="text-xs font-bold text-white uppercase tracking-wider">Grandfather</span>
                 </div>
 
-                {/* Portrait placeholder */}
-                <div className="relative w-24 h-24 mx-auto mb-4 mt-2">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-regal-gold/30 to-deep-navy/20" />
-                  <div className="absolute inset-2 rounded-full bg-cream flex items-center justify-center">
-                    <grandfather.icon className="w-10 h-10 text-regal-gold" />
-                  </div>
+                {/* Portrait */}
+                <div className="relative w-40 h-48 mx-auto mb-4 mt-2 overflow-hidden rounded-xl">
+                  <img
+                    src={grandfather.image}
+                    alt={grandfather.name}
+                    className="w-full h-full object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                 </div>
 
                 {/* Era badge */}
@@ -295,13 +372,13 @@ export default function FamilyPage() {
                 </div>
 
                 {/* Name & Role */}
-                <h3 className="text-2xl font-serif font-medium text-charcoal mb-1">
+                <h3 className="text-2xl lg:text-3xl font-serif font-medium text-charcoal mb-1">
                   {grandfather.name}
                 </h3>
-                <p className="text-regal-gold font-medium mb-3">{grandfather.role}</p>
+                <p className="text-regal-gold text-lg font-medium mb-3">{grandfather.role}</p>
 
                 {/* Description */}
-                <p className="text-muted text-sm leading-relaxed">
+                <p className="text-muted text-base leading-relaxed">
                   {grandfather.description}
                 </p>
               </div>
@@ -314,21 +391,23 @@ export default function FamilyPage() {
             <div className="hidden sm:block w-1/2 h-0.5 bg-regal-gold/40 mx-auto" />
 
             {/* Parents - Bottom Row */}
-            <div className="grid sm:grid-cols-2 gap-6 mt-6">
+            <div className="grid sm:grid-cols-2 gap-8 mt-6">
               {parents.map((parent) => (
                 <div key={parent.key} className="parent-card">
-                  <div className="relative bg-white rounded-2xl border border-border p-6 text-center hover:shadow-xl hover:-translate-y-1 hover:border-regal-gold/40 transition-all duration-300">
+                  <div className="relative bg-white rounded-2xl border border-border p-8 text-center hover:shadow-xl hover:-translate-y-1 hover:border-regal-gold/40 transition-all duration-300">
                     {/* Relationship badge */}
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-charcoal rounded-full">
                       <span className="text-[10px] font-bold text-white uppercase tracking-wider">{parent.relationship}</span>
                     </div>
 
-                    {/* Portrait placeholder */}
-                    <div className="relative w-20 h-20 mx-auto mb-4 mt-2">
-                      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-regal-gold/20 to-deep-navy/10" />
-                      <div className="absolute inset-2 rounded-full bg-cream flex items-center justify-center">
-                        <parent.icon className="w-8 h-8 text-regal-gold" />
-                      </div>
+                    {/* Portrait */}
+                    <div className="relative w-36 h-44 mx-auto mb-4 mt-2 overflow-hidden rounded-xl">
+                      <img
+                        src={parent.image}
+                        alt={parent.name}
+                        className={`w-full h-full object-cover object-top ${parent.key === 'mother' ? 'filter grayscale' : ''}`}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                     </div>
 
                     {/* Era badge */}
@@ -337,13 +416,13 @@ export default function FamilyPage() {
                     </div>
 
                     {/* Name & Role */}
-                    <h3 className="text-xl font-serif font-medium text-charcoal mb-1">
+                    <h3 className="text-xl lg:text-2xl font-serif font-medium text-charcoal mb-1">
                       {parent.name}
                     </h3>
-                    <p className="text-regal-gold text-sm font-medium mb-3">{parent.role}</p>
+                    <p className="text-regal-gold text-base font-medium mb-3">{parent.role}</p>
 
                     {/* Description */}
-                    <p className="text-muted text-sm leading-relaxed">
+                    <p className="text-muted text-base leading-relaxed">
                       {parent.description}
                     </p>
                   </div>
@@ -435,8 +514,8 @@ export default function FamilyPage() {
         <ArabesqueCorner position="bottom-right" className="text-regal-gold/25" />
 
         <Container className="relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <FadeIn className="text-center">
+          <div className="max-w-5xl mx-auto">
+            <FadeIn className="text-center mb-12">
               {/* Icon */}
               <div className="w-20 h-20 mx-auto mb-8 rounded-full bg-regal-gold-muted flex items-center justify-center">
                 <Users className="w-10 h-10 text-regal-gold" />
@@ -448,26 +527,53 @@ export default function FamilyPage() {
               </h2>
 
               {/* Content */}
-              <p className="text-body-lg text-muted leading-relaxed mb-10 max-w-2xl mx-auto">
+              <p className="text-body-lg text-muted leading-relaxed max-w-2xl mx-auto">
                 {t('nextGeneration.content')}
               </p>
+            </FadeIn>
 
-              {/* Children highlight */}
-              <div className="grid sm:grid-cols-2 gap-5 max-w-xl mx-auto">
-                <div className="p-5 bg-cream rounded-xl border border-border text-center group hover:border-regal-gold/50 hover:shadow-lg transition-all">
-                  <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-white flex items-center justify-center border-2 border-regal-gold/20">
-                    <Crown className="w-6 h-6 text-regal-gold" />
+            {/* Prince Khaled - Image Left, Text Right */}
+            <FadeIn className="mb-10">
+              <div className="bg-cream rounded-2xl border border-border p-8 lg:p-10 hover:border-regal-gold/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                  {/* Image */}
+                  <div className="relative w-full h-72 md:h-80 overflow-hidden rounded-xl">
+                    <img
+                      src={children[0].image}
+                      alt={children[0].name}
+                      className="w-full h-full object-cover object-top"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                   </div>
-                  <h4 className="text-lg font-serif text-charcoal mb-1">Princess Reem</h4>
-                  <p className="text-sm text-muted">Philanthropist & Leader</p>
+                  {/* Text */}
+                  <div className="text-center md:text-left">
+                    <h3 className="text-2xl lg:text-3xl font-serif text-charcoal mb-2">{children[0].name}</h3>
+                    <p className="text-regal-gold text-base font-medium mb-4">{children[0].role}</p>
+                    <p className="text-base text-muted leading-relaxed">{children[0].description}</p>
+                  </div>
                 </div>
+              </div>
+            </FadeIn>
 
-                <div className="p-5 bg-cream rounded-xl border border-border text-center group hover:border-regal-gold/50 hover:shadow-lg transition-all">
-                  <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-white flex items-center justify-center border-2 border-regal-gold/20">
-                    <Crown className="w-6 h-6 text-regal-gold" />
+            {/* Princess Reem - Text Left, Image Right */}
+            <FadeIn>
+              <div className="bg-cream rounded-2xl border border-border p-8 lg:p-10 hover:border-regal-gold/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                  {/* Text - First on mobile, second on desktop */}
+                  <div className="text-center md:text-left order-2 md:order-1">
+                    <h3 className="text-2xl lg:text-3xl font-serif text-charcoal mb-2">{children[1].name}</h3>
+                    <p className="text-regal-gold text-base font-medium mb-4">{children[1].role}</p>
+                    <p className="text-base text-muted leading-relaxed">{children[1].description}</p>
                   </div>
-                  <h4 className="text-lg font-serif text-charcoal mb-1">Prince Khaled</h4>
-                  <p className="text-sm text-muted">Chairman, Saudi Sports for All</p>
+                  {/* Image */}
+                  <div className="relative w-full h-72 md:h-80 overflow-hidden rounded-xl order-1 md:order-2">
+                    <img
+                      src={children[1].image}
+                      alt={children[1].name}
+                      className="w-full h-full object-cover object-top"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  </div>
                 </div>
               </div>
             </FadeIn>
@@ -485,7 +591,7 @@ export default function FamilyPage() {
 
             <blockquote className="text-xl lg:text-2xl font-serif text-charcoal leading-relaxed mb-8 italic">
               &ldquo;The values passed down through generations—service, courage, and
-              global perspective—are the foundation upon which we build our future.&rdquo;
+              global perspective—are the foundation upon which the family builds its future.&rdquo;
             </blockquote>
 
             <div className="flex items-center justify-center gap-4">

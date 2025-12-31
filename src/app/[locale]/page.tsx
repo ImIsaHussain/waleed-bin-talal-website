@@ -21,6 +21,7 @@ import ParallaxSection, {
   FadeIn
 } from '@/components/animations/ParallaxSection';
 import { MagneticButton } from '@/components/animations';
+import MaskReveal from '@/components/animations/MaskReveal';
 import { STATS, assetPath } from '@/lib/constants';
 import { ArrowRight, ArrowUpRight, Building2, Heart, Landmark, Globe2, Award, Users } from 'lucide-react';
 
@@ -34,6 +35,7 @@ export default function HomePage() {
   const heroRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
   const [heroImageSrc, setHeroImageSrc] = useState('/images/wbt-image-1.webp');
+  const [showMask, setShowMask] = useState(true);
 
   // Set correct image path for GitHub Pages
   useEffect(() => {
@@ -116,6 +118,9 @@ export default function HomePage() {
 
   return (
     <>
+      {/* Initial page load mask reveal animation */}
+      {showMask && <MaskReveal onComplete={() => setShowMask(false)} />}
+
       {/* ============================================
           HERO SECTION - Full Screen Immersive
           ============================================ */}

@@ -228,7 +228,7 @@ export default function AccomplishmentsPage() {
           ============================================ */}
       <section
         ref={heroRef}
-        className="relative min-h-[85vh] pt-20 lg:pt-24 pb-15 flex items-center bg-deep-navy overflow-hidden"
+        className="relative min-h-[85vh] pt-28 md:pt-24 lg:pt-24 pb-15 flex items-center bg-deep-navy overflow-hidden"
       >
         {/* Background Pattern */}
         <div className="absolute inset-0">
@@ -577,10 +577,10 @@ export default function AccomplishmentsPage() {
                 </h2>
                 <div className="space-y-6 text-gray-300 leading-relaxed">
                   <p>
-                    My investment philosophy has always been to identify companies and sectors
+                    Prince Alwaleed&apos;s investment philosophy has always been to identify companies and sectors
                     poised for transformative growth. From early investments in Apple and
                     Citigroup to recent ventures in artificial intelligence and social media,
-                    I seek opportunities that combine financial returns with lasting impact.
+                    he seeks opportunities that combine financial returns with lasting impact.
                   </p>
                   <p>
                     Kingdom Holding&apos;s portfolio reflects a commitment to innovation,

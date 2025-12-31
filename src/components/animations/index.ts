@@ -9,3 +9,4 @@ export {
 } from './ParallaxSection';
 export { default as CustomCursor } from './CustomCursor';
 export { default as PageTransition, PageTransitionOverlay } from './PageTransition';
+export { default as MaskReveal } from './MaskReveal';

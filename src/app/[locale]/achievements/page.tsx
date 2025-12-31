@@ -178,7 +178,7 @@ export default function AchievementsPage() {
           ============================================ */}
       <section
         ref={heroRef}
-        className="relative min-h-[90vh] pt-20 lg:pt-24 pb-15 lg:pb-20 flex items-center bg-deep-navy overflow-hidden"
+        className="relative min-h-[90vh] pt-28 md:pt-24 lg:pt-24 pb-15 lg:pb-20 flex items-center bg-deep-navy overflow-hidden"
       >
         {/* Background Pattern */}
         <div className="absolute inset-0">

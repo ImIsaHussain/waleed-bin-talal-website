@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/GeometricPatterns';
 import { AnimatedHeading } from '@/components/animations/TextReveal';
 import ParallaxSection, { FadeIn } from '@/components/animations/ParallaxSection';
-import { GraduationCap, Briefcase, Heart, Crown, Quote, BookOpen, Building, Globe, Award } from 'lucide-react';
+import { GraduationCap, Heart, Crown, Quote, Building, Globe } from 'lucide-react';
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -25,87 +25,63 @@ export default function BiographyPage() {
   const heroRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
-  // Expanded timeline with more content
+  // Streamlined timeline with key milestones in chronological order
   const sections = [
     {
       key: 'earlyLife',
       icon: Crown,
-      title: t('earlyLife.title'),
-      content: t('earlyLife.content'),
+      title: 'Royal Heritage',
+      content: 'Born March 7, 1955, in Riyadh as grandson of King Abdulaziz, founder of Saudi Arabia. Raised in a family dedicated to nation-building and social reform.',
       year: '1955',
-      period: 'Birth & Early Years',
-    },
-    {
-      key: 'childhood',
-      icon: BookOpen,
-      title: 'Formative Years',
-      content: 'Growing up in a family of visionaries, young Alwaleed was exposed to discussions of nation-building, social reform, and global affairs from an early age. His father Prince Talal advocated for constitutional reform and social justice, instilling values of progress and responsibility.',
-      year: '1960s',
-      period: 'Childhood',
-    },
-    {
-      key: 'education',
-      icon: GraduationCap,
-      title: t('education.title'),
-      content: t('education.content'),
-      year: '1970s',
-      period: 'Academic Foundation',
+      period: 'Birth',
     },
     {
       key: 'menloCollege',
       icon: GraduationCap,
       title: 'Menlo College',
-      content: 'Earned a Bachelor of Science in Business Administration from Menlo College in California in 1979. This American education provided a foundation in Western business practices and entrepreneurial thinking that would later prove invaluable.',
+      content: 'Earned a B.S. in Business Administration from Menlo College in California, gaining foundational knowledge in Western business practices.',
       year: '1979',
-      period: 'Undergraduate Studies',
-    },
-    {
-      key: 'syracuse',
-      icon: Award,
-      title: 'Syracuse University',
-      content: 'Completed a Master\'s degree in Social Science from Syracuse University in 1985, broadening his understanding of global economics, social systems, and international development.',
-      year: '1985',
-      period: 'Graduate Studies',
-    },
-    {
-      key: 'career',
-      icon: Briefcase,
-      title: t('career.title'),
-      content: t('career.content'),
-      year: '1980',
-      period: 'Business Beginnings',
+      period: 'Undergraduate',
     },
     {
       key: 'kingdomHolding',
       icon: Building,
       title: 'Kingdom Holding Company',
-      content: 'Founded Kingdom Holding Company, which would grow to become one of the largest diversified investment holding companies in the world, with interests spanning banking, hospitality, real estate, media, and technology across five continents.',
+      content: 'Founded Kingdom Holding Company, which grew to become one of the world\'s largest diversified investment holding companies across five continents.',
       year: '1980',
-      period: 'Building an Empire',
+      period: 'Business Foundation',
+    },
+    {
+      key: 'syracuse',
+      icon: GraduationCap,
+      title: 'Syracuse University',
+      content: 'Completed a Master\'s degree in Social Science from Syracuse University, broadening his understanding of global economics and international development.',
+      year: '1985',
+      period: 'Graduate Studies',
     },
     {
       key: 'globalExpansion',
       icon: Globe,
-      title: 'Global Investment Strategy',
-      content: 'Pioneered strategic investments in iconic companies including Citicorp (now Citigroup), Apple, Twitter, Lyft, and Four Seasons Hotels & Resorts. These bold moves established a reputation for identifying transformative opportunities before others.',
-      year: '1991',
+      title: 'Global Investments',
+      content: 'Made strategic investments in Citigroup, Apple, Twitter, Four Seasons, and other iconic companies, establishing a reputation for identifying transformative opportunities.',
+      year: '1990s',
       period: 'International Growth',
     },
     {
       key: 'philanthropy',
       icon: Heart,
-      title: 'Philanthropic Mission',
-      content: 'Established Alwaleed Philanthropies, channeling billions toward education, healthcare, disaster relief, and cultural understanding across 190+ countries. Signed The Giving Pledge in 2015, committing the majority of wealth to charitable causes.',
+      title: 'The Giving Pledge',
+      content: 'Became the first Arab Muslim to join the Giving Pledge in 2015, committing the majority of wealth to charitable causes through Alwaleed Philanthropies.',
       year: '2015',
-      period: 'Giving Back',
+      period: 'Philanthropic Commitment',
     },
     {
-      key: 'values',
+      key: 'legacy',
       icon: Heart,
-      title: t('values.title'),
-      content: t('values.content'),
+      title: 'Continuing Legacy',
+      content: 'Continues to lead Kingdom Holding Company while championing women\'s empowerment, interfaith dialogue, and sustainable development worldwide.',
       year: 'Today',
-      period: 'Continuing Legacy',
+      period: 'Present Day',
     },
   ];
 
@@ -265,7 +241,7 @@ export default function BiographyPage() {
             <div className="bio-hero-icon relative w-28 h-28 mx-auto mb-8">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-regal-gold/20 to-regal-gold/5 blur-xl" />
               <div className="relative w-full h-full rounded-full bg-gradient-to-br from-regal-gold/30 to-transparent flex items-center justify-center border border-regal-gold/30">
-                <BookOpen className="w-14 h-14 text-regal-gold" />
+                <Crown className="w-14 h-14 text-regal-gold" />
               </div>
             </div>
 
@@ -282,7 +258,7 @@ export default function BiographyPage() {
         </Container>
 
         {/* Softer bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 z-[5] h-40 bg-gradient-to-t from-background via-background/50 to-transparent" />
       </section>
 
       {/* ============================================
@@ -294,7 +270,7 @@ export default function BiographyPage() {
             <EightPointStar className="text-regal-gold mx-auto mb-8" size={36} strokeWidth={2} />
             <p className="text-body-lg text-muted leading-relaxed max-w-3xl mx-auto">
               Born into the esteemed Saudi royal family as the grandson of King Abdulaziz,
-              the visionary founder of the Kingdom of Saudi Arabia, my journey has been shaped
+              the visionary founder of the Kingdom of Saudi Arabia, Prince Alwaleed&apos;s journey has been shaped
               by a unique heritage of leadership, reform, and global perspective.
             </p>
           </FadeIn>
@@ -440,9 +416,9 @@ export default function BiographyPage() {
 
               {/* Quote text */}
               <blockquote className="text-2xl lg:text-3xl font-serif text-white leading-relaxed mb-8">
-                &ldquo;My grandfather taught me that leadership means service. My father
-                showed me that reform requires courage. My mother gave me a global
-                perspective. These three pillars guide every decision I make.&rdquo;
+                &ldquo;His grandfather taught him that leadership means service. His father
+                showed him that reform requires courage. His mother gave him a global
+                perspective. These three pillars guide every decision he makes.&rdquo;
               </blockquote>
 
               {/* Attribution */}
@@ -476,17 +452,17 @@ export default function BiographyPage() {
               <div className="space-y-5 text-muted leading-relaxed">
                 <p>
                   As the grandson of King Abdulaziz Ibn Saud, the founder of modern Saudi Arabia,
-                  I inherited a legacy of nation-building and visionary leadership.
+                  Prince Alwaleed inherited a legacy of nation-building and visionary leadership.
                 </p>
                 <p>
-                  My father, Prince Talal bin Abdulaziz, was known as the &ldquo;Red Prince&rdquo;
+                  His father, Prince Talal bin Abdulaziz, was known as the &ldquo;Red Prince&rdquo;
                   for his progressive views on constitutional reform and social justice. His
-                  advocacy for human rights and democratic principles deeply influenced my values.
+                  advocacy for human rights and democratic principles deeply influenced Prince Alwaleed&apos;s values.
                 </p>
                 <p>
-                  My mother, Princess Mona El Solh, daughter of Lebanon&apos;s first Prime Minister,
+                  His mother, Princess Mona El Solh, daughter of Lebanon&apos;s first Prime Minister,
                   brought an international perspective and a commitment to cultural bridge-building
-                  that continues to guide my philanthropic work today.
+                  that continues to guide his philanthropic work today.
                 </p>
               </div>
             </FadeIn>
