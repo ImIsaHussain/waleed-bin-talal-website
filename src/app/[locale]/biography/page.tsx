@@ -1,28 +1,17 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from '@/lib/gsap';
 import { useTranslations } from 'next-intl';
-import { Container } from '@/components/ui';
-import {
-  EightPointStar,
-  GeometricGrid,
-  ArabesqueCorner,
-  GeometricDivider,
-} from '@/components/ui/GeometricPatterns';
-import { AnimatedHeading } from '@/components/animations/TextReveal';
-import ParallaxSection, { FadeIn } from '@/components/animations/ParallaxSection';
+import { Container, EightPointStar, GeometricGrid, ArabesqueCorner } from '@/components/ui';
+import PageHero from '@/components/layout/PageHero';
+import PageCTA from '@/components/layout/PageCTA';
+import { AnimatedHeading, ParallaxSection, FadeIn } from '@/components/animations';
 import { GraduationCap, Heart, Crown, Quote, Building, Globe } from 'lucide-react';
-
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 export default function BiographyPage() {
   const t = useTranslations('biography');
-  const heroRef = useRef<HTMLDivElement>(null);
+  const tc = useTranslations('common');
   const timelineRef = useRef<HTMLDivElement>(null);
 
   // Streamlined timeline with key milestones in chronological order
@@ -30,111 +19,60 @@ export default function BiographyPage() {
     {
       key: 'earlyLife',
       icon: Crown,
-      title: 'Royal Heritage',
-      content: 'Born March 7, 1955, in Riyadh as grandson of King Abdulaziz, founder of Saudi Arabia. Raised in a family dedicated to nation-building and social reform.',
-      year: '1955',
-      period: 'Birth',
+      title: t('timeline.earlyLife.title'),
+      content: t('timeline.earlyLife.content'),
+      year: t('timeline.earlyLife.year'),
+      period: t('timeline.earlyLife.period'),
     },
     {
       key: 'menloCollege',
       icon: GraduationCap,
-      title: 'Menlo College',
-      content: 'Earned a B.S. in Business Administration from Menlo College in California, gaining foundational knowledge in Western business practices.',
-      year: '1979',
-      period: 'Undergraduate',
+      title: t('timeline.menloCollege.title'),
+      content: t('timeline.menloCollege.content'),
+      year: t('timeline.menloCollege.year'),
+      period: t('timeline.menloCollege.period'),
     },
     {
       key: 'kingdomHolding',
       icon: Building,
-      title: 'Kingdom Holding Company',
-      content: 'Founded Kingdom Holding Company, which grew to become one of the world\'s largest diversified investment holding companies across five continents.',
-      year: '1980',
-      period: 'Business Foundation',
+      title: t('timeline.kingdomHolding.title'),
+      content: t('timeline.kingdomHolding.content'),
+      year: t('timeline.kingdomHolding.year'),
+      period: t('timeline.kingdomHolding.period'),
     },
     {
       key: 'syracuse',
       icon: GraduationCap,
-      title: 'Syracuse University',
-      content: 'Completed a Master\'s degree in Social Science from Syracuse University, broadening his understanding of global economics and international development.',
-      year: '1985',
-      period: 'Graduate Studies',
+      title: t('timeline.syracuse.title'),
+      content: t('timeline.syracuse.content'),
+      year: t('timeline.syracuse.year'),
+      period: t('timeline.syracuse.period'),
     },
     {
       key: 'globalExpansion',
       icon: Globe,
-      title: 'Global Investments',
-      content: 'Made strategic investments in Citigroup, Apple, Twitter, Four Seasons, and other iconic companies, establishing a reputation for identifying transformative opportunities.',
-      year: '1990s',
-      period: 'International Growth',
+      title: t('timeline.globalExpansion.title'),
+      content: t('timeline.globalExpansion.content'),
+      year: t('timeline.globalExpansion.year'),
+      period: t('timeline.globalExpansion.period'),
     },
     {
       key: 'philanthropy',
       icon: Heart,
-      title: 'The Giving Pledge',
-      content: 'Became the first Arab Muslim to join the Giving Pledge in 2015, committing the majority of wealth to charitable causes through Alwaleed Philanthropies.',
-      year: '2015',
-      period: 'Philanthropic Commitment',
+      title: t('timeline.philanthropy.title'),
+      content: t('timeline.philanthropy.content'),
+      year: t('timeline.philanthropy.year'),
+      period: t('timeline.philanthropy.period'),
     },
     {
       key: 'legacy',
       icon: Heart,
-      title: 'Continuing Legacy',
-      content: 'Continues to lead Kingdom Holding Company while championing women\'s empowerment, interfaith dialogue, and sustainable development worldwide.',
-      year: 'Today',
-      period: 'Present Day',
+      title: t('timeline.legacy.title'),
+      content: t('timeline.legacy.content'),
+      year: t('timeline.legacy.year'),
+      period: t('timeline.legacy.period'),
     },
   ];
-
-  useEffect(() => {
-    if (!heroRef.current) return;
-
-    const ctx = gsap.context(() => {
-      // Hero entrance animation
-      const tl = gsap.timeline();
-
-      tl.fromTo(
-        '.bio-hero-icon',
-        { scale: 0, rotation: -90, opacity: 0 },
-        { scale: 1, rotation: 0, opacity: 1, duration: 1, ease: 'back.out(1.7)' }
-      )
-        .fromTo(
-          '.bio-hero-title',
-          { y: 80, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-          '-=0.4'
-        )
-        .fromTo(
-          '.bio-hero-subtitle',
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
-          '-=0.4'
-        );
-
-      // Subtle floating animation (no rotation)
-      gsap.to('.bio-hero-icon', {
-        y: -12,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
-
-      // Parallax on decorative elements
-      gsap.to('.bio-hero-star', {
-        y: -60,
-        rotation: 60,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
 
   // Timeline animation
   useEffect(() => {
@@ -183,83 +121,15 @@ export default function BiographyPage() {
   return (
     <>
       {/* ============================================
-          HERO SECTION - Softer gradient
+          HERO SECTION
           ============================================ */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[70vh] pt-20 lg:pt-24 flex items-center bg-deep-navy overflow-hidden"
-      >
-        {/* Background Pattern */}
-        <div className="absolute inset-0">
-          <GeometricGrid className="text-regal-gold/8" />
-        </div>
-
-        {/* Decorative stars - more prominent with rotation variation */}
-        <EightPointStar
-          className="bio-hero-star absolute top-32 right-[12%] text-regal-gold/25 rotate-[18deg]"
-          size={160}
-          strokeWidth={0.8}
-        />
-        <EightPointStar
-          className="bio-hero-star absolute bottom-32 left-[8%] text-regal-gold/20 -rotate-[22deg]"
-          size={120}
-          strokeWidth={0.6}
-        />
-        <EightPointStar
-          className="bio-hero-star absolute top-1/2 left-[3%] text-regal-gold/15 rotate-[30deg]"
-          size={200}
-          strokeWidth={0.4}
-        />
-        <EightPointStar
-          className="bio-hero-star absolute top-40 right-[3%] text-regal-gold/10 -rotate-[15deg]"
-          size={250}
-          strokeWidth={0.3}
-        />
-        <EightPointStar
-          className="bio-hero-star absolute bottom-20 right-[20%] text-regal-gold/15 rotate-45"
-          size={80}
-          strokeWidth={0.8}
-        />
-        <EightPointStar
-          className="bio-hero-star absolute top-28 left-[18%] text-regal-gold/12 -rotate-[28deg]"
-          size={60}
-          strokeWidth={1}
-        />
-
-        {/* Corner accents */}
-        <ArabesqueCorner position="top-left" className="text-regal-gold/40" />
-        <ArabesqueCorner position="top-right" className="text-regal-gold/40" />
-        <ArabesqueCorner position="bottom-left" className="text-regal-gold/40" />
-        <ArabesqueCorner position="bottom-right" className="text-regal-gold/40" />
-
-        {/* Softer gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/20 via-deep-navy/5 to-deep-navy/40" />
-
-        <Container className="relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            {/* Hero Icon */}
-            <div className="bio-hero-icon relative w-28 h-28 mx-auto mb-8">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-regal-gold/20 to-regal-gold/5 blur-xl" />
-              <div className="relative w-full h-full rounded-full bg-gradient-to-br from-regal-gold/30 to-transparent flex items-center justify-center border border-regal-gold/30">
-                <Crown className="w-14 h-14 text-regal-gold" />
-              </div>
-            </div>
-
-            {/* Title */}
-            <h1 className="bio-hero-title text-display font-serif text-white mb-6">
-              {t('title')}
-            </h1>
-
-            {/* Subtitle */}
-            <p className="bio-hero-subtitle text-subtitle text-regal-gold-light font-light max-w-2xl mx-auto">
-              {t('subtitle')}
-            </p>
-          </div>
-        </Container>
-
-        {/* Softer bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 z-[5] h-40 bg-gradient-to-t from-background via-background/50 to-transparent" />
-      </section>
+      <PageHero
+        heroPrefix="bio"
+        icon={<Crown className="w-14 h-14 text-regal-gold" />}
+        title={t('title')}
+        subtitle={t('subtitle')}
+        minHeight="min-h-[70vh]"
+      />
 
       {/* ============================================
           INTRO SECTION
@@ -269,9 +139,7 @@ export default function BiographyPage() {
           <FadeIn className="text-center">
             <EightPointStar className="text-regal-gold mx-auto mb-8" size={36} strokeWidth={2} />
             <p className="text-body-lg text-muted leading-relaxed max-w-3xl mx-auto">
-              Born into the esteemed Saudi royal family as the grandson of King Abdulaziz,
-              the visionary founder of the Kingdom of Saudi Arabia, Prince Alwaleed&apos;s journey has been shaped
-              by a unique heritage of leadership, reform, and global perspective.
+              {t('intro')}
             </p>
           </FadeIn>
         </Container>
@@ -314,10 +182,10 @@ export default function BiographyPage() {
           {/* Section header */}
           <div className="text-center mb-16">
             <FadeIn>
-              <span className="text-label text-regal-gold mb-4 block">The Journey</span>
+              <span className="text-label text-regal-gold mb-4 block">{t('timeline.label')}</span>
             </FadeIn>
             <AnimatedHeading as="h2" className="text-title font-serif text-charcoal">
-              A Life of Purpose
+              {t('timeline.title')}
             </AnimatedHeading>
           </div>
 
@@ -416,9 +284,7 @@ export default function BiographyPage() {
 
               {/* Quote text */}
               <blockquote className="text-2xl lg:text-3xl font-serif text-white leading-relaxed">
-                &ldquo;My grandfather taught me that leadership means service. My father
-                showed me that reform requires courage. My mother gave me a global
-                perspective. These three pillars guide every decision I make.&rdquo;
+                &ldquo;{t('quote')}&rdquo;
               </blockquote>
             </FadeIn>
           </Container>
@@ -436,25 +302,14 @@ export default function BiographyPage() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left content */}
             <FadeIn direction="left">
-              <span className="text-label text-regal-gold mb-4 block">Royal Heritage</span>
+              <span className="text-label text-regal-gold mb-4 block">{t('heritage.label')}</span>
               <h2 className="text-title font-serif text-charcoal mb-6">
-                A Unique Lineage
+                {t('heritage.title')}
               </h2>
               <div className="space-y-5 text-muted leading-relaxed">
-                <p>
-                  As the grandson of King Abdulaziz Ibn Saud, the founder of modern Saudi Arabia,
-                  Prince Alwaleed inherited a legacy of nation-building and visionary leadership.
-                </p>
-                <p>
-                  His father, Prince Talal bin Abdulaziz, was known as the &ldquo;Red Prince&rdquo;
-                  for his progressive views on constitutional reform and social justice. His
-                  advocacy for human rights and democratic principles deeply influenced Prince Alwaleed&apos;s values.
-                </p>
-                <p>
-                  His mother, Princess Mona El Solh, daughter of Lebanon&apos;s first Prime Minister,
-                  brought an international perspective and a commitment to cultural bridge-building
-                  that continues to guide his philanthropic work today.
-                </p>
+                <p>{t('heritage.paragraph1')}</p>
+                <p>{t('heritage.paragraph2')}</p>
+                <p>{t('heritage.paragraph3')}</p>
               </div>
             </FadeIn>
 
@@ -463,23 +318,23 @@ export default function BiographyPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="p-6 bg-cream rounded-2xl border border-border text-center">
                   <EightPointStar className="text-regal-gold mx-auto mb-3" size={28} strokeWidth={2} />
-                  <h4 className="text-base font-serif text-charcoal mb-1">Grandson of</h4>
-                  <p className="text-muted text-sm">King Abdulaziz Ibn Saud</p>
+                  <h4 className="text-base font-serif text-charcoal mb-1">{t('heritage.facts.grandsonOf')}</h4>
+                  <p className="text-muted text-sm">{t('heritage.facts.grandsonOfValue')}</p>
                 </div>
                 <div className="p-6 bg-cream rounded-2xl border border-border text-center">
                   <EightPointStar className="text-regal-gold mx-auto mb-3" size={28} strokeWidth={2} />
-                  <h4 className="text-base font-serif text-charcoal mb-1">Son of</h4>
-                  <p className="text-muted text-sm">Prince Talal bin Abdulaziz</p>
+                  <h4 className="text-base font-serif text-charcoal mb-1">{t('heritage.facts.sonOf')}</h4>
+                  <p className="text-muted text-sm">{t('heritage.facts.sonOfValue')}</p>
                 </div>
                 <div className="p-6 bg-cream rounded-2xl border border-border text-center">
                   <EightPointStar className="text-regal-gold mx-auto mb-3" size={28} strokeWidth={2} />
-                  <h4 className="text-base font-serif text-charcoal mb-1">Born</h4>
-                  <p className="text-muted text-sm">March 7, 1955</p>
+                  <h4 className="text-base font-serif text-charcoal mb-1">{t('heritage.facts.born')}</h4>
+                  <p className="text-muted text-sm">{t('heritage.facts.bornValue')}</p>
                 </div>
                 <div className="p-6 bg-cream rounded-2xl border border-border text-center">
                   <EightPointStar className="text-regal-gold mx-auto mb-3" size={28} strokeWidth={2} />
-                  <h4 className="text-base font-serif text-charcoal mb-1">Education</h4>
-                  <p className="text-muted text-sm">Menlo & Syracuse</p>
+                  <h4 className="text-base font-serif text-charcoal mb-1">{t('heritage.facts.education')}</h4>
+                  <p className="text-muted text-sm">{t('heritage.facts.educationValue')}</p>
                 </div>
               </div>
             </FadeIn>
@@ -490,35 +345,16 @@ export default function BiographyPage() {
       {/* ============================================
           CTA SECTION
           ============================================ */}
-      <section className="py-16 bg-cream relative">
-        <Container size="md">
-          <FadeIn className="text-center">
-            <GeometricDivider variant="star" className="text-regal-gold mx-auto mb-8" />
-            <h2 className="text-subtitle font-serif text-charcoal mb-4">
-              Continue Exploring
-            </h2>
-            <p className="text-muted mb-8">
-              Discover how this heritage has shaped a global business empire and philanthropic legacy.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/accomplishments"
-                className="btn-primary"
-                data-cursor="View"
-              >
-                View Accomplishments
-              </a>
-              <a
-                href="/philanthropy"
-                className="btn-outline"
-                data-cursor="Explore"
-              >
-                Explore Philanthropy
-              </a>
-            </div>
-          </FadeIn>
-        </Container>
-      </section>
+      <PageCTA
+        title={t('cta.title')}
+        description={t('cta.description')}
+        primaryLabel={tc('cta.viewAccomplishments')}
+        primaryHref="/accomplishments"
+        primaryCursor={tc('cta.cursor.view')}
+        outlineLabel={tc('cta.explorePhilanthropy')}
+        outlineHref="/philanthropy"
+        outlineCursor={tc('cta.cursor.explore')}
+      />
     </>
   );
 }

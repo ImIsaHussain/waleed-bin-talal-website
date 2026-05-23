@@ -1,29 +1,18 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap } from '@/lib/gsap';
 import { useTranslations } from 'next-intl';
-import { Container } from '@/components/ui';
-import {
-  EightPointStar,
-  GeometricGrid,
-  ArabesqueCorner,
-  GeometricDivider,
-} from '@/components/ui/GeometricPatterns';
-import { AnimatedHeading } from '@/components/animations/TextReveal';
-import ParallaxSection, { FadeIn } from '@/components/animations/ParallaxSection';
+import { Container, EightPointStar, GeometricGrid, ArabesqueCorner, GeometricDivider } from '@/components/ui';
+import { AnimatedHeading, ParallaxSection, FadeIn } from '@/components/animations';
 import { Crown, Users, Heart, Sparkles } from 'lucide-react';
 import { assetPath } from '@/lib/constants';
-
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import PageHero from '@/components/layout/PageHero';
+import PageCTA from '@/components/layout/PageCTA';
 
 export default function FamilyPage() {
   const t = useTranslations('family');
-  const heroRef = useRef<HTMLDivElement>(null);
+  const tc = useTranslations('common');
   const lineageRef = useRef<HTMLDivElement>(null);
 
   // Image paths state for GitHub Pages compatibility
@@ -53,9 +42,9 @@ export default function FamilyPage() {
     name: t('lineage.grandfather.name'),
     role: t('lineage.grandfather.role'),
     description: t('lineage.grandfather.description'),
-    era: '1875 - 1953',
+    era: t('lineage.grandfather.era'),
     icon: Crown,
-    relationship: 'Grandfather',
+    relationship: t('lineage.grandfather.relationship'),
     image: imagePaths.grandfather,
   };
 
@@ -66,9 +55,9 @@ export default function FamilyPage() {
       name: t('lineage.father.name'),
       role: t('lineage.father.role'),
       description: t('lineage.father.description'),
-      era: '1931 - 2018',
+      era: t('lineage.father.era'),
       icon: Sparkles,
-      relationship: 'Father',
+      relationship: t('lineage.father.relationship'),
       image: imagePaths.father,
     },
     {
@@ -76,9 +65,9 @@ export default function FamilyPage() {
       name: t('lineage.mother.name'),
       role: t('lineage.mother.role'),
       description: t('lineage.mother.description'),
-      era: '1938 - 2025',
+      era: t('lineage.mother.era'),
       icon: Heart,
-      relationship: 'Mother',
+      relationship: t('lineage.mother.relationship'),
       image: imagePaths.mother,
     },
   ];
@@ -87,70 +76,19 @@ export default function FamilyPage() {
   const children = [
     {
       key: 'khaled',
-      name: 'Prince Khaled bin Alwaleed',
-      role: 'Investor & Philanthropist',
-      description: 'Chairman of the Saudi Sports for All Federation and advocate for sustainable investment.',
+      name: t('children.khaled.name'),
+      role: t('children.khaled.role'),
+      description: t('children.khaled.description'),
       image: imagePaths.princeKhaled,
     },
     {
       key: 'reem',
-      name: 'Princess Reem bint Alwaleed',
-      role: 'Businesswoman',
-      description: 'Continuing the family legacy of leadership and philanthropic endeavors.',
+      name: t('children.reem.name'),
+      role: t('children.reem.role'),
+      description: t('children.reem.description'),
       image: imagePaths.princessReem,
     },
   ];
-
-  useEffect(() => {
-    if (!heroRef.current) return;
-
-    const ctx = gsap.context(() => {
-      // Hero entrance animation
-      const tl = gsap.timeline();
-
-      tl.fromTo(
-        '.fam-hero-icon',
-        { scale: 0, rotation: -90, opacity: 0 },
-        { scale: 1, rotation: 0, opacity: 1, duration: 1, ease: 'back.out(1.7)' }
-      )
-        .fromTo(
-          '.fam-hero-title',
-          { y: 80, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-          '-=0.4'
-        )
-        .fromTo(
-          '.fam-hero-subtitle',
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
-          '-=0.4'
-        );
-
-      // Subtle floating animation (no rotation)
-      gsap.to('.fam-hero-icon', {
-        y: -12,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
-
-      // Parallax on decorative elements
-      gsap.to('.fam-float-star', {
-        y: -60,
-        rotation: 60,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
 
   // Lineage cards animation
   useEffect(() => {
@@ -213,96 +151,30 @@ export default function FamilyPage() {
 
   return (
     <>
-      {/* ============================================
-          HERO SECTION - Softer gradient
-          ============================================ */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[80vh] flex items-center bg-deep-navy overflow-hidden"
+      <PageHero
+        heroPrefix="fam"
+        icon={<Users className="w-14 h-14 text-regal-gold" />}
+        title={t('title')}
+        subtitle={t('subtitle')}
+        minHeight="min-h-[80vh]"
       >
-        {/* Background Pattern */}
-        <div className="absolute inset-0">
-          <GeometricGrid className="text-regal-gold/8" />
-        </div>
-
-        {/* Decorative floating stars with rotation */}
-        <EightPointStar
-          className="fam-float-star absolute top-24 right-[12%] text-regal-gold/20 rotate-[18deg]"
-          size={140}
-          strokeWidth={0.6}
-        />
-        <EightPointStar
-          className="fam-float-star absolute bottom-32 left-[8%] text-regal-gold/15 -rotate-[25deg]"
-          size={100}
-          strokeWidth={0.5}
-        />
-        <EightPointStar
-          className="fam-float-star absolute top-1/3 left-[3%] text-regal-gold/12 rotate-[35deg]"
-          size={200}
-          strokeWidth={0.4}
-        />
-        <EightPointStar
-          className="fam-float-star absolute bottom-20 right-[20%] text-regal-gold/18 -rotate-12"
-          size={80}
-          strokeWidth={0.7}
-        />
-        <EightPointStar
-          className="fam-float-star absolute top-40 left-[25%] text-regal-gold/10 rotate-45"
-          size={60}
-          strokeWidth={0.8}
-        />
-
-        {/* Corner accents */}
-        <ArabesqueCorner position="top-left" className="text-regal-gold/40" />
-        <ArabesqueCorner position="top-right" className="text-regal-gold/40" />
-        <ArabesqueCorner position="bottom-left" className="text-regal-gold/40" />
-        <ArabesqueCorner position="bottom-right" className="text-regal-gold/40" />
-
-        {/* Hero image - positioned at bottom right, behind gradient */}
-        <div className="absolute bottom-0 right-0 z-[1] hidden lg:block">
-          <div className="fam-hero-image relative w-[560px] h-[680px]">
-            <img
-              src={imagePaths.heroImage}
-              alt="Prince Alwaleed bin Talal"
-              className="w-full h-full object-cover object-top opacity-90"
-            />
-            {/* Gradient fade to blend with background */}
-            <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-deep-navy/80" />
-            <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-deep-navy/60 z-[1]" />
-          </div>
-        </div>
-
-        {/* Softer bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/50 to-transparent z-[1]" />
-
-        <Container className="relative z-10">
-          <div className="lg:mr-[420px]">
-            {/* Text content - pushed right on desktop */}
-            <div className="text-center lg:text-left">
-              {/* Hero Icon */}
-              <div className="fam-hero-icon relative w-28 h-28 mx-auto lg:mx-0 mb-8">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-regal-gold/20 to-regal-gold/5 blur-xl" />
-                <div className="relative w-full h-full rounded-full bg-gradient-to-br from-regal-gold/30 to-transparent flex items-center justify-center border border-regal-gold/30">
-                  <Users className="w-14 h-14 text-regal-gold" />
-                </div>
-              </div>
-
-              {/* Title */}
-              <h1 className="fam-hero-title text-display font-serif text-white mb-6">
-                {t('title')}
-              </h1>
-
-              {/* Subtitle */}
-              <p className="fam-hero-subtitle text-subtitle text-regal-gold-light font-light max-w-2xl mx-auto lg:mx-0">
-                {t('subtitle')}
-              </p>
+        <>
+          {/* Hero image - positioned at bottom right, behind gradient */}
+          <div className="absolute bottom-0 right-0 z-[1] hidden lg:block">
+            <div className="fam-hero-image relative w-[560px] h-[680px]">
+              <img
+                src={imagePaths.heroImage}
+                alt="Prince Alwaleed bin Talal"
+                className="w-full h-full object-cover object-top opacity-90"
+              />
+              <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-deep-navy/80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-deep-navy/60 z-[1]" />
             </div>
           </div>
-        </Container>
-
-        {/* Softer bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/50 to-transparent z-[1]" />
-      </section>
+          {/* Softer bottom fade */}
+          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/50 to-transparent z-[1]" />
+        </>
+      </PageHero>
 
       {/* ============================================
           INTRO SECTION
@@ -339,7 +211,7 @@ export default function FamilyPage() {
           {/* Section header */}
           <div className="text-center mb-16">
             <FadeIn>
-              <span className="text-label text-regal-gold mb-4 block">Heritage</span>
+              <span className="text-label text-regal-gold mb-4 block">{t('heritage.label')}</span>
             </FadeIn>
             <AnimatedHeading as="h2" className="text-title font-serif text-charcoal">
               {t('lineage.title')}
@@ -452,11 +324,11 @@ export default function FamilyPage() {
           <Container className="relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <FadeIn>
-                <span className="text-label text-regal-gold mb-4 block">Foundation</span>
+                <span className="text-label text-regal-gold mb-4 block">{t('pillars.label')}</span>
               </FadeIn>
 
               <AnimatedHeading as="h2" className="text-title font-serif text-white mb-12">
-                Three Pillars of Heritage
+                {t('pillars.title')}
               </AnimatedHeading>
 
               <div className="grid md:grid-cols-3 gap-6">
@@ -465,10 +337,9 @@ export default function FamilyPage() {
                     <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-regal-gold/20 flex items-center justify-center">
                       <Crown className="w-7 h-7 text-regal-gold" />
                     </div>
-                    <h3 className="text-lg font-serif text-white mb-3">Vision</h3>
+                    <h3 className="text-lg font-serif text-white mb-3">{t('pillars.vision.title')}</h3>
                     <p className="text-gray-400 text-sm leading-relaxed">
-                      From King Abdulaziz, the vision to unite and build a nation that would
-                      become a cornerstone of the modern Middle East.
+                      {t('pillars.vision.description')}
                     </p>
                   </div>
                 </FadeIn>
@@ -478,10 +349,9 @@ export default function FamilyPage() {
                     <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-regal-gold/20 flex items-center justify-center">
                       <Sparkles className="w-7 h-7 text-regal-gold" />
                     </div>
-                    <h3 className="text-lg font-serif text-white mb-3">Reform</h3>
+                    <h3 className="text-lg font-serif text-white mb-3">{t('pillars.reform.title')}</h3>
                     <p className="text-gray-400 text-sm leading-relaxed">
-                      From Prince Talal, the courage to champion progressive reform,
-                      social development, and modernization.
+                      {t('pillars.reform.description')}
                     </p>
                   </div>
                 </FadeIn>
@@ -491,10 +361,9 @@ export default function FamilyPage() {
                     <div className="w-14 h-14 mx-auto mb-5 rounded-full bg-regal-gold/20 flex items-center justify-center">
                       <Heart className="w-7 h-7 text-regal-gold" />
                     </div>
-                    <h3 className="text-lg font-serif text-white mb-3">Global Perspective</h3>
+                    <h3 className="text-lg font-serif text-white mb-3">{t('pillars.globalPerspective.title')}</h3>
                     <p className="text-gray-400 text-sm leading-relaxed">
-                      From Princess Mona, an international worldview and commitment
-                      to bridging cultures and communities.
+                      {t('pillars.globalPerspective.description')}
                     </p>
                   </div>
                 </FadeIn>
@@ -590,44 +459,23 @@ export default function FamilyPage() {
             <GeometricDivider variant="star" className="text-regal-gold mx-auto mb-8" />
 
             <blockquote className="text-xl lg:text-2xl font-serif text-charcoal leading-relaxed italic">
-              &ldquo;The values passed down through generations—service, courage, and
-              global perspective—are the foundation upon which my family builds its future.&rdquo;
+              &ldquo;{t('quote')}&rdquo;
             </blockquote>
           </FadeIn>
         </Container>
       </section>
 
-      {/* ============================================
-          CTA SECTION
-          ============================================ */}
-      <section className="py-16 bg-background relative">
-        <Container size="md">
-          <FadeIn className="text-center">
-            <h2 className="text-subtitle font-serif text-charcoal mb-4">
-              Continue the Story
-            </h2>
-            <p className="text-muted mb-8">
-              Discover how this heritage shapes philanthropic work and global impact.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/philanthropy"
-                className="btn-primary"
-                data-cursor="View"
-              >
-                View Philanthropy
-              </a>
-              <a
-                href="/biography"
-                className="btn-outline"
-                data-cursor="Read"
-              >
-                Read Biography
-              </a>
-            </div>
-          </FadeIn>
-        </Container>
-      </section>
+      <PageCTA
+        title={t('cta.title')}
+        description={t('cta.description')}
+        primaryLabel={tc('cta.viewPhilanthropy')}
+        primaryHref="/philanthropy"
+        primaryCursor={tc('cta.cursor.view')}
+        outlineLabel={tc('cta.readBiography')}
+        outlineHref="/biography"
+        outlineCursor={tc('cta.cursor.read')}
+        showDivider={false}
+      />
     </>
   );
 }

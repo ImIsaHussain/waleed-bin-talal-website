@@ -5,9 +5,8 @@ import { useLocale, useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe, ArrowUpRight } from 'lucide-react';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
-import { Container } from '@/components/ui';
-import { MagneticWrapper } from '@/components/animations/MagneticButton';
-import { EightPointStar } from '@/components/ui/GeometricPatterns';
+import { Container, EightPointStar } from '@/components/ui';
+import { MagneticWrapper } from '@/components/animations';
 import { NAVIGATION_ITEMS } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import type { Locale } from '@/i18n/routing';
@@ -16,6 +15,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const t = useTranslations('navigation');
+  const tc = useTranslations('common');
   const locale = useLocale() as Locale;
   const pathname = usePathname();
   const router = useRouter();
@@ -71,7 +71,7 @@ export default function Header() {
               href="/"
               className="flex items-center gap-3 group relative z-10"
               onClick={closeMenu}
-              data-cursor="Home"
+              data-cursor={tc('cta.cursor.home')}
             >
               {/* Animated star logo */}
               <motion.div
@@ -94,7 +94,7 @@ export default function Header() {
                       : 'text-white'
                   )}
                 >
-                  {locale === 'ar' ? 'الأمير الوليد' : 'Prince Alwaleed'}
+                  {t('logo.name')}
                 </span>
                 <span
                   className={cn(
@@ -104,7 +104,7 @@ export default function Header() {
                       : 'text-white/70'
                   )}
                 >
-                  {locale === 'ar' ? 'صاحب السمو الملكي' : 'bin Talal'}
+                  {t('logo.subtitle')}
                 </span>
               </div>
             </Link>
@@ -125,7 +125,7 @@ export default function Header() {
                             ? 'text-charcoal hover:text-regal-gold hover:-translate-y-0.5'
                             : 'text-white/90 hover:text-white hover:-translate-y-0.5'
                       )}
-                      data-cursor="View"
+                      data-cursor={tc('cta.cursor.view')}
                     >
                       {t(item.key)}
                       {isActive && (
@@ -153,11 +153,11 @@ export default function Header() {
                       ? 'border-charcoal/20 text-charcoal hover:border-regal-gold hover:text-regal-gold'
                       : 'border-white/40 text-white hover:border-white hover:bg-white/10'
                   )}
-                  aria-label={`Switch to ${locale === 'en' ? 'Arabic' : 'English'}`}
+                  aria-label={t('switchLanguage')}
                 >
                   <Globe className="w-4 h-4" />
                   <span className="hidden sm:inline">
-                    {locale === 'en' ? 'العربية' : 'EN'}
+                    {t('switchLanguage')}
                   </span>
                 </button>
               </MagneticWrapper>
@@ -171,7 +171,7 @@ export default function Header() {
                     : 'border-white/40 text-white hover:bg-white/10'
                 )}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-label={isMenuOpen ? t('closeMenu') : t('openMenu')}
                 aria-expanded={isMenuOpen}
               >
                 <AnimatePresence mode="wait">
@@ -241,9 +241,9 @@ export default function Header() {
                   return (
                     <motion.div
                       key={item.key}
-                      initial={{ opacity: 0, x: -50 }}
+                      initial={{ opacity: 0, x: locale === 'ar' ? 50 : -50 }}
                       animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -50 }}
+                      exit={{ opacity: 0, x: locale === 'ar' ? 50 : -50 }}
                       transition={{ delay: index * 0.05, duration: 0.3 }}
                     >
                       <Link
@@ -255,7 +255,7 @@ export default function Header() {
                         )}
                       >
                         <span className="text-2xl font-serif font-medium">{t(item.key)}</span>
-                        <ArrowUpRight className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                        <ArrowUpRight className="w-5 h-5 opacity-0 -translate-x-2 rtl:translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                       </Link>
                     </motion.div>
                   );
@@ -276,7 +276,7 @@ export default function Header() {
                     className="flex items-center gap-2 hover:text-regal-gold transition-colors"
                   >
                     <Globe className="w-4 h-4" />
-                    {locale === 'en' ? 'العربية' : 'English'}
+                    {t('switchLanguage')}
                   </button>
                 </div>
               </motion.div>

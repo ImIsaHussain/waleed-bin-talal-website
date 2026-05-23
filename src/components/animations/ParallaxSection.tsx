@@ -1,14 +1,8 @@
 'use client';
 
 import { useRef, ReactNode, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from '@/lib/gsap';
 import { cn } from '@/lib/utils';
-
-// Register plugin
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 interface ParallaxSectionProps {
   children: ReactNode;
@@ -50,59 +44,6 @@ export default function ParallaxSection({
   return (
     <div ref={ref} className={cn('overflow-hidden', className)}>
       <div ref={innerRef}>{children}</div>
-    </div>
-  );
-}
-
-// Parallax image with scale effect
-interface ParallaxImageProps {
-  src: string;
-  alt: string;
-  className?: string;
-  speed?: number;
-  scale?: number;
-}
-
-export function ParallaxImage({
-  src,
-  alt,
-  className,
-  speed = 0.3,
-  scale = 1.2,
-}: ParallaxImageProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!containerRef.current || !imageRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.set(imageRef.current, { scale });
-
-      gsap.to(imageRef.current, {
-        y: -100 * speed,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [speed, scale]);
-
-  return (
-    <div ref={containerRef} className={cn('overflow-hidden', className)}>
-      <div
-        ref={imageRef}
-        className="w-full h-full bg-cover bg-center"
-        style={{ backgroundImage: `url(${src})` }}
-        role="img"
-        aria-label={alt}
-      />
     </div>
   );
 }
@@ -166,49 +107,6 @@ export function FadeIn({
   return (
     <div ref={ref} className={className}>
       {children}
-    </div>
-  );
-}
-
-// Horizontal scroll section
-interface HorizontalScrollProps {
-  children: ReactNode;
-  className?: string;
-}
-
-export function HorizontalScroll({ children, className }: HorizontalScrollProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!containerRef.current || !scrollRef.current) return;
-
-    const ctx = gsap.context(() => {
-      const scrollWidth = scrollRef.current!.scrollWidth;
-      const containerWidth = containerRef.current!.offsetWidth;
-
-      gsap.to(scrollRef.current, {
-        x: -(scrollWidth - containerWidth),
-        ease: 'none',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top top',
-          end: `+=${scrollWidth - containerWidth}`,
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
-        },
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <div ref={containerRef} className={cn('overflow-hidden', className)}>
-      <div ref={scrollRef} className="flex">
-        {children}
-      </div>
     </div>
   );
 }

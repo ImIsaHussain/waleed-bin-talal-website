@@ -1,14 +1,8 @@
 'use client';
 
 import { useEffect, useRef, ReactNode } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from '@/lib/gsap';
 import { cn } from '@/lib/utils';
-
-// Register plugin
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 interface TextRevealProps {
   children: ReactNode;
@@ -43,12 +37,16 @@ export default function TextReveal({
         const parts = text.split(splitBy);
 
         if (textRef.current) {
-          textRef.current.innerHTML = parts
-            .map(
-              (part) =>
-                `<span class="inline-block overflow-hidden"><span class="inline-block translate-y-full">${part}${animation === 'split-words' ? '&nbsp;' : ''}</span></span>`
-            )
-            .join('');
+          textRef.current.innerHTML = '';
+          parts.forEach((part) => {
+            const outer = document.createElement('span');
+            outer.className = 'inline-block overflow-hidden';
+            const inner = document.createElement('span');
+            inner.className = 'inline-block translate-y-full';
+            inner.textContent = animation === 'split-words' ? part + '\u00A0' : part;
+            outer.appendChild(inner);
+            textRef.current!.appendChild(outer);
+          });
 
           const innerSpans = textRef.current.querySelectorAll('span > span');
 

@@ -5,7 +5,6 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
-  const [, setIsClicking] = useState(false);
   const [cursorText, setCursorText] = useState('');
   const cursorRef = useRef<HTMLDivElement>(null);
 
@@ -28,11 +27,9 @@ export default function CustomCursor() {
     };
 
     const handleMouseDown = () => {
-      setIsClicking(true);
       clickScale.set(0.8);
     };
     const handleMouseUp = () => {
-      setIsClicking(false);
       clickScale.set(1);
     };
 

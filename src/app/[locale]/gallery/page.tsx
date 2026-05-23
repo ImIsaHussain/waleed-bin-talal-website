@@ -1,123 +1,66 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useTranslations } from 'next-intl';
-import { Container } from '@/components/ui';
-import {
-  EightPointStar,
-  GeometricGrid,
-  ArabesqueCorner,
-  GeometricDivider,
-} from '@/components/ui/GeometricPatterns';
-import ParallaxSection, { FadeIn } from '@/components/animations/ParallaxSection';
+import { useRef, useEffect, useState, useMemo } from 'react';
+import { gsap, ScrollTrigger } from '@/lib/gsap';
+import { useTranslations, useLocale } from 'next-intl';
+import { Container, EightPointStar, GeometricGrid, ArabesqueCorner } from '@/components/ui';
+import PageHero from '@/components/layout/PageHero';
+import PageCTA from '@/components/layout/PageCTA';
+import { ParallaxSection, FadeIn } from '@/components/animations';
 import {
   Camera,
   Image as ImageIcon,
   Video,
   Calendar,
   Play,
-  Grid3X3,
-  LayoutGrid,
+  ExternalLink,
 } from 'lucide-react';
+import { getGallerySortedByDate, getGalleryTypeCounts } from '@/lib/content';
+import type { Locale } from '@/i18n/routing';
 
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-// Placeholder gallery items with more data
-const galleryItems = [
-  { id: 1, category: 'business', year: '2024', type: 'image', title: 'Kingdom Tower Groundbreaking', aspect: 'landscape' },
-  { id: 2, category: 'philanthropy', year: '2023', type: 'image', title: 'Education Initiative Launch', aspect: 'portrait' },
-  { id: 3, category: 'diplomatic', year: '2023', type: 'image', title: 'Global Leaders Summit', aspect: 'landscape' },
-  { id: 4, category: 'family', year: '2022', type: 'image', title: 'Royal Heritage Ceremony', aspect: 'square' },
-  { id: 5, category: 'business', year: '2022', type: 'video', title: 'Investment Summit Keynote', aspect: 'landscape' },
-  { id: 6, category: 'philanthropy', year: '2021', type: 'image', title: 'Healthcare Fund Announcement', aspect: 'portrait' },
-  { id: 7, category: 'diplomatic', year: '2020', type: 'image', title: 'Peace Conference Opening', aspect: 'landscape' },
-  { id: 8, category: 'business', year: '2019', type: 'image', title: 'Tech Innovation Award', aspect: 'square' },
-  { id: 9, category: 'family', year: '2018', type: 'image', title: 'Family Foundation Gala', aspect: 'landscape' },
-  { id: 10, category: 'philanthropy', year: '2024', type: 'image', title: 'Water Access Program', aspect: 'portrait' },
-  { id: 11, category: 'diplomatic', year: '2024', type: 'video', title: 'Economic Forum Address', aspect: 'landscape' },
-  { id: 12, category: 'business', year: '2023', type: 'image', title: 'Global Expansion Announcement', aspect: 'square' },
-];
+// Number of items per row (3 columns) x 3 rows = 9 items per load
+const ITEMS_PER_PAGE = 9;
 
 export default function GalleryPage() {
   const t = useTranslations('gallery');
-  const heroRef = useRef<HTMLDivElement>(null);
+  const tc = useTranslations('common');
+  const locale = useLocale() as Locale;
   const galleryRef = useRef<HTMLDivElement>(null);
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [viewMode, setViewMode] = useState<'grid' | 'masonry'>('grid');
+  const [activeType, setActiveType] = useState<'all' | 'image' | 'video'>('all');
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
 
-  const categories = [
-    { key: 'all', label: t('categories.all'), count: galleryItems.length },
-    { key: 'business', label: t('categories.business'), count: galleryItems.filter(i => i.category === 'business').length },
-    { key: 'philanthropy', label: t('categories.philanthropy'), count: galleryItems.filter(i => i.category === 'philanthropy').length },
-    { key: 'family', label: t('categories.family'), count: galleryItems.filter(i => i.category === 'family').length },
-    { key: 'diplomatic', label: t('categories.diplomatic'), count: galleryItems.filter(i => i.category === 'diplomatic').length },
+  // Get gallery data from JSON content
+  const allGalleryItems = useMemo(() => getGallerySortedByDate(locale), [locale]);
+  const typeCounts = useMemo(() => getGalleryTypeCounts(), []);
+
+  const typeFilters = [
+    { key: 'all' as const, label: t('types.all'), icon: Camera, count: typeCounts.all },
+    { key: 'image' as const, label: t('types.images'), icon: ImageIcon, count: typeCounts.images },
+    { key: 'video' as const, label: t('types.videos'), icon: Video, count: typeCounts.videos },
   ];
 
-  const filteredItems = activeCategory === 'all'
-    ? galleryItems
-    : galleryItems.filter(item => item.category === activeCategory);
+  // Filter by type only
+  const filteredItems = useMemo(() => {
+    if (activeType === 'all') return allGalleryItems;
+    return allGalleryItems.filter(item => item.type === activeType);
+  }, [allGalleryItems, activeType]);
 
-  // Hero animations
+  // Items to display (limited by visibleCount)
+  const displayedItems = useMemo(() => {
+    return filteredItems.slice(0, visibleCount);
+  }, [filteredItems, visibleCount]);
+
+  // Check if there are more items to load
+  const hasMoreItems = visibleCount < filteredItems.length;
+
+  // Reset visible count when filter changes
   useEffect(() => {
-    if (!heroRef.current) return;
+    setVisibleCount(ITEMS_PER_PAGE);
+  }, [activeType]);
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
-
-      tl.fromTo(
-        '.gallery-hero-icon',
-        { scale: 0, rotation: -180, opacity: 0 },
-        { scale: 1, rotation: 0, opacity: 1, duration: 1.2, ease: 'back.out(1.7)' }
-      )
-        .fromTo(
-          '.gallery-hero-title',
-          { y: 100, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
-          '-=0.5'
-        )
-        .fromTo(
-          '.gallery-hero-subtitle',
-          { y: 50, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-          '-=0.5'
-        )
-        .fromTo(
-          '.gallery-hero-stats span',
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power3.out' },
-          '-=0.3'
-        );
-
-      // Subtle floating animation (no rotation)
-      gsap.to('.gallery-hero-icon', {
-        y: -12,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
-
-      // Parallax stars
-      gsap.to('.gallery-star', {
-        y: -80,
-        rotation: 120,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
+  const handleLoadMore = () => {
+    setVisibleCount(prev => prev + ITEMS_PER_PAGE);
+  };
 
   // Gallery items animation
   useEffect(() => {
@@ -139,18 +82,18 @@ export default function GalleryPage() {
               start: 'top 90%',
               toggleActions: 'play none none reverse',
             },
-            delay: (index % 4) * 0.1,
+            delay: (index % 3) * 0.1,
           }
         );
       });
     }, galleryRef);
 
     return () => ctx.revert();
-  }, [filteredItems]);
+  }, [displayedItems]);
 
-  const handleCategoryChange = (category: string) => {
-    setActiveCategory(category);
-    // Animate category change
+  const handleTypeChange = (type: 'all' | 'image' | 'video') => {
+    setActiveType(type);
+    // Animate filter change
     if (galleryRef.current) {
       gsap.fromTo(
         '.gallery-item',
@@ -165,97 +108,29 @@ export default function GalleryPage() {
       {/* ============================================
           HERO SECTION
           ============================================ */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[75vh] flex items-center bg-deep-navy overflow-hidden"
-      >
-        {/* Background Pattern */}
-        <div className="absolute inset-0">
-          <GeometricGrid className="text-regal-gold/5" />
-        </div>
-
-        {/* Decorative stars with rotation */}
-        <EightPointStar
-          className="gallery-star absolute top-24 right-[12%] text-regal-gold/20 rotate-[28deg]"
-          size={140}
-          strokeWidth={0.5}
-        />
-        <EightPointStar
-          className="gallery-star absolute bottom-36 left-[8%] text-regal-gold/10 -rotate-[18deg]"
-          size={200}
-          strokeWidth={0.5}
-        />
-        <EightPointStar
-          className="gallery-star absolute top-1/3 left-[20%] text-regal-gold/8 rotate-[42deg]"
-          size={80}
-          strokeWidth={0.5}
-        />
-        <EightPointStar
-          className="gallery-star absolute top-1/2 right-[6%] text-regal-gold/12 -rotate-[32deg]"
-          size={180}
-          strokeWidth={0.4}
-        />
-        <EightPointStar
-          className="gallery-star absolute bottom-24 right-[22%] text-regal-gold/15 rotate-[15deg]"
-          size={65}
-          strokeWidth={0.7}
-        />
-        <EightPointStar
-          className="gallery-star absolute top-20 left-[5%] text-regal-gold/10 -rotate-45"
-          size={110}
-          strokeWidth={0.5}
-        />
-
-        {/* Corner accents */}
-        <ArabesqueCorner position="top-left" className="text-regal-gold/30" />
-        <ArabesqueCorner position="top-right" className="text-regal-gold/30" />
-        <ArabesqueCorner position="bottom-left" className="text-regal-gold/30" />
-        <ArabesqueCorner position="bottom-right" className="text-regal-gold/30" />
-
-        {/* Gradient overlays - softer */}
-        <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/20 via-deep-navy/5 to-deep-navy/40" />
-
-        <Container className="relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            {/* Camera Icon */}
-            <div className="gallery-hero-icon relative w-28 h-28 mx-auto mb-8">
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-regal-gold/20 to-regal-gold/5 rotate-12" />
-              <div className="relative w-full h-full rounded-2xl bg-gradient-to-br from-regal-gold/30 to-transparent flex items-center justify-center border border-regal-gold/20 -rotate-6">
-                <Camera className="w-14 h-14 text-regal-gold" />
-              </div>
-            </div>
-
-            {/* Title */}
-            <h1 className="gallery-hero-title text-display font-serif text-white mb-6">
-              {t('title')}
-            </h1>
-
-            {/* Subtitle */}
-            <p className="gallery-hero-subtitle text-subtitle text-regal-gold-light font-light max-w-2xl mx-auto mb-10">
-              {t('subtitle')}
-            </p>
-
-            {/* Stats */}
-            <div className="gallery-hero-stats flex flex-wrap justify-center gap-8">
-              <span className="flex items-center gap-2 text-gray-400">
-                <ImageIcon className="w-5 h-5 text-regal-gold" />
-                <span className="text-white font-semibold">{galleryItems.filter(i => i.type === 'image').length}</span> Photos
-              </span>
-              <span className="flex items-center gap-2 text-gray-400">
-                <Video className="w-5 h-5 text-regal-gold" />
-                <span className="text-white font-semibold">{galleryItems.filter(i => i.type === 'video').length}</span> Videos
-              </span>
-              <span className="flex items-center gap-2 text-gray-400">
-                <Calendar className="w-5 h-5 text-regal-gold" />
-                <span className="text-white font-semibold">2018-2024</span> Timeline
-              </span>
-            </div>
+      <PageHero
+        heroPrefix="gallery"
+        icon={<Camera className="w-14 h-14 text-regal-gold" />}
+        iconStyle="square"
+        title={t('title')}
+        subtitle={t('subtitle')}
+        rightContent={
+          <div className="gallery-hero-stats flex flex-wrap justify-center gap-8">
+            <span className="flex items-center gap-2 text-gray-400">
+              <ImageIcon className="w-5 h-5 text-regal-gold" />
+              <span className="text-white font-semibold">{typeCounts.images}</span> {t('types.images')}
+            </span>
+            <span className="flex items-center gap-2 text-gray-400">
+              <Video className="w-5 h-5 text-regal-gold" />
+              <span className="text-white font-semibold">{typeCounts.videos}</span> {t('types.videos')}
+            </span>
+            <span className="flex items-center gap-2 text-gray-400">
+              <Calendar className="w-5 h-5 text-regal-gold" />
+              <span className="text-white font-semibold">{typeCounts.all}</span> {t('types.all')}
+            </span>
           </div>
-        </Container>
-
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
-      </section>
+        }
+      />
 
       {/* ============================================
           INTRO SECTION
@@ -276,54 +151,32 @@ export default function GalleryPage() {
           ============================================ */}
       <section className="sticky top-20 lg:top-24 z-30 bg-white/95 backdrop-blur-md border-y border-border py-4 shadow-sm">
         <Container>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            {/* Category Filters */}
-            <div className="flex flex-wrap justify-center gap-2">
-              {categories.map((category) => (
+          {/* Type Filters (All/Images/Videos) */}
+          <div className="flex flex-wrap justify-center gap-3">
+            {typeFilters.map((filter) => {
+              const Icon = filter.icon;
+              return (
                 <button
-                  key={category.key}
-                  onClick={() => handleCategoryChange(category.key)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
-                    activeCategory === category.key
+                  key={filter.key}
+                  onClick={() => handleTypeChange(filter.key)}
+                  className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
+                    activeType === filter.key
                       ? 'bg-regal-gold text-white shadow-lg shadow-regal-gold/20'
                       : 'bg-gray-100 text-charcoal hover:bg-regal-gold/10 hover:text-regal-gold'
                   }`}
                 >
-                  {category.label}
-                  <span className={`text-xs px-1.5 py-0.5 rounded-full ${
-                    activeCategory === category.key
+                  <Icon className="w-4 h-4" />
+                  {filter.label}
+                  <span className={`text-xs px-2 py-0.5 rounded-full ${
+                    activeType === filter.key
                       ? 'bg-white/20 text-white'
                       : 'bg-gray-200 text-gray-600'
                   }`}>
-                    {category.count}
+                    {filter.count}
                   </span>
                 </button>
-              ))}
-            </div>
-
-            {/* View Toggle */}
-            <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
-              <button
-                onClick={() => setViewMode('grid')}
-                className={`p-2 rounded-md transition-colors ${
-                  viewMode === 'grid'
-                    ? 'bg-white text-regal-gold shadow-sm'
-                    : 'text-gray-500 hover:text-charcoal'
-                }`}
-              >
-                <Grid3X3 className="w-5 h-5" />
-              </button>
-              <button
-                onClick={() => setViewMode('masonry')}
-                className={`p-2 rounded-md transition-colors ${
-                  viewMode === 'masonry'
-                    ? 'bg-white text-regal-gold shadow-sm'
-                    : 'text-gray-500 hover:text-charcoal'
-                }`}
-              >
-                <LayoutGrid className="w-5 h-5" />
-              </button>
-            </div>
+              );
+            })}
           </div>
         </Container>
       </section>
@@ -336,25 +189,18 @@ export default function GalleryPage() {
         <ArabesqueCorner position="bottom-right" className="text-regal-gold/10" />
 
         <Container>
-          <div className={`grid gap-6 ${
-            viewMode === 'grid'
-              ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-              : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
-          }`}>
-            {filteredItems.map((item, index) => (
-              <div
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {displayedItems.map((item) => (
+              <a
                 key={item.id}
-                className={`gallery-item group relative overflow-hidden rounded-2xl cursor-pointer bg-white border border-border shadow-sm hover:shadow-2xl transition-all duration-500 ${
-                  viewMode === 'masonry' && item.aspect === 'portrait' ? 'sm:row-span-2' : ''
-                } ${viewMode === 'masonry' && item.aspect === 'landscape' && index % 3 === 0 ? 'sm:col-span-2' : ''}`}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="gallery-item group relative overflow-hidden rounded-2xl cursor-pointer bg-white border border-border shadow-sm hover:shadow-2xl transition-all duration-500 block"
               >
-                {/* Image placeholder */}
-                <div className={`relative bg-gradient-to-br from-deep-navy/10 via-regal-gold/5 to-deep-navy/10 ${
-                  viewMode === 'grid' ? 'aspect-[4/3]' :
-                  item.aspect === 'portrait' ? 'aspect-[3/4]' :
-                  item.aspect === 'square' ? 'aspect-square' : 'aspect-[16/10]'
-                }`}>
-                  {/* Placeholder icon */}
+                {/* Image/Video thumbnail */}
+                <div className="relative aspect-[4/3] bg-gradient-to-br from-deep-navy/10 via-regal-gold/5 to-deep-navy/10">
+                  {/* Placeholder icon or actual image */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-20 h-20 rounded-full bg-white/50 flex items-center justify-center">
                       {item.type === 'video' ? (
@@ -372,6 +218,11 @@ export default function GalleryPage() {
                     </div>
                   )}
 
+                  {/* External link indicator */}
+                  <div className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ExternalLink className="w-4 h-4 text-charcoal" />
+                  </div>
+
                   {/* Hover Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-deep-navy via-deep-navy/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -380,7 +231,7 @@ export default function GalleryPage() {
                           {item.type === 'video' ? (
                             <Play className="w-8 h-8 text-white ml-1" />
                           ) : (
-                            <ImageIcon className="w-8 h-8 text-white" />
+                            <ExternalLink className="w-8 h-8 text-white" />
                           )}
                         </div>
                       </div>
@@ -388,15 +239,18 @@ export default function GalleryPage() {
 
                     {/* Info */}
                     <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-150">
-                      <span className="inline-block px-3 py-1 text-xs font-medium text-white bg-regal-gold rounded-full mb-3 capitalize">
-                        {item.category}
-                      </span>
-                      <h3 className="text-lg font-serif text-white mb-2">
+                      <h3 className="text-lg font-serif text-white mb-2 line-clamp-2">
                         {item.title}
                       </h3>
-                      <p className="text-sm text-gray-300 flex items-center gap-1">
+                      <p className="text-sm text-gray-300 flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         {item.year}
+                        {item.source && (
+                          <>
+                            <span className="w-1 h-1 rounded-full bg-gray-400" />
+                            <span className="truncate max-w-[120px]">{item.source}</span>
+                          </>
+                        )}
                       </p>
                     </div>
                   </div>
@@ -408,21 +262,30 @@ export default function GalleryPage() {
                     {item.title}
                   </h3>
                   <p className="text-sm text-muted mt-1 flex items-center gap-2">
-                    <span className="capitalize">{item.category}</span>
-                    <span className="w-1 h-1 rounded-full bg-gray-300" />
                     <span>{item.year}</span>
+                    {item.source && (
+                      <>
+                        <span className="w-1 h-1 rounded-full bg-gray-300" />
+                        <span className="truncate">{item.source}</span>
+                      </>
+                    )}
                   </p>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
 
           {/* Load More */}
-          <div className="text-center mt-12">
-            <button className="btn-outline">
-              Load More
-            </button>
-          </div>
+          {hasMoreItems && (
+            <div className="text-center mt-12">
+              <button
+                onClick={handleLoadMore}
+                className="btn-outline"
+              >
+                {t('loadMore', { count: filteredItems.length - visibleCount })}
+              </button>
+            </div>
+          )}
         </Container>
       </section>
 
@@ -465,7 +328,7 @@ export default function GalleryPage() {
 
               {/* Description */}
               <p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
-                Explore an interactive timeline of key moments and milestones spanning over five decades of impact and achievement.
+                {t('timelineSection.description')}
               </p>
 
               {/* Timeline Preview */}
@@ -480,7 +343,7 @@ export default function GalleryPage() {
 
               {/* CTA */}
               <button className="btn-primary" disabled>
-                Interactive Timeline Coming Soon
+                {t('timelineSection.comingSoon')}
               </button>
             </FadeIn>
           </Container>
@@ -490,35 +353,16 @@ export default function GalleryPage() {
       {/* ============================================
           CTA SECTION
           ============================================ */}
-      <section className="section-padding-sm bg-background relative">
-        <Container size="md">
-          <FadeIn className="text-center">
-            <GeometricDivider variant="star" className="text-regal-gold mx-auto mb-8" />
-            <h2 className="text-subtitle font-serif text-charcoal mb-4">
-              Continue Exploring
-            </h2>
-            <p className="text-muted mb-8">
-              Discover more about the life and legacy of Prince Alwaleed bin Talal.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/biography"
-                className="btn-primary"
-                data-cursor="Read"
-              >
-                Read Biography
-              </a>
-              <a
-                href="/news"
-                className="btn-outline"
-                data-cursor="View"
-              >
-                Latest News
-              </a>
-            </div>
-          </FadeIn>
-        </Container>
-      </section>
+      <PageCTA
+        title={t('cta.title')}
+        description={t('cta.description')}
+        primaryLabel={tc('cta.readBiography')}
+        primaryHref="/biography"
+        primaryCursor={tc('cta.cursor.read')}
+        outlineLabel={tc('cta.latestNews')}
+        outlineHref="/news"
+        outlineCursor={tc('cta.cursor.view')}
+      />
     </>
   );
 }

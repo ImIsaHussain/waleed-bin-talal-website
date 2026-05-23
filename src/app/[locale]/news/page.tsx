@@ -1,17 +1,12 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef, useEffect, useState, useMemo } from 'react';
+import { gsap, ScrollTrigger } from '@/lib/gsap';
 import { useTranslations, useLocale } from 'next-intl';
-import { Container } from '@/components/ui';
-import {
-  EightPointStar,
-  GeometricGrid,
-  ArabesqueCorner,
-  GeometricDivider,
-} from '@/components/ui/GeometricPatterns';
-import ParallaxSection, { FadeIn } from '@/components/animations/ParallaxSection';
+import { Container, EightPointStar, GeometricGrid, ArabesqueCorner } from '@/components/ui';
+import PageHero from '@/components/layout/PageHero';
+import PageCTA from '@/components/layout/PageCTA';
+import { ParallaxSection, FadeIn } from '@/components/animations';
 import {
   Newspaper,
   Calendar,
@@ -23,104 +18,57 @@ import {
   ArrowRight,
   Bell,
   ChevronRight,
+  ExternalLink,
 } from 'lucide-react';
+import { getNewsSortedByDate, getNewsCategoryCounts } from '@/lib/content';
+import type { Locale } from '@/i18n/routing';
 
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-// Placeholder news items with more data
-const newsItems = [
-  {
-    id: 1,
-    title: 'Kingdom Holding Company Announces Strategic Investment in AI Sector',
-    description:
-      'Prince Alwaleed announces new investment in emerging artificial intelligence technologies, reinforcing commitment to innovation and future-focused growth strategies.',
-    date: '2025-01-15',
-    category: 'investments',
-    source: 'Kingdom Holding Company',
-    featured: true,
-    image: null,
-  },
-  {
-    id: 2,
-    title: 'Alwaleed Philanthropies Expands Water Restoration Project',
-    description:
-      'Foundation expands critical water infrastructure project reaching additional communities in the Middle East.',
-    date: '2025-01-10',
-    category: 'philanthropy',
-    source: 'Alwaleed Philanthropies',
-    featured: false,
-    image: null,
-  },
-  {
-    id: 3,
-    title: 'Prince Alwaleed Delivers Keynote at Global Investment Forum',
-    description:
-      'Speaking at the annual forum, Prince Alwaleed shares insights on sustainable investment strategies for the future.',
-    date: '2025-01-05',
-    category: 'media',
-    source: 'Global Investment Forum',
-    featured: false,
-    image: null,
-  },
-  {
-    id: 4,
-    title: 'Recognition for Humanitarian Leadership',
-    description:
-      'Prince Alwaleed honored for decades of philanthropic work impacting communities across 190 countries.',
-    date: '2024-12-20',
-    category: 'awards',
-    source: 'Humanitarian Leadership Council',
-    featured: false,
-    image: null,
-  },
-  {
-    id: 5,
-    title: 'New Partnership with Leading Technology Firms',
-    description:
-      'Kingdom Holding announces strategic partnerships to accelerate digital transformation initiatives.',
-    date: '2024-12-15',
-    category: 'investments',
-    source: 'Kingdom Holding Company',
-    featured: false,
-    image: null,
-  },
-  {
-    id: 6,
-    title: 'Education Initiative Reaches New Milestone',
-    description:
-      'Alwaleed Philanthropies celebrates supporting over 1 million students through global education programs.',
-    date: '2024-12-01',
-    category: 'philanthropy',
-    source: 'Alwaleed Philanthropies',
-    featured: false,
-    image: null,
-  },
-];
+// Number of items per row (3 columns) x 3 rows = 9 items per load
+const ITEMS_PER_PAGE = 9;
 
 export default function NewsPage() {
   const t = useTranslations('news');
-  const locale = useLocale();
-  const heroRef = useRef<HTMLDivElement>(null);
+  const tc = useTranslations('common');
+  const locale = useLocale() as Locale;
   const newsRef = useRef<HTMLDivElement>(null);
   const [activeCategory, setActiveCategory] = useState('all');
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+
+  // Get news data from JSON content
+  const newsItems = useMemo(() => getNewsSortedByDate(locale), [locale]);
+  const categoryCounts = useMemo(() => getNewsCategoryCounts(), []);
 
   const categories = [
-    { key: 'all', label: t('categories.all'), icon: Newspaper, count: newsItems.length },
-    { key: 'investments', label: t('categories.investments'), icon: TrendingUp, count: newsItems.filter(i => i.category === 'investments').length },
-    { key: 'philanthropy', label: t('categories.philanthropy'), icon: Heart, count: newsItems.filter(i => i.category === 'philanthropy').length },
-    { key: 'media', label: t('categories.media'), icon: Mic, count: newsItems.filter(i => i.category === 'media').length },
-    { key: 'awards', label: t('categories.awards'), icon: Award, count: newsItems.filter(i => i.category === 'awards').length },
+    { key: 'all', label: t('categories.all'), icon: Newspaper, count: categoryCounts.all || 0 },
+    { key: 'investments', label: t('categories.investments'), icon: TrendingUp, count: categoryCounts.investments || 0 },
+    { key: 'philanthropy', label: t('categories.philanthropy'), icon: Heart, count: categoryCounts.philanthropy || 0 },
+    { key: 'media', label: t('categories.media'), icon: Mic, count: categoryCounts.media || 0 },
+    { key: 'awards', label: t('categories.awards'), icon: Award, count: categoryCounts.awards || 0 },
   ];
 
-  const filteredItems = activeCategory === 'all'
-    ? newsItems
-    : newsItems.filter(item => item.category === activeCategory);
+  const filteredItems = useMemo(() => {
+    return activeCategory === 'all'
+      ? newsItems
+      : newsItems.filter(item => item.category === activeCategory);
+  }, [newsItems, activeCategory]);
 
-  const featuredItem = filteredItems.find(item => item.featured) || filteredItems[0];
-  const otherItems = filteredItems.filter(item => item.id !== featuredItem?.id);
+  // Featured item is always the first (latest by date since already sorted)
+  const featuredItem = filteredItems[0];
+  // Other items exclude the featured one
+  const otherItems = filteredItems.slice(1);
+  // Items to display (limited by visibleCount)
+  const displayedItems = otherItems.slice(0, visibleCount);
+  // Check if there are more items to load
+  const hasMoreItems = visibleCount < otherItems.length;
+
+  // Reset visible count when filter changes
+  useEffect(() => {
+    setVisibleCount(ITEMS_PER_PAGE);
+  }, [activeCategory]);
+
+  const handleLoadMore = () => {
+    setVisibleCount(prev => prev + ITEMS_PER_PAGE);
+  };
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US', {
@@ -149,57 +97,6 @@ export default function NewsPage() {
         return 'from-regal-gold to-regal-gold-dark';
     }
   };
-
-  // Hero animations
-  useEffect(() => {
-    if (!heroRef.current) return;
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
-
-      tl.fromTo(
-        '.news-hero-icon',
-        { scale: 0, rotation: -90, opacity: 0 },
-        { scale: 1, rotation: 0, opacity: 1, duration: 1, ease: 'back.out(1.7)' }
-      )
-        .fromTo(
-          '.news-hero-title',
-          { y: 100, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
-          '-=0.4'
-        )
-        .fromTo(
-          '.news-hero-subtitle',
-          { y: 50, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-          '-=0.5'
-        );
-
-      // Subtle floating animation (no rotation)
-      gsap.to('.news-hero-icon', {
-        y: -12,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
-
-      // Parallax stars
-      gsap.to('.news-star', {
-        y: -60,
-        rotation: 90,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
 
   // News items animation
   useEffect(() => {
@@ -236,95 +133,27 @@ export default function NewsPage() {
               trigger: card as Element,
               start: 'top 90%',
             },
-            delay: index * 0.1,
+            delay: (index % 3) * 0.1,
           }
         );
       });
     }, newsRef);
 
     return () => ctx.revert();
-  }, [filteredItems]);
+  }, [displayedItems]);
 
   return (
     <>
       {/* ============================================
           HERO SECTION
           ============================================ */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[70vh] flex items-center bg-deep-navy overflow-hidden"
-      >
-        {/* Background Pattern */}
-        <div className="absolute inset-0">
-          <GeometricGrid className="text-regal-gold/5" />
-        </div>
-
-        {/* Decorative stars with rotation */}
-        <EightPointStar
-          className="news-star absolute top-28 right-[15%] text-regal-gold/20 rotate-[20deg]"
-          size={130}
-          strokeWidth={0.5}
-        />
-        <EightPointStar
-          className="news-star absolute bottom-32 left-[10%] text-regal-gold/10 -rotate-[25deg]"
-          size={180}
-          strokeWidth={0.5}
-        />
-        <EightPointStar
-          className="news-star absolute top-1/3 left-[4%] text-regal-gold/12 rotate-[38deg]"
-          size={150}
-          strokeWidth={0.4}
-        />
-        <EightPointStar
-          className="news-star absolute top-1/2 right-[8%] text-regal-gold/8 -rotate-[12deg]"
-          size={220}
-          strokeWidth={0.3}
-        />
-        <EightPointStar
-          className="news-star absolute bottom-20 right-[28%] text-regal-gold/15 rotate-[52deg]"
-          size={75}
-          strokeWidth={0.6}
-        />
-        <EightPointStar
-          className="news-star absolute top-24 left-[22%] text-regal-gold/10 -rotate-[35deg]"
-          size={60}
-          strokeWidth={0.7}
-        />
-
-        {/* Corner accents */}
-        <ArabesqueCorner position="top-left" className="text-regal-gold/30" />
-        <ArabesqueCorner position="top-right" className="text-regal-gold/30" />
-        <ArabesqueCorner position="bottom-left" className="text-regal-gold/30" />
-        <ArabesqueCorner position="bottom-right" className="text-regal-gold/30" />
-
-        {/* Gradient overlays - softer */}
-        <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/20 via-deep-navy/5 to-deep-navy/40" />
-
-        <Container className="relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            {/* Icon */}
-            <div className="news-hero-icon relative w-24 h-24 mx-auto mb-8">
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-regal-gold/20 to-regal-gold/5 rotate-6" />
-              <div className="relative w-full h-full rounded-2xl bg-gradient-to-br from-regal-gold/30 to-transparent flex items-center justify-center border border-regal-gold/20 -rotate-3">
-                <Newspaper className="w-12 h-12 text-regal-gold" />
-              </div>
-            </div>
-
-            {/* Title */}
-            <h1 className="news-hero-title text-display font-serif text-white mb-6">
-              {t('title')}
-            </h1>
-
-            {/* Subtitle */}
-            <p className="news-hero-subtitle text-subtitle text-regal-gold-light font-light max-w-2xl mx-auto">
-              {t('subtitle')}
-            </p>
-          </div>
-        </Container>
-
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
-      </section>
+      <PageHero
+        heroPrefix="news"
+        icon={<Newspaper className="w-12 h-12 text-regal-gold" />}
+        title={t('title')}
+        subtitle={t('subtitle')}
+        minHeight="min-h-[70vh]"
+      />
 
       {/* ============================================
           INTRO SECTION
@@ -382,13 +211,18 @@ export default function NewsPage() {
         <ArabesqueCorner position="bottom-right" className="text-regal-gold/10" />
 
         <Container>
-          {/* Featured Article */}
+          {/* Featured Article (Latest News) */}
           {featuredItem && (
             <div className="news-featured mb-12">
-              <div className="group relative bg-white rounded-3xl overflow-hidden border border-border shadow-lg hover:shadow-2xl transition-all duration-500">
+              <a
+                href={featuredItem.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative bg-white rounded-3xl overflow-hidden border border-border shadow-lg hover:shadow-2xl transition-all duration-500 block"
+              >
                 <div className="grid lg:grid-cols-2 gap-0">
                   {/* Image placeholder */}
-                  <div className="relative aspect-[4/3] lg:aspect-auto bg-gradient-to-br from-deep-navy/20 via-regal-gold/10 to-deep-navy/20">
+                  <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[320px] bg-gradient-to-br from-deep-navy/20 via-regal-gold/10 to-deep-navy/20">
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="w-24 h-24 rounded-full bg-white/50 flex items-center justify-center">
                         <Newspaper className="w-12 h-12 text-gray-300" />
@@ -402,47 +236,58 @@ export default function NewsPage() {
                       })()}
                       {t(`categories.${featuredItem.category}`)}
                     </div>
+                    {/* External link indicator */}
+                    {featuredItem.url && (
+                      <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <ExternalLink className="w-5 h-5 text-charcoal" />
+                      </div>
+                    )}
                   </div>
 
                   {/* Content */}
                   <div className="p-8 lg:p-12 flex flex-col justify-center">
-                    <span className="text-label text-regal-gold mb-4 block">Featured</span>
+                    <span className="text-label text-regal-gold mb-4 block uppercase tracking-wider">{t('latest')}</span>
                     <h2 className="text-2xl lg:text-3xl font-serif font-medium text-charcoal mb-4 group-hover:text-regal-gold transition-colors">
                       {featuredItem.title}
                     </h2>
-                    <p className="text-muted leading-relaxed mb-6">
+                    <p className="text-muted leading-relaxed mb-6 line-clamp-3">
                       {featuredItem.description}
                     </p>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4 text-sm text-muted">
-                        <span className="flex items-center gap-1">
+                    <div className="flex items-center justify-between mt-auto">
+                      <div className="flex items-center gap-4 text-sm text-muted min-w-0">
+                        <span className="flex items-center gap-1 shrink-0">
                           <Calendar className="w-4 h-4" />
                           {formatDate(featuredItem.date)}
                         </span>
-                        <span>{featuredItem.source}</span>
+                        <span className="truncate max-w-[150px] relative">
+                          <span className="truncate block">{featuredItem.source}</span>
+                        </span>
                       </div>
-                      <button className="inline-flex items-center gap-2 text-regal-gold font-medium group/btn">
+                      <span className="inline-flex items-center gap-2 text-regal-gold font-medium shrink-0">
                         {t('readMore')}
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                      </button>
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </span>
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           )}
 
           {/* News Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {otherItems.map((item) => {
+            {displayedItems.map((item) => {
               const Icon = getCategoryIcon(item.category);
               return (
-                <div
+                <a
                   key={item.id}
-                  className="news-card group bg-white rounded-2xl overflow-hidden border border-border hover:border-regal-gold/30 hover:shadow-xl transition-all duration-500"
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="news-card group bg-white rounded-2xl overflow-hidden border border-border hover:border-regal-gold/30 hover:shadow-xl transition-all duration-500 flex flex-col h-full"
                 >
                   {/* Image placeholder */}
-                  <div className="relative aspect-[16/10] bg-gradient-to-br from-deep-navy/10 via-regal-gold/5 to-deep-navy/10">
+                  <div className="relative aspect-[16/10] bg-gradient-to-br from-deep-navy/10 via-regal-gold/5 to-deep-navy/10 shrink-0">
                     <div className="absolute inset-0 flex items-center justify-center">
                       <Icon className="w-12 h-12 text-gray-200" />
                     </div>
@@ -450,39 +295,55 @@ export default function NewsPage() {
                     <div className={`absolute top-4 left-4 px-3 py-1.5 rounded-full bg-gradient-to-r ${getCategoryGradient(item.category)} text-white text-xs font-medium`}>
                       {t(`categories.${item.category}`)}
                     </div>
+                    {/* External link indicator */}
+                    {item.url && (
+                      <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <ExternalLink className="w-4 h-4 text-charcoal" />
+                      </div>
+                    )}
                   </div>
 
                   {/* Content */}
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-grow">
                     <div className="flex items-center gap-2 text-sm text-muted mb-3">
-                      <Calendar className="w-4 h-4" />
+                      <Calendar className="w-4 h-4 shrink-0" />
                       {formatDate(item.date)}
                     </div>
                     <h3 className="text-lg font-serif font-medium text-charcoal mb-3 group-hover:text-regal-gold transition-colors line-clamp-2">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-muted leading-relaxed mb-4 line-clamp-2">
+                    <p className="text-sm text-muted leading-relaxed mb-4 line-clamp-2 flex-grow">
                       {item.description}
                     </p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-muted">{item.source}</span>
-                      <button className="inline-flex items-center gap-1 text-sm text-regal-gold font-medium group/btn">
+                    {/* Fixed bottom section */}
+                    <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-100">
+                      {/* Source with fade effect for overflow */}
+                      <div className="relative max-w-[120px] overflow-hidden">
+                        <span className="text-xs text-muted whitespace-nowrap">{item.source}</span>
+                        <div className="absolute top-0 right-0 bottom-0 w-6 bg-gradient-to-l from-white to-transparent" />
+                      </div>
+                      <span className="inline-flex items-center gap-1 text-sm text-regal-gold font-medium shrink-0">
                         {t('readMore')}
-                        <ChevronRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />
-                      </button>
+                        <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                      </span>
                     </div>
                   </div>
-                </div>
+                </a>
               );
             })}
           </div>
 
           {/* Load More */}
-          <div className="text-center mt-12">
-            <button className="btn-outline">
-              Load More News
-            </button>
-          </div>
+          {hasMoreItems && (
+            <div className="text-center mt-12">
+              <button
+                onClick={handleLoadMore}
+                className="btn-outline"
+              >
+                {t('loadMore', { count: otherItems.length - visibleCount })}
+              </button>
+            </div>
+          )}
         </Container>
       </section>
 
@@ -513,7 +374,7 @@ export default function NewsPage() {
               {/* Coming Soon Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-regal-gold/20 border border-regal-gold/30 rounded-full mb-8">
                 <span className="w-2 h-2 rounded-full bg-regal-gold animate-pulse" />
-                <span className="text-sm font-medium text-regal-gold uppercase tracking-wider">Coming Soon</span>
+                <span className="text-sm font-medium text-regal-gold uppercase tracking-wider">{t('newsletter.comingSoon')}</span>
               </div>
 
               {/* Icon */}
@@ -526,12 +387,12 @@ export default function NewsPage() {
 
               {/* Title */}
               <h2 className="text-3xl lg:text-4xl font-serif text-white mb-4">
-                Stay Updated
+                {t('newsletter.title')}
               </h2>
 
               {/* Description */}
               <p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto">
-                Newsletter subscription and RSS feed integration are coming soon. Stay tuned for the latest news and updates.
+                {t('newsletter.description')}
               </p>
 
               {/* Coming soon indicator */}
@@ -539,12 +400,12 @@ export default function NewsPage() {
                 <div className="flex flex-col sm:flex-row gap-4 opacity-50 pointer-events-none">
                   <input
                     type="email"
-                    placeholder="Enter your email"
+                    placeholder={t('newsletter.emailPlaceholder')}
                     disabled
                     className="flex-1 px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white/50 placeholder-gray-500"
                   />
                   <button className="btn-primary whitespace-nowrap opacity-60" disabled>
-                    Subscribe
+                    {t('newsletter.subscribe')}
                   </button>
                 </div>
               </div>
@@ -553,11 +414,11 @@ export default function NewsPage() {
               <div className="flex flex-wrap items-center justify-center gap-6 text-gray-500">
                 <div className="flex items-center gap-2">
                   <Bell className="w-4 h-4" />
-                  <span className="text-sm">Email Notifications</span>
+                  <span className="text-sm">{t('newsletter.emailNotifications')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Rss className="w-4 h-4" />
-                  <span className="text-sm">RSS Feed</span>
+                  <span className="text-sm">{t('newsletter.rssFeed')}</span>
                 </div>
               </div>
             </FadeIn>
@@ -576,11 +437,11 @@ export default function NewsPage() {
               <p className="text-muted leading-relaxed">
                 News updates are aggregated from official sources including{' '}
                 <a href="https://www.kingdom.com.sa" target="_blank" rel="noopener noreferrer" className="text-regal-gold hover:underline">
-                  Kingdom Holding Company
+                  {t('sources.kingdomHolding')}
                 </a>{' '}
                 and{' '}
                 <a href="https://alwaleedphilanthropies.org" target="_blank" rel="noopener noreferrer" className="text-regal-gold hover:underline">
-                  Alwaleed Philanthropies
+                  {t('sources.alwaleedPhilanthropies')}
                 </a>.
               </p>
             </div>
@@ -591,35 +452,16 @@ export default function NewsPage() {
       {/* ============================================
           CTA SECTION
           ============================================ */}
-      <section className="section-padding-sm bg-background relative">
-        <Container size="md">
-          <FadeIn className="text-center">
-            <GeometricDivider variant="star" className="text-regal-gold mx-auto mb-8" />
-            <h2 className="text-subtitle font-serif text-charcoal mb-4">
-              Continue Exploring
-            </h2>
-            <p className="text-muted mb-8">
-              Learn more about the vision and impact of Prince Alwaleed bin Talal.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/philanthropy"
-                className="btn-primary"
-                data-cursor="Explore"
-              >
-                Explore Philanthropy
-              </a>
-              <a
-                href="/biography"
-                className="btn-outline"
-                data-cursor="Read"
-              >
-                Read Biography
-              </a>
-            </div>
-          </FadeIn>
-        </Container>
-      </section>
+      <PageCTA
+        title={t('cta.title')}
+        description={t('cta.description')}
+        primaryLabel={tc('cta.explorePhilanthropy')}
+        primaryHref="/philanthropy"
+        primaryCursor={tc('cta.cursor.explore')}
+        outlineLabel={tc('cta.readBiography')}
+        outlineHref="/biography"
+        outlineCursor={tc('cta.cursor.read')}
+      />
     </>
   );
 }

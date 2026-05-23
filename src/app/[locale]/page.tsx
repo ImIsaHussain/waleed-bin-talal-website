@@ -1,37 +1,17 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from '@/lib/gsap';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { Container } from '@/components/ui';
-import {
-  EightPointStar,
-  GeometricGrid,
-  ArabesqueCorner,
-  FloatingShapes,
-  GeometricDivider
-} from '@/components/ui/GeometricPatterns';
-import {
-  AnimatedHeading,
-  AnimatedCounter
-} from '@/components/animations/TextReveal';
-import ParallaxSection, {
-  FadeIn
-} from '@/components/animations/ParallaxSection';
-import { MagneticButton } from '@/components/animations';
-import MaskReveal from '@/components/animations/MaskReveal';
+import { Container, EightPointStar, GeometricGrid, ArabesqueCorner, FloatingShapes, GeometricDivider } from '@/components/ui';
+import { AnimatedHeading, AnimatedCounter, ParallaxSection, FadeIn, MagneticButton, MaskReveal } from '@/components/animations';
 import { STATS, assetPath } from '@/lib/constants';
 import { ArrowRight, ArrowUpRight, Building2, Heart, Landmark, Globe2, Award, Users } from 'lucide-react';
 
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export default function HomePage() {
   const t = useTranslations('home');
+  const tc = useTranslations('common');
   const heroRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
   const [heroImageSrc, setHeroImageSrc] = useState('/images/wbt-image-1.webp');
@@ -221,7 +201,7 @@ export default function HomePage() {
                   <Link
                     href="/biography"
                     className="btn-primary group"
-                    data-cursor="Explore"
+                    data-cursor={tc('cta.cursor.explore')}
                   >
                     {t('hero.cta.biography')}
                     <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -232,7 +212,7 @@ export default function HomePage() {
                   <Link
                     href="/philanthropy"
                     className="inline-flex items-center gap-3 px-8 py-4 border border-regal-gold/50 text-regal-gold rounded-full transition-all duration-500 hover:bg-regal-gold hover:text-deep-navy"
-                    data-cursor="Discover"
+                    data-cursor={tc('cta.cursor.discover')}
                   >
                     {t('hero.cta.philanthropy')}
                     <ArrowUpRight className="w-5 h-5" />
@@ -268,7 +248,7 @@ export default function HomePage() {
 
         {/* Scroll indicator */}
         <div className="hero-scroll-indicator absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-10">
-          <span className="text-label text-regal-gold/60">Scroll</span>
+          <span className="text-label text-regal-gold/60">{tc('cta.scroll')}</span>
           <div className="w-px h-16 bg-gradient-to-b from-regal-gold to-transparent" />
         </div>
       </section>
@@ -320,7 +300,7 @@ export default function HomePage() {
                 <Link
                   href="/biography"
                   className="inline-flex items-center gap-3 text-charcoal font-medium group"
-                  data-cursor="Read"
+                  data-cursor={tc('cta.cursor.read')}
                 >
                   <span className="link-underline">{t('welcome.cta')}</span>
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
@@ -420,7 +400,7 @@ export default function HomePage() {
         <Container>
           <div className="text-center mb-16">
             <FadeIn>
-              <span className="text-label text-regal-gold mb-4 block">Areas of Impact</span>
+              <span className="text-label text-regal-gold mb-4 block">{t('focus.label')}</span>
             </FadeIn>
             <AnimatedHeading
               as="h2"
@@ -437,6 +417,7 @@ export default function HomePage() {
               description={t('focus.investments.description')}
               link="/accomplishments"
               cta={t('focus.investments.cta')}
+              cursorText={tc('cta.cursor.view')}
               delay={0}
             />
             <FocusCard
@@ -445,6 +426,7 @@ export default function HomePage() {
               description={t('focus.philanthropy.description')}
               link="/philanthropy"
               cta={t('focus.philanthropy.cta')}
+              cursorText={tc('cta.cursor.view')}
               delay={0.15}
             />
             <FocusCard
@@ -453,6 +435,7 @@ export default function HomePage() {
               description={t('focus.vision.description')}
               link="/achievements"
               cta={t('focus.vision.cta')}
+              cursorText={tc('cta.cursor.view')}
               delay={0.3}
             />
           </div>
@@ -476,33 +459,33 @@ export default function HomePage() {
         <Container className="relative z-10">
           <div className="text-center mb-16">
             <FadeIn>
-              <span className="text-label text-regal-gold mb-4 block">Global Reach</span>
+              <span className="text-label text-regal-gold mb-4 block">{t('impact.label')}</span>
             </FadeIn>
             <AnimatedHeading
               as="h2"
               className="text-title font-serif text-white"
             >
-              A Legacy of Impact
+              {t('impact.title')}
             </AnimatedHeading>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <FadeIn delay={0} className="text-center p-8">
               <Globe2 className="w-12 h-12 text-regal-gold mx-auto mb-6" />
-              <h3 className="text-2xl font-serif text-white mb-3">Global Investments</h3>
-              <p className="text-gray-400">Strategic investments spanning technology, hospitality, media, and real estate across six continents.</p>
+              <h3 className="text-2xl font-serif text-white mb-3">{t('impact.globalInvestments.title')}</h3>
+              <p className="text-gray-400">{t('impact.globalInvestments.description')}</p>
             </FadeIn>
 
             <FadeIn delay={0.15} className="text-center p-8 border-x border-regal-gold/20">
               <Award className="w-12 h-12 text-regal-gold mx-auto mb-6" />
-              <h3 className="text-2xl font-serif text-white mb-3">Recognition</h3>
-              <p className="text-gray-400">Consistently ranked among the world&apos;s most influential business leaders and philanthropists.</p>
+              <h3 className="text-2xl font-serif text-white mb-3">{t('impact.recognition.title')}</h3>
+              <p className="text-gray-400">{t('impact.recognition.description')}</p>
             </FadeIn>
 
             <FadeIn delay={0.3} className="text-center p-8">
               <Users className="w-12 h-12 text-regal-gold mx-auto mb-6" />
-              <h3 className="text-2xl font-serif text-white mb-3">Lives Touched</h3>
-              <p className="text-gray-400">Millions of lives improved through education, healthcare, and disaster relief initiatives worldwide.</p>
+              <h3 className="text-2xl font-serif text-white mb-3">{t('impact.livesTouched.title')}</h3>
+              <p className="text-gray-400">{t('impact.livesTouched.description')}</p>
             </FadeIn>
           </div>
         </Container>
@@ -539,7 +522,7 @@ export default function HomePage() {
                 <Link
                   href="/contact"
                   className="btn-primary"
-                  data-cursor="Connect"
+                  data-cursor={tc('cta.cursor.connect')}
                 >
                   {t('cta.button')}
                   <ArrowRight className="w-5 h-5" />
@@ -588,6 +571,7 @@ function FocusCard({
   description,
   link,
   cta,
+  cursorText,
   delay = 0,
 }: {
   icon: React.ReactNode;
@@ -595,6 +579,7 @@ function FocusCard({
   description: string;
   link: string;
   cta: string;
+  cursorText: string;
   delay?: number;
 }) {
   return (
@@ -602,7 +587,7 @@ function FocusCard({
       <Link
         href={link}
         className="group block relative h-full p-10 lg:p-12 bg-white border border-border rounded-2xl transition-all duration-500 hover:border-regal-gold hover:shadow-2xl hover:-translate-y-2"
-        data-cursor="View"
+        data-cursor={cursorText}
       >
         {/* Corner accent on hover */}
         <div className="corner-accent corner-accent--tl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

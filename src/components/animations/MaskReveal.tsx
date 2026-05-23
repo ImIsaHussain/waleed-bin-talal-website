@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { EightPointStar } from '@/components/ui/GeometricPatterns';
+import { EightPointStar } from '@/components/ui';
 
 interface MaskRevealProps {
   onComplete?: () => void;

@@ -20,103 +20,113 @@ export interface TimelineEvent {
   image?: string;
 }
 
-// News item type
-export interface NewsItem {
+// ============================================
+// Content JSON Types (websiteContent.json)
+// ============================================
+
+// News article from JSON
+export interface ContentNewsArticle {
   id: string;
+  date: string;
+  title: string;
+  title_ar?: string;
+  summary: string;
+  summary_ar: string;
+  source: string;
+  url?: string;
+  image: string | null;
+  category: string;
+}
+
+// Processed news item for page display
+export interface ProcessedNewsItem {
+  id: string;
+  date: string;
   title: string;
   description: string;
-  link: string;
-  pubDate: string;
   source: string;
-  category: 'investments' | 'philanthropy' | 'media' | 'awards';
-  image?: string;
+  url?: string;
+  image: string | null;
+  category: 'investments' | 'philanthropy' | 'awards' | 'media';
+  featured?: boolean;
 }
 
-// Guestbook entry type
-export interface GuestbookEntry {
+// Image item from JSON
+export interface ContentImageItem {
   id: string;
-  name: string;
-  email: string;
-  message: string;
-  category: 'impact' | 'business' | 'inspiration' | 'general';
-  createdAt: string;
-  approved: boolean;
-}
-
-// Gallery item type
-export interface GalleryItem {
-  id: string;
-  title: {
-    en: string;
-    ar: string;
-  };
-  description?: {
-    en: string;
-    ar: string;
-  };
+  date: string;
+  description: string;
+  description_ar: string;
+  source: string;
+  url: string;
+  context: string;
+  context_ar?: string;
+  type: 'image';
   image: string;
-  category: 'business' | 'philanthropy' | 'family' | 'diplomatic';
-  year?: string;
 }
 
-// Achievement type
-export interface Achievement {
+// Video item from JSON
+export interface ContentVideoItem {
   id: string;
-  title: {
-    en: string;
-    ar: string;
-  };
-  description: {
-    en: string;
-    ar: string;
-  };
+  date: string;
+  title: string;
+  title_ar: string;
+  description: string;
+  description_ar: string;
+  platform: string;
+  url: string;
+  duration?: string;
+  type: 'video';
+  thumbnail: string;
+}
+
+// Processed gallery item for page display
+export interface ProcessedGalleryItem {
+  id: string;
+  title: string;
+  description?: string;
+  type: 'image' | 'video';
+  image: string;
+  category: string;
   year: string;
-  category: 'influence' | 'humanitarian' | 'business';
+  source?: string;
+  url?: string;
 }
 
-// Sector investment type
-export interface SectorInvestment {
-  id: string;
-  title: {
-    en: string;
-    ar: string;
+// Full content JSON structure
+export interface WebsiteContent {
+  metadata: {
+    subject: string;
+    born: string;
+    birthplace: string;
+    titles: string[];
+    net_worth_estimate: string;
+    last_updated: string;
   };
-  description: {
-    en: string;
-    ar: string;
+  news_articles: {
+    business_investments: ContentNewsArticle[];
+    philanthropy: ContentNewsArticle[];
+    recognition_awards: ContentNewsArticle[];
+    biography_profiles: ContentNewsArticle[];
   };
-  companies: string[];
-  icon: string;
-}
-
-// Family member type
-export interface FamilyMember {
-  id: string;
-  name: {
-    en: string;
-    ar: string;
+  image_gallery: {
+    professional_portraits: ContentImageItem[];
+    business_events: ContentImageItem[];
+    diplomatic_meetings: ContentImageItem[];
+    philanthropic_activities: ContentImageItem[];
+    historical_personal: ContentImageItem[];
+    assets_properties: ContentImageItem[];
+    image_archives: Array<{ source: string; count?: string; url: string; description: string }>;
   };
-  role: {
-    en: string;
-    ar: string;
+  video_gallery: {
+    major_interviews: ContentVideoItem[];
+    conference_appearances: ContentVideoItem[];
+    audio_content: ContentVideoItem[];
+    video_platforms: Array<{ platform: string; description: string; url: string }>;
   };
-  description: {
-    en: string;
-    ar: string;
+  key_statistics: {
+    business: Record<string, unknown>;
+    philanthropy: Record<string, unknown>;
+    recognition: Record<string, unknown>;
   };
-  image?: string;
-}
-
-// Philanthropy pillar type
-export interface PhilanthropyPillar {
-  id: string;
-  title: {
-    en: string;
-    ar: string;
-  };
-  description: {
-    en: string;
-    ar: string;
-  };
-  icon: string;
 }

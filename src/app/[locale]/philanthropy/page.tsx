@@ -1,18 +1,12 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from '@/lib/gsap';
 import { useTranslations } from 'next-intl';
-import { Container } from '@/components/ui';
-import {
-  EightPointStar,
-  GeometricGrid,
-  ArabesqueCorner,
-  GeometricDivider,
-} from '@/components/ui/GeometricPatterns';
-import { AnimatedHeading, AnimatedCounter } from '@/components/animations/TextReveal';
-import ParallaxSection, { FadeIn } from '@/components/animations/ParallaxSection';
+import { Container, EightPointStar, GeometricGrid, ArabesqueCorner } from '@/components/ui';
+import PageHero from '@/components/layout/PageHero';
+import PageCTA from '@/components/layout/PageCTA';
+import { AnimatedHeading, AnimatedCounter, ParallaxSection, FadeIn } from '@/components/animations';
 import {
   Heart,
   Users,
@@ -27,14 +21,9 @@ import {
   ExternalLink,
 } from 'lucide-react';
 
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export default function PhilanthropyPage() {
   const t = useTranslations('philanthropy');
-  const heroRef = useRef<HTMLDivElement>(null);
+  const tc = useTranslations('common');
   const pillarsRef = useRef<HTMLDivElement>(null);
   const impactRef = useRef<HTMLDivElement>(null);
 
@@ -85,68 +74,11 @@ export default function PhilanthropyPage() {
   ];
 
   const focusAreas = [
-    { icon: GraduationCap, label: 'Education', count: '200+ institutions supported' },
-    { icon: Building2, label: 'Healthcare', count: '50+ hospitals funded' },
-    { icon: Droplets, label: 'Water Access', count: '100+ communities served' },
-    { icon: BookOpen, label: 'Cultural Exchange', count: '30+ programs worldwide' },
+    { icon: GraduationCap, label: t('focusAreas.education.label'), count: t('focusAreas.education.count') },
+    { icon: Building2, label: t('focusAreas.healthcare.label'), count: t('focusAreas.healthcare.count') },
+    { icon: Droplets, label: t('focusAreas.waterAccess.label'), count: t('focusAreas.waterAccess.count') },
+    { icon: BookOpen, label: t('focusAreas.culturalExchange.label'), count: t('focusAreas.culturalExchange.count') },
   ];
-
-  // Hero animations
-  useEffect(() => {
-    if (!heroRef.current) return;
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
-
-      tl.fromTo(
-        '.philanthropy-hero-heart',
-        { scale: 0, rotation: -180 },
-        { scale: 1, rotation: 0, duration: 1.2, ease: 'back.out(1.7)' }
-      )
-        .fromTo(
-          '.philanthropy-hero-title',
-          { y: 100, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
-          '-=0.5'
-        )
-        .fromTo(
-          '.philanthropy-hero-subtitle',
-          { y: 50, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-          '-=0.5'
-        )
-        .fromTo(
-          '.philanthropy-hero-stat',
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out' },
-          '-=0.3'
-        );
-
-      // Floating heart animation
-      gsap.to('.philanthropy-hero-heart', {
-        y: -15,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
-
-      // Parallax stars
-      gsap.to('.philanthropy-star', {
-        y: -100,
-        rotation: 180,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
 
   // Pillars animation
   useEffect(() => {
@@ -226,98 +158,30 @@ export default function PhilanthropyPage() {
       {/* ============================================
           HERO SECTION
           ============================================ */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[85vh] flex items-center bg-deep-navy overflow-hidden"
-      >
-        {/* Background Pattern */}
-        <div className="absolute inset-0">
-          <GeometricGrid className="text-regal-gold/5" />
-        </div>
-
-        {/* Decorative stars with rotation */}
-        <EightPointStar
-          className="philanthropy-star absolute top-20 right-[15%] text-regal-gold/20 rotate-[22deg]"
-          size={120}
-          strokeWidth={0.5}
-        />
-        <EightPointStar
-          className="philanthropy-star absolute bottom-32 left-[10%] text-regal-gold/10 -rotate-[15deg]"
-          size={180}
-          strokeWidth={0.5}
-        />
-        <EightPointStar
-          className="philanthropy-star absolute top-1/2 right-[5%] text-regal-gold/8 rotate-[40deg]"
-          size={250}
-          strokeWidth={0.3}
-        />
-        <EightPointStar
-          className="philanthropy-star absolute top-1/4 left-[5%] text-regal-gold/12 -rotate-[28deg]"
-          size={160}
-          strokeWidth={0.4}
-        />
-        <EightPointStar
-          className="philanthropy-star absolute bottom-20 right-[25%] text-regal-gold/15 rotate-12"
-          size={90}
-          strokeWidth={0.6}
-        />
-        <EightPointStar
-          className="philanthropy-star absolute top-36 left-[20%] text-regal-gold/8 rotate-[55deg]"
-          size={70}
-          strokeWidth={0.7}
-        />
-
-        {/* Corner accents */}
-        <ArabesqueCorner position="top-left" className="text-regal-gold/30" />
-        <ArabesqueCorner position="top-right" className="text-regal-gold/30" />
-        <ArabesqueCorner position="bottom-left" className="text-regal-gold/30" />
-        <ArabesqueCorner position="bottom-right" className="text-regal-gold/30" />
-
-        {/* Gradient overlays - softer */}
-        <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/20 via-deep-navy/5 to-deep-navy/40" />
-
-        <Container className="relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            {/* Animated Heart Icon */}
-            <div className="philanthropy-hero-heart relative w-32 h-32 mx-auto mb-8">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-regal-gold/20 to-regal-gold/5 blur-xl" />
-              <div className="relative w-full h-full rounded-full bg-gradient-to-br from-regal-gold/30 to-transparent flex items-center justify-center border border-regal-gold/20">
-                <Heart className="w-16 h-16 text-regal-gold" fill="currentColor" />
-              </div>
-            </div>
-
-            {/* Title */}
-            <h1 className="philanthropy-hero-title text-display font-serif text-white mb-6">
-              {t('title')}
-            </h1>
-
-            {/* Subtitle */}
-            <p className="philanthropy-hero-subtitle text-subtitle text-regal-gold-light font-light max-w-2xl mx-auto mb-12">
-              {t('subtitle')}
-            </p>
-
-            {/* Quick Stats */}
-            <div className="flex flex-wrap justify-center gap-8 lg:gap-16">
-              {impactStats.slice(0, 3).map((stat, index) => (
-                <div
-                  key={index}
-                  className="philanthropy-hero-stat text-center"
-                >
-                  <div className="text-4xl lg:text-5xl font-bold text-regal-gold mb-2">
-                    {stat.number}{stat.suffix}
-                  </div>
-                  <div className="text-sm text-gray-400 uppercase tracking-wider">
-                    {stat.label}
-                  </div>
+      <PageHero
+        heroPrefix="phil"
+        icon={<Heart className="w-16 h-16 text-regal-gold" fill="currentColor" />}
+        title={t('title')}
+        subtitle={t('subtitle')}
+        minHeight="min-h-[85vh]"
+        rightContent={
+          <div className="flex flex-wrap justify-center gap-8 lg:gap-16">
+            {impactStats.slice(0, 3).map((stat, index) => (
+              <div
+                key={index}
+                className="philanthropy-hero-stat text-center"
+              >
+                <div className="text-4xl lg:text-5xl font-bold text-regal-gold mb-2">
+                  {stat.number}{stat.suffix}
                 </div>
-              ))}
-            </div>
+                <div className="text-sm text-gray-400 uppercase tracking-wider">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </div>
-        </Container>
-
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
-      </section>
+        }
+      />
 
       {/* ============================================
           MISSION SECTION
@@ -344,7 +208,7 @@ export default function PhilanthropyPage() {
           {/* Section header */}
           <div className="text-center mb-16">
             <FadeIn>
-              <span className="text-label text-regal-gold mb-4 block">The Approach</span>
+              <span className="text-label text-regal-gold mb-4 block">{t('approach.label')}</span>
             </FadeIn>
             <AnimatedHeading as="h2" className="text-title font-serif text-charcoal">
               {t('pillars.title')}
@@ -397,7 +261,7 @@ export default function PhilanthropyPage() {
                     <div className="flex items-center gap-3 mt-6 pt-6 border-t border-border">
                       <EightPointStar className="text-regal-gold/40" size={16} strokeWidth={2} />
                       <span className="text-xs text-muted uppercase tracking-wider">
-                        Swipe to explore
+                        {t('approach.swipeToExplore')}
                       </span>
                     </div>
                   </div>
@@ -444,7 +308,7 @@ export default function PhilanthropyPage() {
             {/* Section header */}
             <div className="text-center mb-16">
               <FadeIn>
-                <span className="text-label text-regal-gold mb-4 block">Worldwide Reach</span>
+                <span className="text-label text-regal-gold mb-4 block">{t('impact.label')}</span>
               </FadeIn>
               <AnimatedHeading as="h2" className="text-title font-serif text-white">
                 {t('impact.title')}
@@ -495,10 +359,10 @@ export default function PhilanthropyPage() {
         <Container>
           <div className="text-center mb-16">
             <FadeIn>
-              <span className="text-label text-regal-gold mb-4 block">Making a Difference</span>
+              <span className="text-label text-regal-gold mb-4 block">{t('focusAreas.label')}</span>
             </FadeIn>
             <AnimatedHeading as="h2" className="text-title font-serif text-charcoal">
-              Focus Areas
+              {t('focusAreas.title')}
             </AnimatedHeading>
           </div>
 
@@ -556,7 +420,7 @@ export default function PhilanthropyPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-regal-gold hover:text-regal-gold-dark transition-colors group"
             >
-              <span className="font-medium">Learn about The Giving Pledge</span>
+              <span className="font-medium">{t('givingPledge.learnMore')}</span>
               <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </a>
           </FadeIn>
@@ -566,35 +430,16 @@ export default function PhilanthropyPage() {
       {/* ============================================
           CTA SECTION
           ============================================ */}
-      <section className="section-padding-sm bg-background relative">
-        <Container size="md">
-          <FadeIn className="text-center">
-            <GeometricDivider variant="star" className="text-regal-gold mx-auto mb-8" />
-            <h2 className="text-subtitle font-serif text-charcoal mb-4">
-              Continue Exploring
-            </h2>
-            <p className="text-muted mb-8">
-              Discover more about the legacy and impact of Prince Alwaleed bin Talal.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/accomplishments"
-                className="btn-primary"
-                data-cursor="View"
-              >
-                View Accomplishments
-              </a>
-              <a
-                href="/biography"
-                className="btn-outline"
-                data-cursor="Read"
-              >
-                Read Biography
-              </a>
-            </div>
-          </FadeIn>
-        </Container>
-      </section>
+      <PageCTA
+        title={t('cta.title')}
+        description={t('cta.description')}
+        primaryLabel={tc('cta.viewAccomplishments')}
+        primaryHref="/accomplishments"
+        primaryCursor={tc('cta.cursor.view')}
+        outlineLabel={tc('cta.readBiography')}
+        outlineHref="/biography"
+        outlineCursor={tc('cta.cursor.read')}
+      />
     </>
   );
 }

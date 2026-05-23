@@ -1,0 +1,984 @@
+{
+  "metadata": {
+    "subject": "Prince Alwaleed bin Talal Al Saud",
+    "born": "March 7, 1955",
+    "birthplace": "Saudi Arabia",
+    "titles": [
+      "Chairman, Kingdom Holding Company",
+      "Founder, Alwaleed Philanthropies"
+    ],
+    "net_worth_estimate": "$16-20 billion (2025)",
+    "last_updated": "January 2026"
+  },
+
+  "news_articles": {
+    "business_investments": [
+      {
+        "id": "inv-001",
+        "date": "1991-02-01",
+        "title": "Prince Alwaleed Invests $797 Million in Citicorp",
+        "title_ar": "الأمير الوليد يستثمر 797 مليون دولار في سيتي كورب",
+        "summary": "Prince Alwaleed made a transformative investment of $797 million in Citicorp when the bank was near collapse, ultimately becoming its largest shareholder and helping save the institution.",
+        "summary_ar": "قام الأمير الوليد باستثمار تاريخي بقيمة 797 مليون دولار في سيتي كورب عندما كان البنك على وشك الانهيار، ليصبح في نهاية المطاف أكبر مساهم فيه ويساهم في إنقاذ المؤسسة.",
+        "source": "Morningstar India",
+        "url": "https://www.morningstar.in/posts/43602/prince-alwaleed-became-billionaire.aspx",
+        "image": "/images/placeholder.jpg",
+        "category": "investment"
+      },
+      {
+        "id": "inv-002",
+        "date": "1997-04-01",
+        "title": "Saudi Prince Says He Owns 5% of Apple",
+        "title_ar": "الأمير السعودي يعلن امتلاكه 5% من آبل",
+        "summary": "Prince Alwaleed purchased more than 5% of Apple Computer Inc. stock (6.25 million shares) for $115 million, becoming Apple's second-largest shareholder when the company was struggling and Steve Jobs had just returned.",
+        "summary_ar": "اشترى الأمير الوليد أكثر من 5% من أسهم شركة آبل (6.25 مليون سهم) بقيمة 115 مليون دولار، ليصبح ثاني أكبر مساهم في الشركة في وقت كانت تعاني فيه من صعوبات وكان ستيف جوبز قد عاد للتو.",
+        "source": "SF Gate",
+        "url": "https://www.sfgate.com/news/article/saudi-prince-says-he-owns-5-of-apple-his-2847592.php",
+        "image": "/images/placeholder.jpg",
+        "category": "investment"
+      },
+      {
+        "id": "inv-003",
+        "date": "2008-11-20",
+        "title": "Saudi Prince Increases Citigroup Stake During Financial Crisis",
+        "title_ar": "الأمير السعودي يزيد حصته في سيتي جروب خلال الأزمة المالية",
+        "summary": "Prince Alwaleed announced plans to increase his Citigroup stake to 5% during the 2008 financial crisis, demonstrating confidence in the struggling bank as a long-time investor.",
+        "summary_ar": "أعلن الأمير الوليد عن خطط لزيادة حصته في سيتي جروب إلى 5% خلال الأزمة المالية عام 2008، مما يعكس ثقته بالبنك المتعثر بصفته مستثمراً طويل الأمد.",
+        "source": "CNN Money",
+        "url": "https://money.cnn.com/2008/11/20/news/companies/citi_stake/index.htm",
+        "image": "/images/placeholder.jpg",
+        "category": "investment"
+      },
+      {
+        "id": "inv-004",
+        "date": "2011-12-19",
+        "title": "Saudi Prince Invests $300M in Twitter",
+        "title_ar": "الأمير السعودي يستثمر 300 مليون دولار في تويتر",
+        "summary": "Prince Alwaleed and Kingdom Holding invested $300 million in Twitter after months of negotiations, acquiring approximately 4% stake in the company then valued at $8 billion.",
+        "summary_ar": "استثمر الأمير الوليد وشركة المملكة القابضة 300 مليون دولار في تويتر بعد أشهر من المفاوضات، للاستحواذ على حصة تقارب 4% في الشركة التي كانت تُقدَّر قيمتها آنذاك بـ 8 مليارات دولار.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/economy/2011/12/19/saudi-prince-invests-300m-in-twitter",
+        "image": "/images/placeholder.jpg",
+        "category": "investment"
+      },
+      {
+        "id": "inv-005",
+        "date": "2011-12-19",
+        "title": "Prince Alwaleed & Kingdom Holding Company Make Twitter Investment",
+        "title_ar": "الأمير الوليد وشركة المملكة القابضة يستثمران في تويتر",
+        "summary": "Official announcement of the combined $300 million strategic investment in Twitter, described as identifying suitable opportunities to invest in promising, high-growth businesses.",
+        "summary_ar": "الإعلان الرسمي عن الاستثمار الاستراتيجي المشترك بقيمة 300 مليون دولار في تويتر، الذي وُصف بأنه تحديد لفرص مناسبة للاستثمار في شركات واعدة وسريعة النمو.",
+        "source": "PR Newswire",
+        "url": "https://www.prnewswire.com/news-releases/prince-alwaleed--kingdom-holding-company-make-a-300-million-investment-in-twitter-135843108.html",
+        "image": "/images/placeholder.jpg",
+        "category": "investment"
+      },
+      {
+        "id": "inv-006",
+        "date": "2015-10-07",
+        "title": "Saudi Prince Alwaleed Doubles His Ownership of Twitter Stock",
+        "title_ar": "الأمير الوليد يضاعف حصته في أسهم تويتر",
+        "summary": "Prince Alwaleed doubled his Twitter stake to over 5% (34.9 million shares worth $1 billion), becoming Twitter's second-largest shareholder ahead of Jack Dorsey.",
+        "summary_ar": "ضاعف الأمير الوليد حصته في تويتر لتتجاوز 5% (34.9 مليون سهم بقيمة مليار دولار)، ليصبح ثاني أكبر مساهم في تويتر متقدماً على جاك دورسي.",
+        "source": "Fortune",
+        "url": "https://fortune.com/2015/10/07/saudi-prince-twitter-stock/",
+        "image": "/images/placeholder.jpg",
+        "category": "investment"
+      },
+      {
+        "id": "inv-007",
+        "date": "2015-12-01",
+        "title": "Kingdom Holding Takes Uber-Rival Lyft for a Spin",
+        "title_ar": "شركة المملكة القابضة تستثمر في ليفت منافسة أوبر",
+        "summary": "Prince Alwaleed, KHC and partners invested $247.7 million in Lyft, with KHC alone investing $104.9 million for 2.3% stake in the ride-hailing company.",
+        "summary_ar": "استثمر الأمير الوليد وشركة المملكة القابضة وشركاؤهم 247.7 مليون دولار في ليفت، حيث استثمرت المملكة القابضة وحدها 104.9 مليون دولار مقابل حصة 2.3% في شركة النقل التشاركي.",
+        "source": "The National",
+        "url": "https://www.thenationalnews.com/business/kingdom-holding-takes-uber-rival-lyft-for-a-spin-1.108446",
+        "image": "/images/placeholder.jpg",
+        "category": "investment"
+      },
+      {
+        "id": "inv-008",
+        "date": "2017-06-01",
+        "title": "Kingdom Buys 7% of Careem Ride App",
+        "title_ar": "المملكة القابضة تستحوذ على 7% من تطبيق كريم",
+        "summary": "Kingdom Holding acquired 7% stake in Careem, the Middle East's leading ride-hailing app, for $62 million.",
+        "summary_ar": "استحوذت شركة المملكة القابضة على حصة 7% في كريم، تطبيق النقل التشاركي الرائد في الشرق الأوسط، بقيمة 62 مليون دولار.",
+        "source": "Arab News",
+        "url": "https://www.arabnews.com/node/1115736/business-economy",
+        "image": "/images/placeholder.jpg",
+        "category": "investment"
+      },
+      {
+        "id": "inv-009",
+        "date": "2019-03-01",
+        "title": "Saudi's Kingdom Holding to Invest Careem Proceeds After Uber Acquisition",
+        "title_ar": "المملكة القابضة تستثمر عائدات كريم بعد استحواذ أوبر",
+        "summary": "Kingdom Holding sold its Careem stake for $333 million when Uber acquired Careem for $3.1 billion, generating 53% IRR on Lyft and nearly 100% return on Careem.",
+        "summary_ar": "باعت شركة المملكة القابضة حصتها في كريم بقيمة 333 مليون دولار عند استحواذ أوبر على كريم بقيمة 3.1 مليار دولار، محققةً عائداً داخلياً بنسبة 53% على ليفت وعائداً يقارب 100% على كريم.",
+        "source": "Business Insider",
+        "url": "https://www.insider.com/saudis-kingdom-holding-to-invest-careem-proceeds-in-europe-saudi-ceo-2019-3",
+        "image": "/images/placeholder.jpg",
+        "category": "investment"
+      },
+      {
+        "id": "inv-010",
+        "date": "2021-09-08",
+        "title": "Bill Gates Takes Four Seasons Control After Deal With Saudi Prince Alwaleed",
+        "title_ar": "بيل غيتس يتولى السيطرة على فور سيزونز بعد صفقة مع الأمير الوليد",
+        "summary": "Bill Gates's Cascade Investment acquired stake from Kingdom Holding for $2.2 billion, with KHC retaining 23.75% stake in the luxury hotel brand they've partnered on since 2007.",
+        "summary_ar": "استحوذت شركة كاسكيد للاستثمار التابعة لبيل غيتس على حصة من المملكة القابضة بقيمة 2.2 مليار دولار، مع احتفاظ المملكة القابضة بحصة 23.75% في علامة الفنادق الفاخرة التي شاركا فيها منذ 2007.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2021-09-08/saudi-billionaire-to-sell-stake-in-four-seasons-for-2-2-billion",
+        "image": "/images/placeholder.jpg",
+        "category": "investment"
+      },
+      {
+        "id": "inv-011",
+        "date": "2023-10-24",
+        "title": "Red Sea Global and Kingdom Holding Sign 2bn SR Joint Venture",
+        "title_ar": "البحر الأحمر الدولية والمملكة القابضة توقعان مشروعاً مشتركاً بقيمة 2 مليار ريال",
+        "summary": "SAR 2 billion joint venture announced for Four Seasons Resort Red Sea, a 50/50 partnership to develop luxury resort on Shura Island as part of Saudi Vision 2030.",
+        "summary_ar": "الإعلان عن مشروع مشترك بقيمة 2 مليار ريال سعودي لمنتجع فور سيزونز البحر الأحمر، بشراكة مناصفة لتطوير منتجع فاخر على جزيرة شورى ضمن رؤية السعودية 2030.",
+        "source": "Red Sea Global",
+        "url": "https://www.redseaglobal.com/en/w/media-center/red-sea-global-and-kingdom-holding-company-sign-a-2bn-sr-joint-venture/",
+        "image": "/images/placeholder.jpg",
+        "category": "investment"
+      },
+      {
+        "id": "inv-012",
+        "date": "2023-11-29",
+        "title": "Kingdom Holding Buys $450 Million Citigroup Stake From Saudi Prince Alwaleed",
+        "title_ar": "المملكة القابضة تشتري حصة بقيمة 450 مليون دولار في سيتي جروب من الأمير الوليد",
+        "summary": "Kingdom Holding raised its Citigroup stake to 2.2% after acquiring $450 million stake from Prince Alwaleed personally, demonstrating over 30 years of strategic commitment to Citigroup.",
+        "summary_ar": "رفعت شركة المملكة القابضة حصتها في سيتي جروب إلى 2.2% بعد استحواذها على حصة بقيمة 450 مليون دولار من الأمير الوليد شخصياً، مما يعكس التزاماً استراتيجياً يمتد لأكثر من 30 عاماً تجاه سيتي جروب.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/news/articles/2023-11-29/kingdom-holding-buys-450-million-citigroup-stake-from-alwaleed",
+        "image": "/images/placeholder.jpg",
+        "category": "investment"
+      },
+      {
+        "id": "inv-013",
+        "date": "2024-12-01",
+        "title": "Kingdom Holding Increases xAI Investment to $800 Million",
+        "title_ar": "المملكة القابضة ترفع استثمارها في xAI إلى 800 مليون دولار",
+        "summary": "KHC acquired additional stake in Elon Musk's xAI, bringing total investment to $800 million as part of xAI's Series C financing, becoming second-largest shareholder in the AI company.",
+        "summary_ar": "استحوذت المملكة القابضة على حصة إضافية في شركة xAI التابعة لإيلون ماسك، ليصل إجمالي الاستثمار إلى 800 مليون دولار ضمن جولة التمويل C، لتصبح ثاني أكبر مساهم في شركة الذكاء الاصطناعي.",
+        "source": "Kingdom Holding Company (X/Twitter)",
+        "url": "https://x.com/Kingdom_KHC/status/1871909848071463318",
+        "image": "/images/placeholder.jpg",
+        "category": "investment"
+      },
+      {
+        "id": "inv-014",
+        "date": "2025-01-14",
+        "title": "Al-Waleed bin Talal Announces Four Seasons to Reopen in Beirut",
+        "title_ar": "الوليد بن طلال يعلن إعادة افتتاح فور سيزونز في بيروت",
+        "summary": "Prince Alwaleed announced reconstruction and reopening of Four Seasons Beirut for early 2026, linking it to Lebanon's 'new era' and continued commitment to regional hospitality investments.",
+        "summary_ar": "أعلن الأمير الوليد عن إعادة إعمار وافتتاح فندق فور سيزونز بيروت في مطلع 2026، ربطاً بـ\"العهد الجديد\" في لبنان واستمراراً لالتزامه بالاستثمارات الفندقية في المنطقة.",
+        "source": "Al-Monitor",
+        "url": "https://www.al-monitor.com/originals/2025/01/al-waleed-bin-talal-announces-four-seasons-reopen-beirut-lebanon",
+        "image": "/images/placeholder.jpg",
+        "category": "investment"
+      }
+    ],
+
+    "philanthropy": [
+      {
+        "id": "phil-001",
+        "date": "2005-12-01",
+        "title": "Prince Alwaleed Donates $40 Million to Harvard and Georgetown",
+        "title_ar": "الأمير الوليد يتبرع بـ 40 مليون دولار لهارفارد وجورجتاون",
+        "summary": "Prince Alwaleed donated $20 million each to Harvard University and Georgetown University to support Islamic studies programs, creating the Prince Alwaleed bin Talal Center for Muslim-Christian Understanding at Georgetown.",
+        "summary_ar": "تبرع الأمير الوليد بـ 20 مليون دولار لكل من جامعة هارفارد وجامعة جورجتاون لدعم برامج الدراسات الإسلامية، وأسس مركز الأمير الوليد بن طلال للتفاهم الإسلامي المسيحي في جورجتاون.",
+        "source": "Yale Daily News",
+        "url": "https://yaledailynews.com/blog/2006/01/09/schools-accept-princes-money/",
+        "image": "/images/placeholder.jpg",
+        "category": "education"
+      },
+      {
+        "id": "phil-002",
+        "date": "2005-07-26",
+        "title": "Prince Alwaleed Donates €17 Million to Louvre Islamic Art Wing",
+        "title_ar": "الأمير الوليد يتبرع بـ 17 مليون يورو لجناح الفن الإسلامي في اللوفر",
+        "summary": "Prince Alwaleed donated €17 million ($23 million) to create the Louvre's Department of Islamic Art, housing over 20,000 artifacts across 3,000 square meters.",
+        "summary_ar": "تبرع الأمير الوليد بـ 17 مليون يورو (23 مليون دولار) لإنشاء قسم الفن الإسلامي في متحف اللوفر، الذي يضم أكثر من 20,000 قطعة أثرية على مساحة 3,000 متر مربع.",
+        "source": "French Ministry of Culture",
+        "url": "https://www.culture.gouv.fr/culture/actualites/dossiers-presse/DPmecenat-islam.html",
+        "image": "/images/placeholder.jpg",
+        "category": "cultural"
+      },
+      {
+        "id": "phil-003",
+        "date": "2011-09-01",
+        "title": "Carter Center Partners with Alwaleed Foundation for Disease Elimination",
+        "title_ar": "مركز كارتر يتعاون مع مؤسسة الوليد للإنسانية للقضاء على الأمراض",
+        "summary": "The foundation donated $500,000 for the Onchocerciasis Elimination Program, continuing support since 2003 for river blindness elimination, trachoma control, and mental health services.",
+        "summary_ar": "تبرعت المؤسسة بمبلغ 500,000 دولار لبرنامج القضاء على داء كلابية الذنب (عمى الأنهار)، استمراراً للدعم منذ 2003 للقضاء على عمى الأنهار ومكافحة التراخوما وخدمات الصحة النفسية.",
+        "source": "The Carter Center",
+        "url": "https://www.cartercenter.org/donate/corporate-government-foundation-partners/archives/alwaleed-bin-talal-foundation.html",
+        "image": "/images/placeholder.jpg",
+        "category": "health"
+      },
+      {
+        "id": "phil-004",
+        "date": "2013-10-08",
+        "title": "Organization of Islamic Cooperation Awards Prince Alwaleed",
+        "title_ar": "منظمة التعاون الإسلامي تكرّم الأمير الوليد",
+        "summary": "Prince Alwaleed received an honorary plaque from the OIC Secretary General recognizing his humanitarian efforts across 80+ countries—the first person to be honored by the OIC for philanthropy.",
+        "summary_ar": "تسلّم الأمير الوليد لوحة تكريمية من الأمين العام لمنظمة التعاون الإسلامي تقديراً لجهوده الإنسانية في أكثر من 80 دولة، ليكون أول شخص تكرّمه المنظمة على أعماله الخيرية.",
+        "source": "Alwaleed Philanthropies",
+        "url": "https://alwaleedphilanthropies.org/en/news/organization-of-islamic-cooperation-oic-awards-prince-alwaleed",
+        "image": "/images/placeholder.jpg",
+        "category": "recognition"
+      },
+      {
+        "id": "phil-005",
+        "date": "2015-01-01",
+        "title": "Alwaleed Philanthropies Pledges $1 Million to Gavi Vaccine Alliance",
+        "title_ar": "مؤسسة الوليد للإنسانية تتعهد بمليون دولار لتحالف غافي للقاحات",
+        "summary": "In January 2015, Alwaleed Philanthropies pledged US$1.006 million for vaccine support to Timor Leste, Kiribati, Armenia, Azerbaijan, Moldova and Guyana.",
+        "summary_ar": "في يناير 2015، تعهدت مؤسسة الوليد للإنسانية بتقديم 1.006 مليون دولار لدعم اللقاحات في تيمور الشرقية وكيريباتي وأرمينيا وأذربيجان ومولدوفا وغيانا.",
+        "source": "Gavi",
+        "url": "https://www.gavi.org/investing-gavi/funding/donor-profiles/alwaleed-philanthropies",
+        "image": "/images/placeholder.jpg",
+        "category": "health"
+      },
+      {
+        "id": "phil-006",
+        "date": "2015-07-01",
+        "title": "Saudi Prince Alwaleed Pledges $32 Billion to Charity",
+        "title_ar": "الأمير الوليد يتعهد بالتبرع بـ 32 مليار دولار للأعمال الخيرية",
+        "summary": "Prince Alwaleed announced at a press conference that he would donate his entire $32 billion fortune to charitable causes through Alwaleed Philanthropies, having already donated $3.5 billion over 35 years.",
+        "summary_ar": "أعلن الأمير الوليد في مؤتمر صحفي عن تبرعه بكامل ثروته البالغة 32 مليار دولار للأعمال الخيرية عبر مؤسسة الوليد للإنسانية، بعد أن تبرع بالفعل بـ 3.5 مليار دولار على مدار 35 عاماً.",
+        "source": "Al Jazeera",
+        "url": "https://www.aljazeera.com/news/2015/7/1/saudi-prince-alwaleed-pledges-32bn-to-charity",
+        "image": "/images/placeholder.jpg",
+        "category": "pledge"
+      },
+      {
+        "id": "phil-007",
+        "date": "2016-06-01",
+        "title": "Prince Alwaleed Joins The Giving Pledge",
+        "title_ar": "الأمير الوليد ينضم إلى تعهد العطاء",
+        "summary": "Prince Alwaleed became the first Arab Muslim to join the Giving Pledge, committing to help build 'a more peaceful, equitable and sustainable world for generations to come.'",
+        "summary_ar": "أصبح الأمير الوليد أول عربي مسلم ينضم إلى تعهد العطاء، ملتزماً بالمساهمة في بناء \"عالم أكثر سلاماً وعدالة واستدامة للأجيال القادمة.\"",
+        "source": "The Giving Pledge",
+        "url": "https://www.givingpledge.org/pledger/hrh-prince-alwaleed-bin-talal-bin-abdulaziz-alsaud/",
+        "image": "/images/placeholder.jpg",
+        "category": "pledge"
+      },
+      {
+        "id": "phil-008",
+        "date": "2019-08-01",
+        "title": "Alwaleed Philanthropies Pledges $5 Million to Gavi INFUSE Initiative",
+        "title_ar": "مؤسسة الوليد للإنسانية تتعهد بـ 5 ملايين دولار لمبادرة INFUSE التابعة لغافي",
+        "summary": "Alwaleed Philanthropies pledged US$5 million to support Gavi's INFUSE initiative for innovation in immunization delivery to developing countries.",
+        "summary_ar": "تعهدت مؤسسة الوليد للإنسانية بتقديم 5 ملايين دولار لدعم مبادرة INFUSE التابعة لغافي للابتكار في توصيل اللقاحات إلى الدول النامية.",
+        "source": "Gavi",
+        "url": "https://www.gavi.org/investing-gavi/funding/donor-profiles/alwaleed-philanthropies",
+        "image": "/images/placeholder.jpg",
+        "category": "health"
+      },
+      {
+        "id": "phil-009",
+        "date": "2021-05-01",
+        "title": "Alwaleed Philanthropies First to Contribute to UN Multi-Partner Trust Fund",
+        "title_ar": "مؤسسة الوليد للإنسانية أول مؤسسة خيرية تساهم في صندوق الأمم المتحدة متعدد الشركاء",
+        "summary": "Alwaleed Philanthropies made history as the first private philanthropic organization to contribute to the MPHSTF with a $200,000 donation for sustainable development in the Aral Sea Region.",
+        "summary_ar": "سجّلت مؤسسة الوليد للإنسانية سابقة تاريخية بوصفها أول مؤسسة خيرية خاصة تساهم في صندوق الأمم المتحدة الاستئماني متعدد الشركاء بتبرع قدره 200,000 دولار للتنمية المستدامة في منطقة بحر آرال.",
+        "source": "UN Multi-Partner Trust Fund Office",
+        "url": "https://mptf.undp.org/news/alwaleed-philanthropies-kingdom-saudi-arabia-first-philanthropic-organization-contribute",
+        "image": "/images/placeholder.jpg",
+        "category": "development"
+      },
+      {
+        "id": "phil-010",
+        "date": "2022-01-01",
+        "title": "Alwaleed Philanthropies Launches Female Artisan Empowerment Program",
+        "title_ar": "مؤسسة الوليد للإنسانية تطلق برنامج تمكين الحرفيات",
+        "summary": "Creative production workshops launched for Saudi female artisans at Princess Nourah bint Abdulrahman University, training 60 artists every 18 months to sell crafts through e-commerce and luxury hotels.",
+        "summary_ar": "إطلاق ورش إنتاج إبداعية للحرفيات السعوديات في جامعة الأميرة نورة بنت عبدالرحمن، لتدريب 60 فنانة كل 18 شهراً على بيع المنتجات الحرفية عبر التجارة الإلكترونية والفنادق الفاخرة.",
+        "source": "Alwaleed Philanthropies",
+        "url": "https://alwaleedphilanthropies.org/en/news/Alwaleed-Philanthropies-launch-production-workshops-to-support-female-artisans-heralding-new-era-in-empowerment",
+        "image": "/images/placeholder.jpg",
+        "category": "women_empowerment"
+      }
+    ],
+
+    "recognition_awards": [
+      {
+        "id": "award-001",
+        "date": "2002-01-01",
+        "title": "First Order of King Abdulaziz",
+        "title_ar": "وسام الملك عبدالعزيز من الدرجة الأولى",
+        "summary": "Prince Alwaleed received Saudi Arabia's highest honor, the First Order of King Abdulaziz, for his contributions to the Kingdom.",
+        "summary_ar": "تسلّم الأمير الوليد أرفع وسام في المملكة العربية السعودية، وسام الملك عبدالعزيز من الدرجة الأولى، تقديراً لإسهاماته في خدمة المملكة.",
+        "source": "Official Records",
+        "image": "/images/placeholder.jpg",
+        "category": "royal_honor"
+      },
+      {
+        "id": "award-002",
+        "date": "2008-01-01",
+        "title": "Time 100 Most Influential People",
+        "title_ar": "قائمة تايم لأكثر 100 شخصية مؤثرة في العالم",
+        "summary": "Prince Alwaleed named to Time magazine's list of 100 Most Influential People in the Builders & Titans category, recognizing his global business impact.",
+        "summary_ar": "اختير الأمير الوليد ضمن قائمة مجلة تايم لأكثر 100 شخصية مؤثرة في العالم في فئة البناة والعمالقة، تقديراً لتأثيره العالمي في عالم الأعمال.",
+        "source": "Time Magazine",
+        "image": "/images/placeholder.jpg",
+        "category": "media_recognition"
+      },
+      {
+        "id": "award-003",
+        "date": "2008-01-01",
+        "title": "Pontifical Medal from Pope Benedict XVI",
+        "title_ar": "الميدالية البابوية من البابا بنديكتوس السادس عشر",
+        "summary": "The Alwaleed Bin Talal Humanitarian Foundation in Lebanon was awarded the Pontifical Medal by Pope Benedict XVI for encouraging tolerance between religious faiths.",
+        "summary_ar": "مُنحت مؤسسة الوليد بن طلال الإنسانية في لبنان الميدالية البابوية من البابا بنديكتوس السادس عشر تقديراً لتشجيع التسامح بين الأديان.",
+        "source": "Vatican",
+        "url": "https://houseofsaud.com/prince-alwaleed-bin-talal-bin-abdulaziz-al-saud/philanthropy/",
+        "image": "/images/placeholder.jpg",
+        "category": "interfaith"
+      },
+      {
+        "id": "award-004",
+        "date": "2009-01-01",
+        "title": "Star of Palestine - Highest Honor",
+        "title_ar": "نجمة فلسطين - أعلى وسام",
+        "summary": "Prince Alwaleed received the Star of Palestine, the highest honor from the State of Palestine, for his humanitarian contributions to Palestinian causes.",
+        "summary_ar": "تسلّم الأمير الوليد نجمة فلسطين، أعلى وسام من دولة فلسطين، تقديراً لمساهماته الإنسانية في القضايا الفلسطينية.",
+        "source": "State of Palestine",
+        "image": "/images/placeholder.jpg",
+        "category": "diplomatic_honor"
+      },
+      {
+        "id": "award-005",
+        "date": "2010-01-01",
+        "title": "Dwight D. Eisenhower Award for Innovation",
+        "title_ar": "جائزة دوايت أيزنهاور للابتكار",
+        "summary": "Prince Alwaleed received the Eisenhower Award recognizing innovation in business and philanthropy from the United States.",
+        "summary_ar": "تسلّم الأمير الوليد جائزة أيزنهاور تقديراً للابتكار في مجالي الأعمال والعمل الخيري من الولايات المتحدة.",
+        "source": "USA",
+        "image": "/images/placeholder.jpg",
+        "category": "business_award"
+      },
+      {
+        "id": "award-006",
+        "date": "2015-02-01",
+        "title": "Bloomberg Billionaires Index Features Prince Alwaleed at $30.5 Billion",
+        "title_ar": "مؤشر بلومبرغ للمليارديرات يضم الأمير الوليد بثروة 30.5 مليار دولار",
+        "summary": "Prince Alwaleed featured in Bloomberg Billionaires Index at $30.5 billion, ranked #1 in Arabian Business World's Richest Arabs list at $31.2 billion.",
+        "summary_ar": "ظهر الأمير الوليد في مؤشر بلومبرغ للمليارديرات بثروة 30.5 مليار دولار، واحتل المرتبة الأولى في قائمة أريبيان بزنس لأثرى العرب بثروة 31.2 مليار دولار.",
+        "source": "Arab News",
+        "url": "https://www.arabnews.com/node/531791/amp",
+        "image": "/images/placeholder.jpg",
+        "category": "wealth_ranking"
+      },
+      {
+        "id": "award-007",
+        "date": "2025-01-01",
+        "title": "Saudi Billionaires Return to Forbes List - Alwaleed Ranked Richest Saudi",
+        "title_ar": "المليارديرات السعوديون يعودون إلى قائمة فوربس - الوليد الأغنى سعودياً",
+        "summary": "Prince Alwaleed ranked richest Saudi and richest Arab with $16.5 billion fortune, returning to Forbes list after 8-year hiatus.",
+        "summary_ar": "صُنّف الأمير الوليد كأغنى سعودي وأغنى عربي بثروة 16.5 مليار دولار، عائداً إلى قائمة فوربس بعد غياب 8 سنوات.",
+        "source": "Saudi Gazette",
+        "url": "https://www.saudigazette.com.sa/article/650636/SAUDI-ARABIA/Saudi-billionaires-back-on-Forbes-list-with-combined-assets-of-$558-billion",
+        "image": "/images/placeholder.jpg",
+        "category": "wealth_ranking"
+      }
+    ],
+
+    "biography_profiles": [
+      {
+        "id": "bio-001",
+        "date": "2025-01-01",
+        "title": "Prince Alwaleed bin Talal - Official Biography",
+        "title_ar": "الأمير الوليد بن طلال - السيرة الذاتية الرسمية",
+        "summary": "Comprehensive official biography covering royal lineage as grandson of King Abdulaziz and Lebanon's first Prime Minister, education (magna cum laude from Menlo College, honors from Syracuse), and 27 honorary doctorates.",
+        "summary_ar": "سيرة ذاتية رسمية شاملة تغطي النسب الملكي كحفيد للملك عبدالعزيز وأول رئيس وزراء للبنان، والتعليم (بامتياز مع مرتبة الشرف من كلية مينلو، وبمرتبة الشرف من جامعة سيراكيوز)، و27 دكتوراه فخرية.",
+        "source": "Official Website",
+        "url": "https://alwaleed.com.sa/the_person",
+        "image": "/images/placeholder.jpg",
+        "category": "biography"
+      },
+      {
+        "id": "bio-002",
+        "date": "2025-01-01",
+        "title": "Al Waleed bin Talal Al Saud - Wikipedia",
+        "title_ar": "الوليد بن طلال آل سعود - ويكيبيديا",
+        "summary": "Comprehensive encyclopedia entry covering birth on March 7, 1955, family history, education, business career founding Kingdom Holding in 1980, philanthropy, and recognition as 'Arabian Warren Buffett.'",
+        "summary_ar": "مقال موسوعي شامل يغطي الولادة في 7 مارس 1955، وتاريخ العائلة، والتعليم، والمسيرة المهنية وتأسيس شركة المملكة القابضة عام 1980، والعمل الخيري، ولقب \"وارن بافيت العرب.\"",
+        "source": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Al_Waleed_bin_Talal_Al_Saud",
+        "image": "/images/placeholder.jpg",
+        "category": "encyclopedia"
+      },
+      {
+        "id": "bio-003",
+        "date": "2025-01-01",
+        "title": "Al-Waleed bin Talal - Britannica Money",
+        "title_ar": "الوليد بن طلال - بريتانيكا ماني",
+        "summary": "Authoritative biography highlighting his start in 1980 with $15,000 from his father and a 130-room palace to borrow against, building a global investment empire.",
+        "summary_ar": "سيرة ذاتية موثوقة تسلط الضوء على بداياته عام 1980 بمبلغ 15,000 دولار من والده وقصر من 130 غرفة كضمان للاقتراض، لبناء إمبراطورية استثمارية عالمية.",
+        "source": "Britannica",
+        "url": "https://www.britannica.com/money/al-Waleed-bin-Talal",
+        "image": "/images/placeholder.jpg",
+        "category": "encyclopedia"
+      },
+      {
+        "id": "bio-004",
+        "date": "2025-01-01",
+        "title": "Prince Alwaleed bin Talal - Bloomberg Billionaires Profile",
+        "title_ar": "الأمير الوليد بن طلال - ملف بلومبرغ للمليارديرات",
+        "summary": "Financial profile covering family background, assets including 420-room palace, Kingdom Centre residence, and Kingdom 5KR yacht, with Saudi residences valued at $5 billion.",
+        "summary_ar": "ملف مالي يشمل خلفية العائلة، والأصول بما فيها قصر من 420 غرفة، ومقر إقامة مركز المملكة، ويخت Kingdom 5KR، بقيمة إجمالية للعقارات السعودية تبلغ 5 مليارات دولار.",
+        "source": "Bloomberg",
+        "url": "https://www.bloomberg.com/billionaires/profiles/alwaleed-b-al-saud/",
+        "image": "/images/placeholder.jpg",
+        "category": "financial_profile"
+      },
+      {
+        "id": "bio-005",
+        "date": "2025-01-01",
+        "title": "Prince Alwaleed - Harper's Bazaar Arabia Royal Profile",
+        "title_ar": "الأمير الوليد - ملف هاربرز بازار العربية الملكي",
+        "summary": "Profile highlighting extended family connections to Syrian Al-Jabiri family, Moroccan royal family through maternal aunt Princess Lalla Lamia Solh, and childhood in Morocco.",
+        "summary_ar": "ملف شخصي يسلط الضوء على صلات العائلة الممتدة بآل الجابري السوريين، والعائلة الملكية المغربية عبر خالته الأميرة للا لامية الصلح، وطفولته في المغرب.",
+        "source": "Harper's Bazaar Arabia",
+        "url": "https://www.harpersbazaararabia.com/culture/royal-watch/prince-alwaleed-bin-talal-al-saud",
+        "image": "/images/placeholder.jpg",
+        "category": "lifestyle"
+      }
+    ]
+  },
+
+  "image_gallery": {
+    "professional_portraits": [
+      {
+        "id": "img-pro-001",
+        "date": "2015-01-01",
+        "type": "image",
+        "description": "Prince Alwaleed bin Talal poses for a professional photograph in the penthouse office of Kingdom Holding Company headquarters in Riyadh",
+        "description_ar": "الأمير الوليد بن طلال يلتقط صورة رسمية في مكتبه بالطابق العلوي في المقر الرئيسي لشركة المملكة القابضة بالرياض",
+        "source": "Getty Images / Bloomberg",
+        "url": "https://www.gettyimages.com/photos/saudi-prince-al-waleed",
+        "context": "Corporate portrait at business headquarters",
+        "context_ar": "صورة رسمية في مقر الشركة",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-pro-002",
+        "date": "2015-07-01",
+        "type": "image",
+        "description": "Saudi Arabia's billionaire Prince Alwaleed bin Talal gestures during a press conference in Riyadh announcing his $32 billion philanthropic pledge",
+        "description_ar": "الملياردير السعودي الأمير الوليد بن طلال يتحدث خلال مؤتمر صحفي في الرياض معلناً تعهده الخيري بـ 32 مليار دولار",
+        "source": "Getty Images / AFP",
+        "url": "https://www.gettyimages.com/photos/prince-alwaleed-bin-talal",
+        "context": "Major philanthropic announcement",
+        "context_ar": "إعلان خيري كبير",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-pro-003",
+        "date": "2010-04-27",
+        "type": "image",
+        "description": "Saudi Prince Alwaleed bin Talal speaks during an interview at the Kingdom Center in Riyadh, Saudi Arabia",
+        "description_ar": "الأمير السعودي الوليد بن طلال يتحدث خلال مقابلة في مركز المملكة بالرياض، المملكة العربية السعودية",
+        "source": "Getty Images / Bloomberg",
+        "url": "https://www.gettyimages.com/photos/saudi-prince-alwaleed-bin-talal",
+        "context": "Business interview for media",
+        "context_ar": "مقابلة أعمال إعلامية",
+        "image": "/images/placeholder.jpg"
+      }
+    ],
+
+    "business_events": [
+      {
+        "id": "img-biz-001",
+        "date": "2014-01-01",
+        "type": "image",
+        "description": "Prince Alwaleed Bin Talal, Saudi billionaire and founder of Kingdom Holding Co., speaks at the Bloomberg Year Ahead: 2014 conference in Chicago",
+        "description_ar": "الأمير الوليد بن طلال، الملياردير السعودي ومؤسس شركة المملكة القابضة، يتحدث في مؤتمر بلومبرغ للعام المقبل 2014 في شيكاغو",
+        "source": "Getty Images / Bloomberg",
+        "url": "https://www.gettyimages.com/photos/kingdom-holding-company-prince-alwaleed-bin-talal",
+        "context": "Major business conference appearance",
+        "context_ar": "حضور في مؤتمر أعمال كبير",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-biz-002",
+        "date": "2010-03-09",
+        "type": "image",
+        "description": "Media mogul Rupert Murdoch is greeted by Saudi billionaire Prince Al Waleed bin Talal at the inaugural Abu Dhabi Media Summit",
+        "description_ar": "قطب الإعلام روبرت مردوخ يُستقبل من قبل الملياردير السعودي الأمير الوليد بن طلال في قمة أبوظبي الإعلامية الافتتاحية",
+        "source": "Getty Images",
+        "url": "https://www.gettyimages.com/photos/prince-alwaleed-bin-talal",
+        "context": "Meeting with News Corporation partner",
+        "context_ar": "لقاء مع شريك نيوز كوربوريشن",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-biz-003",
+        "date": "2017-05-11",
+        "type": "image",
+        "description": "Prince Alwaleed bin Talal looks at model of Jeddah Tower ahead of press conference about the world's tallest tower project",
+        "description_ar": "الأمير الوليد بن طلال يتأمل مجسم برج جدة قبيل مؤتمر صحفي حول مشروع أطول برج في العالم",
+        "source": "Getty Images",
+        "url": "https://www.gettyimages.com/photos/saudi-prince-al-waleed",
+        "context": "Major real estate development announcement",
+        "context_ar": "إعلان عن مشروع تطوير عقاري كبير",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-biz-004",
+        "date": "2016-01-01",
+        "type": "image",
+        "description": "Prince Alwaleed Bin Talal during Bloomberg Television interview at the MiSK Global Forum",
+        "description_ar": "الأمير الوليد بن طلال خلال مقابلة مع تلفزيون بلومبرغ في منتدى مسك العالمي",
+        "source": "Getty Images / Bloomberg",
+        "url": "https://www.gettyimages.com/photos/saudi-prince-al-waleed",
+        "context": "Saudi business and technology forum",
+        "context_ar": "منتدى سعودي للأعمال والتكنولوجيا",
+        "image": "/images/placeholder.jpg"
+      }
+    ],
+
+    "diplomatic_meetings": [
+      {
+        "id": "img-dip-001",
+        "date": "2016-09-08",
+        "type": "image",
+        "description": "Saudi Prince Alwaleed bin Talal arrives to meet French President François Hollande at the Élysée Palace in Paris",
+        "description_ar": "الأمير السعودي الوليد بن طلال يصل للقاء الرئيس الفرنسي فرانسوا هولاند في قصر الإليزيه بباريس",
+        "source": "Getty Images",
+        "url": "https://www.gettyimages.com/photos/alwaleed-bin-talal-bin-abdulaziz-al-saud",
+        "context": "Official diplomatic meeting",
+        "context_ar": "لقاء دبلوماسي رسمي",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-dip-002",
+        "date": "2008-07-16",
+        "type": "image",
+        "description": "French President Nicolas Sarkozy bids farewell to Prince Alwaleed after bilateral meeting at Élysée Palace and opening of Louvre Islamic art department",
+        "description_ar": "الرئيس الفرنسي نيكولا ساركوزي يودّع الأمير الوليد بعد لقاء ثنائي في قصر الإليزيه وافتتاح قسم الفن الإسلامي في اللوفر",
+        "source": "Getty Images",
+        "url": "https://www.gettyimages.com/photos/prince-alwaleed-bin-talal",
+        "context": "Diplomatic meeting and cultural event",
+        "context_ar": "لقاء دبلوماسي وحدث ثقافي",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-dip-003",
+        "date": "2010-01-01",
+        "type": "image",
+        "description": "Prince Alwaleed and Princess Amira greet Prince Charles at the reopening of The Savoy Hotel in London",
+        "description_ar": "الأمير الوليد والأميرة أميرة يستقبلان الأمير تشارلز في حفل إعادة افتتاح فندق سافوي في لندن",
+        "source": "Getty Images",
+        "url": "https://www.gettyimages.com/photos/prince-alwaleed-bin-talal",
+        "context": "Major hotel investment - Savoy Hotel reopening",
+        "context_ar": "استثمار فندقي كبير - إعادة افتتاح فندق سافوي",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-dip-004",
+        "date": "2011-04-29",
+        "type": "image",
+        "description": "Saudi Prince Al-Waleed bin Talal and Princess Ameerah exit Westminster Abbey following the Royal Wedding of Prince William and Catherine",
+        "description_ar": "الأمير السعودي الوليد بن طلال والأميرة أميرة يغادران كنيسة وستمنستر بعد حفل الزفاف الملكي للأمير ويليام وكاثرين",
+        "source": "Getty Images (Dan Kitwood)",
+        "url": "https://www.gettyimages.co.uk/photos/saudi-prince-talal",
+        "context": "Guest at British Royal Wedding",
+        "context_ar": "ضيف في حفل الزفاف الملكي البريطاني",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-dip-005",
+        "date": "2007-08-14",
+        "type": "image",
+        "description": "Guatemalan President Oscar Berger meets with Saudi Prince Al-Waleed bin Talal at the Palace of Culture in Guatemala City",
+        "description_ar": "الرئيس الغواتيمالي أوسكار بيرغر يلتقي بالأمير السعودي الوليد بن طلال في قصر الثقافة بمدينة غواتيمالا",
+        "source": "Getty Images / AFP",
+        "url": "https://www.gettyimages.com/photos/prince-alwaleed-bin-talal",
+        "context": "Official diplomatic visit to Guatemala",
+        "context_ar": "زيارة دبلوماسية رسمية إلى غواتيمالا",
+        "image": "/images/placeholder.jpg"
+      }
+    ],
+
+    "philanthropic_activities": [
+      {
+        "id": "img-phil-001",
+        "date": "2013-04-01",
+        "type": "image",
+        "description": "Prince Alwaleed visits Syrian refugees in their tent at Zaatari refugee camp in Jordan during humanitarian visit",
+        "description_ar": "الأمير الوليد يزور اللاجئين السوريين في خيمتهم بمخيم الزعتري في الأردن خلال زيارة إنسانية",
+        "source": "Getty Images",
+        "url": "https://www.gettyimages.com/photos/prince-alwaleed-bin-talal",
+        "context": "Humanitarian visit to Syrian refugee camp",
+        "context_ar": "زيارة إنسانية لمخيم لاجئين سوريين",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-phil-002",
+        "date": "2010-02-24",
+        "type": "image",
+        "description": "Prince Alwaleed attends opening at The Open Arab University in Amman, Jordan with Queen Rania",
+        "description_ar": "الأمير الوليد يحضر حفل افتتاح الجامعة العربية المفتوحة في عمّان، الأردن بحضور الملكة رانيا",
+        "source": "Getty Images",
+        "url": "https://www.gettyimages.com/photos/saudi-prince-al-waleed-bin-talal",
+        "context": "Educational philanthropy event",
+        "context_ar": "حدث خيري تعليمي",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-phil-003",
+        "date": "2014-04-22",
+        "type": "image",
+        "description": "Prince Alwaleed receives honorary doctorate in international business at the University of Jordan in Amman",
+        "description_ar": "الأمير الوليد يتسلم الدكتوراه الفخرية في إدارة الأعمال الدولية من الجامعة الأردنية في عمّان",
+        "source": "Getty Images",
+        "url": "https://www.gettyimages.com/photos/prince-alwaleed-bin-talal",
+        "context": "Academic honor recognition",
+        "context_ar": "تكريم أكاديمي",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-phil-004",
+        "date": "2010-04-28",
+        "type": "image",
+        "description": "Prince Alwaleed meets citizens who have lined up to ask for assistance at his desert camp near Riyadh (traditional majlis)",
+        "description_ar": "الأمير الوليد يستقبل المواطنين الذين اصطفوا لطلب المساعدة في مخيمه الصحراوي قرب الرياض (مجلس تقليدي)",
+        "source": "Getty Images",
+        "url": "https://www.gettyimages.co.uk/photos/saudi-prince-talal",
+        "context": "Traditional Saudi practice of receiving citizens",
+        "context_ar": "تقليد سعودي في استقبال المواطنين",
+        "image": "/images/placeholder.jpg"
+      }
+    ],
+
+    "historical_personal": [
+      {
+        "id": "img-hist-001",
+        "date": "1960-01-01",
+        "type": "image",
+        "description": "Childhood photo of Prince Alwaleed with King Mohammed V of Morocco, his maternal Aunt Princess Lalla Lamia Solh, and Prince Moulay Abdullah",
+        "description_ar": "صورة من الطفولة للأمير الوليد مع الملك محمد الخامس ملك المغرب، وخالته الأميرة للا لامية الصلح، والأمير مولاي عبدالله",
+        "source": "Harper's Bazaar Arabia (via Prince Moulay Hicham Alaoui)",
+        "url": "https://www.harpersbazaararabia.com/culture/royal-watch/prince-alwaleed-bin-talal-al-saud",
+        "context": "Historical childhood photo showing royal family connections",
+        "context_ar": "صورة تاريخية من الطفولة تُظهر الروابط مع العائلات الملكية",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-hist-002",
+        "date": "1960-01-01",
+        "type": "image",
+        "description": "Prince Alwaleed bin Talal as a child with his parents, Prince Talal bin Abdulaziz and Princess Mona Al Solh",
+        "description_ar": "الأمير الوليد بن طلال في طفولته مع والديه، الأمير طلال بن عبدالعزيز والأميرة منى الصلح",
+        "source": "Harper's Bazaar Arabia",
+        "url": "https://www.harpersbazaararabia.com/culture/royal-watch/prince-alwaleed-bin-talal-al-saud",
+        "context": "Historical family portrait",
+        "context_ar": "صورة عائلية تاريخية",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-hist-003",
+        "date": "1998-01-01",
+        "type": "image",
+        "description": "Prince Alwaleed relaxing with daughter Reem and son Khalid on his yacht Kingdom 5-KR, formerly owned by Donald Trump",
+        "description_ar": "الأمير الوليد يسترخي مع ابنته ريم وابنه خالد على يخته Kingdom 5-KR، الذي كان مملوكاً سابقاً لدونالد ترامب",
+        "source": "Getty Images (Barry Iverson/TIME)",
+        "url": "https://www.gettyimages.com/photos/saudi-prince-alwaleed-bin-talal",
+        "context": "Personal family photos on luxury yacht",
+        "context_ar": "صور عائلية شخصية على يخت فاخر",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-hist-004",
+        "date": "1998-01-01",
+        "type": "image",
+        "description": "Prince Alwaleed watching TV at sunset at his weekend desert retreat 45 miles from Riyadh",
+        "description_ar": "الأمير الوليد يشاهد التلفاز عند غروب الشمس في مخيمه الصحراوي لعطلة نهاية الأسبوع على بعد 45 ميلاً من الرياض",
+        "source": "Getty Images (TIME Magazine)",
+        "url": "https://www.gettyimages.com/photos/saudi-prince-al-waleed-bin-talal",
+        "context": "TIME magazine lifestyle feature",
+        "context_ar": "تقرير أسلوب حياة في مجلة تايم",
+        "image": "/images/placeholder.jpg"
+      }
+    ],
+
+    "assets_properties": [
+      {
+        "id": "img-asset-001",
+        "date": "2017-11-05",
+        "type": "image",
+        "description": "Kingdom Tower/Centre in Riyadh, the iconic building owned by Prince Alwaleed bin Talal and headquarters of Kingdom Holding Company",
+        "description_ar": "برج/مركز المملكة في الرياض، المبنى الأيقوني المملوك للأمير الوليد بن طلال والمقر الرئيسي لشركة المملكة القابضة",
+        "source": "Getty Images / AFP",
+        "url": "https://www.gettyimages.com/photos/saudi-prince-talal",
+        "context": "Iconic Kingdom Centre building in Riyadh",
+        "context_ar": "مبنى مركز المملكة الأيقوني في الرياض",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-asset-002",
+        "date": "1998-01-01",
+        "type": "image",
+        "description": "Kingdom 5-KR yacht owned by Prince Alwaleed, the 85.9m vessel formerly owned by Donald Trump (Trump Princess)",
+        "description_ar": "يخت Kingdom 5-KR المملوك للأمير الوليد، السفينة التي يبلغ طولها 85.9 متراً والتي كانت مملوكة سابقاً لدونالد ترامب (ترامب برنسيس)",
+        "source": "Getty Images",
+        "url": "https://www.gettyimages.com/photos/saudi-prince-alwaleed-bin-talal",
+        "context": "Famous yacht featured in James Bond film",
+        "context_ar": "يخت شهير ظهر في فيلم جيمس بوند",
+        "image": "/images/placeholder.jpg"
+      },
+      {
+        "id": "img-asset-003",
+        "date": "2000-01-01",
+        "type": "image",
+        "description": "Prince Alwaleed's private Boeing 747-400 aircraft landing with reverse-thrust",
+        "description_ar": "طائرة الأمير الوليد الخاصة من طراز بوينغ 747-400 أثناء الهبوط بنظام الدفع العكسي",
+        "source": "Getty Images",
+        "url": "https://www.gettyimages.com/photos/alwaleed-bin-talal-bin-abdulaziz-al-saud",
+        "context": "Private aircraft",
+        "context_ar": "طائرة خاصة",
+        "image": "/images/placeholder.jpg"
+      }
+    ],
+
+    "image_archives": [
+      {
+        "source": "Getty Images",
+        "count": "750+",
+        "url": "https://www.gettyimages.com/photos/prince-alwaleed-bin-talal",
+        "description": "Primary archive with extensive editorial images spanning decades"
+      },
+      {
+        "source": "Alamy Stock Photos",
+        "count": "296+",
+        "url": "https://www.alamy.com/stock-photo/alwaleed-bin-talal.html",
+        "description": "Additional stock photo archive"
+      },
+      {
+        "source": "Wikipedia Commons",
+        "url": "https://en.wikipedia.org/wiki/Al_Waleed_bin_Talal_Al_Saud",
+        "description": "Free-to-use biographical images"
+      }
+    ]
+  },
+
+  "video_gallery": {
+    "major_interviews": [
+      {
+        "id": "vid-int-001",
+        "date": "2008-11-24",
+        "type": "video",
+        "title": "CNBC Exclusive: Maria Bartiromo Interviews Prince Alwaleed Bin Talal",
+        "title_ar": "حصري CNBC: ماريا بارتيرومو تحاور الأمير الوليد بن طلال",
+        "description": "As Citigroup's largest shareholder, Prince Alwaleed discusses the government's rescue plan during the 2008 financial crisis and his views on the company's management.",
+        "description_ar": "بصفته أكبر مساهم في سيتي جروب، يناقش الأمير الوليد خطة الإنقاذ الحكومية خلال الأزمة المالية عام 2008 ورؤيته لإدارة الشركة.",
+        "platform": "CNBC Power Lunch",
+        "url": "https://www.cnbc.com/2008/11/24/cnbc-exclusive-cnbc-transcript-cnbcs-maria-bartiromo-interviews-prince-alwaleed-bin-talal-bin-abdulaziz-on-cnbcs-power-lunch-today.html",
+        "duration": "Full interview segment",
+        "thumbnail": "/images/video-placeholder.jpg"
+      },
+      {
+        "id": "vid-int-002",
+        "date": "2011-03-11",
+        "type": "video",
+        "title": "Interview With Prince Alwaleed - Day of Rage Coverage",
+        "title_ar": "مقابلة مع الأمير الوليد - تغطية يوم الغضب",
+        "description": "Prince Alwaleed gives first-hand account of the 'Day of Rage' in Saudi Arabia, discusses regional protests, reform needs in Arab nations, and women's right to drive.",
+        "description_ar": "الأمير الوليد يقدم شهادة مباشرة عن \"يوم الغضب\" في السعودية، ويناقش الاحتجاجات الإقليمية، والحاجة للإصلاح في الدول العربية، وحق المرأة في القيادة.",
+        "platform": "CNBC",
+        "url": "https://www.cnbc.com/2011/03/11/transcript-interview-with-prince-alwaleed.html",
+        "duration": "Phone interview",
+        "thumbnail": "/images/video-placeholder.jpg"
+      },
+      {
+        "id": "vid-int-003",
+        "date": "2011-05-20",
+        "type": "video",
+        "title": "HRH Prince Alwaleed Bin Talal on CNBC's Squawk Box",
+        "title_ar": "صاحب السمو الملكي الأمير الوليد بن طلال على برنامج Squawk Box على CNBC",
+        "description": "Prince Alwaleed discusses the U.S. debt ceiling crisis, warning about the 'time bomb' of accumulating deficit, QE2 withdrawal, and views on the U.S. economy.",
+        "description_ar": "يناقش الأمير الوليد أزمة سقف الدين الأمريكي، محذراً من \"القنبلة الموقوتة\" للعجز المتراكم، وسحب التيسير الكمي، ورؤيته للاقتصاد الأمريكي.",
+        "platform": "CNBC Squawk Box",
+        "url": "https://www.cnbc.com/2011/05/20/cnbc-excerpts-hrh-prince-alwaleed-bin-talal-kingdom-holding-company-chairman-on-cnbcs-squawk-box-today.html",
+        "duration": "Interview segment",
+        "thumbnail": "/images/video-placeholder.jpg"
+      },
+      {
+        "id": "vid-int-004",
+        "date": "2016-11-10",
+        "type": "video",
+        "title": "Prince Alwaleed on Trump: Republican Party Has 'No Excuse' Not to Deliver Growth",
+        "title_ar": "الأمير الوليد عن ترامب: الحزب الجمهوري \"لا عذر له\" في عدم تحقيق النمو",
+        "description": "Prince Alwaleed discusses the Trump election, expressing optimism about the U.S. economy and addressing his previous Twitter exchange with Trump.",
+        "description_ar": "يناقش الأمير الوليد انتخاب ترامب، معرباً عن تفاؤله بالاقتصاد الأمريكي ومتطرقاً إلى سجاله السابق مع ترامب على تويتر.",
+        "platform": "CNBC Squawk on the Street",
+        "url": "https://www.cnbc.com/2016/11/10/saudi-prince-no-excuse-for-republican-party-to-not-deliver-on-economic-growth.html",
+        "duration": "Phone interview segment",
+        "thumbnail": "/images/video-placeholder.jpg"
+      },
+      {
+        "id": "vid-int-005",
+        "date": "2017-10-23",
+        "type": "video",
+        "title": "Watch CNBC's Full Interview with Saudi Prince Alwaleed Bin Talal",
+        "title_ar": "شاهد المقابلة الكاملة لـ CNBC مع الأمير السعودي الوليد بن طلال",
+        "description": "Comprehensive interview with Andrew Ross Sorkin discussing global investing, Saudi Vision 2030, social issues, and Saudi Aramco's IPO—recorded weeks before his detention.",
+        "description_ar": "مقابلة شاملة مع أندرو روس سوركين يناقش فيها الاستثمار العالمي، ورؤية السعودية 2030، والقضايا الاجتماعية، والطرح الأولي لأرامكو السعودية - سُجّلت قبل أسابيع من احتجازه.",
+        "platform": "CNBC",
+        "url": "https://www.cnbc.com/video/2017/10/23/watch-cnbcs-full-interview-with-saudi-prince-alwaleed-bin-talal.html",
+        "duration": "30+ minutes",
+        "thumbnail": "/images/video-placeholder.jpg"
+      },
+      {
+        "id": "vid-int-006",
+        "date": "2018-01-28",
+        "type": "video",
+        "title": "Saudi Arabia's Prince Alwaleed on His Time in Detention",
+        "title_ar": "الأمير الوليد يتحدث عن فترة احتجازه",
+        "description": "Prince Alwaleed speaks about the kingdom's anti-corruption drive and his time in detention at the Ritz-Carlton.",
+        "description_ar": "الأمير الوليد يتحدث عن حملة مكافحة الفساد في المملكة وفترة احتجازه في فندق ريتز كارلتون.",
+        "platform": "CNBC",
+        "url": "https://www.cnbc.com/video/2018/01/28/saudi-arabias-prince-alwaleed-on-his-time-in-detention.html",
+        "duration": "News segment",
+        "thumbnail": "/images/video-placeholder.jpg"
+      },
+      {
+        "id": "vid-int-007",
+        "date": "2018-03-28",
+        "type": "video",
+        "title": "In Conversation: Prince Alwaleed bin Talal Full Show",
+        "title_ar": "في حوار: الأمير الوليد بن طلال - الحلقة الكاملة",
+        "description": "Exclusive first major interview since release from 83-day detention. Prince Alwaleed speaks with Bloomberg's Erik Schatzker about his detention, agreement with Saudi government, and business operations going forward.",
+        "description_ar": "أول مقابلة رئيسية حصرية منذ الإفراج عنه بعد 83 يوماً من الاحتجاز. الأمير الوليد يتحدث مع إيريك شاتزكر من بلومبرغ عن احتجازه، واتفاقه مع الحكومة السعودية، ومستقبل عملياته التجارية.",
+        "platform": "Bloomberg Television",
+        "url": "https://www.bloomberg.com/news/videos/2018-03-28/in-conversation-prince-alwaleed-bin-talal-full-show",
+        "duration": "40+ minutes (Full special)",
+        "thumbnail": "/images/video-placeholder.jpg"
+      },
+      {
+        "id": "vid-int-008",
+        "date": "2018-11-04",
+        "type": "video",
+        "title": "One-on-One with Prince Al-Waleed bin Talal",
+        "title_ar": "لقاء خاص مع الأمير الوليد بن طلال",
+        "description": "One year since his imprisonment, Prince Alwaleed speaks to Maria Bartiromo about the Khashoggi case, his detention experience, and Crown Prince Mohammed bin Salman.",
+        "description_ar": "بعد عام من احتجازه، يتحدث الأمير الوليد مع ماريا بارتيرومو عن قضية خاشقجي، وتجربة احتجازه، وولي العهد الأمير محمد بن سلمان.",
+        "platform": "Fox News/Fox Business",
+        "url": "https://www.foxnews.com/video/5857468539001",
+        "duration": "Extended interview segment",
+        "thumbnail": "/images/video-placeholder.jpg"
+      },
+      {
+        "id": "vid-int-009",
+        "date": "2025-02-05",
+        "type": "video",
+        "title": "Saudi Arabia's Richest Man Prince Alwaleed on Trump's Tariffs, DeepSeek, Israel, and Iran",
+        "title_ar": "أغنى رجل في السعودية الأمير الوليد يتحدث عن رسوم ترامب الجمركية وDeepSeek وإسرائيل وإيران",
+        "description": "Wide-ranging interview discussing support for Trump's policies, U.S.-Saudi relations, investments in X, AI views, decline of Western Europe, tariffs, and cryptocurrency skepticism.",
+        "description_ar": "مقابلة شاملة يناقش فيها دعمه لسياسات ترامب، والعلاقات الأمريكية السعودية، والاستثمارات في X، ورؤيته للذكاء الاصطناعي، وتراجع أوروبا الغربية، والرسوم الجمركية، وشكوكه تجاه العملات المشفرة.",
+        "platform": "Tucker Carlson Network / YouTube",
+        "url": "https://tuckercarlson.com/tucker-show-prince-waleed",
+        "duration": "56-63 minutes (7 chapters)",
+        "thumbnail": "/images/video-placeholder.jpg"
+      },
+      {
+        "id": "vid-int-010",
+        "date": "2025-04-25",
+        "type": "video",
+        "title": "Prince Alwaleed Plots His Next Act",
+        "title_ar": "الأمير الوليد يخطط لخطوته القادمة",
+        "description": "Bloomberg discusses Prince Alwaleed's return to public life and how his friendships with Elon Musk and Donald Trump have prompted his 'comeback' to Wall Street prominence.",
+        "description_ar": "بلومبرغ تناقش عودة الأمير الوليد إلى الحياة العامة وكيف أسهمت صداقاته مع إيلون ماسك ودونالد ترامب في \"عودته\" إلى الواجهة في وول ستريت.",
+        "platform": "Bloomberg Television",
+        "url": "https://www.bloomberg.com/news/videos/2025-04-25/prince-alwaleed-plots-his-next-act-video",
+        "duration": "News segment",
+        "thumbnail": "/images/video-placeholder.jpg"
+      }
+    ],
+
+    "conference_appearances": [
+      {
+        "id": "vid-conf-001",
+        "date": "2013-11-20",
+        "type": "video",
+        "title": "Bloomberg Year Ahead Summit - Multiple Media Appearances",
+        "title_ar": "قمة بلومبرغ للعام المقبل - ظهور إعلامي متعدد",
+        "description": "During U.S. trip, Prince Alwaleed gave multiple interviews discussing Saudi oil production, Twitter investment, Syria, Iran, women drivers, and the kingdom's economic future.",
+        "description_ar": "خلال زيارته للولايات المتحدة، أجرى الأمير الوليد مقابلات عديدة ناقش فيها إنتاج النفط السعودي، والاستثمار في تويتر، وسوريا، وإيران، وقيادة المرأة، والمستقبل الاقتصادي للمملكة.",
+        "platform": "Multiple (Bloomberg, CBS, CNBC, CNN)",
+        "url": "https://alwaleed.com.sa/news-and-media/news/tags/Personal/hrh-prince-alwaleed-interviews-during-hrh-trip-canada-and-usa",
+        "duration": "Various segments",
+        "thumbnail": "/images/video-placeholder.jpg"
+      }
+    ],
+
+    "audio_content": [
+      {
+        "id": "vid-audio-001",
+        "date": "2011-05-01",
+        "type": "video",
+        "title": "NPR All Things Considered - Prince Alwaleed Interview",
+        "title_ar": "برنامج NPR All Things Considered - مقابلة مع الأمير الوليد",
+        "description": "Interview with Robert Siegel discussing Obama's Middle East speech, his investment philosophy, and the $10 million check to Giuliani after 9/11.",
+        "description_ar": "مقابلة مع روبرت سيغل يناقش فيها خطاب أوباما عن الشرق الأوسط، وفلسفته الاستثمارية، وشيك الـ 10 ملايين دولار لجولياني بعد أحداث 11 سبتمبر.",
+        "platform": "NPR",
+        "url": "https://www.northcountrypublicradio.org/news/npr/136472795/prince-alwaleed-comments-on-obama-s-speech",
+        "duration": "Radio interview",
+        "thumbnail": "/images/video-placeholder.jpg"
+      }
+    ],
+
+    "video_platforms": [
+      {
+        "platform": "CNBC",
+        "description": "Most extensive archive with 15+ years of interviews",
+        "url": "https://www.cnbc.com/search/?query=prince%20alwaleed"
+      },
+      {
+        "platform": "Bloomberg",
+        "description": "Major exclusive interviews, particularly post-2018",
+        "url": "https://www.bloomberg.com/search?query=prince%20alwaleed"
+      },
+      {
+        "platform": "YouTube",
+        "description": "Various interviews and documentary content",
+        "url": "https://www.youtube.com/results?search_query=prince+alwaleed+bin+talal"
+      },
+      {
+        "platform": "Official Website",
+        "description": "Archives of interview links and news",
+        "url": "https://alwaleed.com.sa/news-and-media/"
+      }
+    ]
+  },
+
+  "key_statistics": {
+    "business": {
+      "net_worth": "$16-20 billion (2025 estimate)",
+      "peak_net_worth": "$30.5 billion (2015)",
+      "company_founded": "Kingdom Holding Company, 1980",
+      "starting_capital": "$30,000",
+      "major_investments": ["Citigroup", "Apple", "Twitter/X", "Four Seasons", "xAI", "Lyft", "Careem", "Flynas"],
+      "forbes_ranking_peak": "5th richest person in world (2005)"
+    },
+    "philanthropy": {
+      "total_donated": "$5+ billion",
+      "countries_reached": "190+",
+      "beneficiaries": "1.5 billion+",
+      "giving_pledge_amount": "$32 billion (2015)",
+      "years_of_giving": "45+"
+    },
+    "recognition": {
+      "honorary_doctorates": 27,
+      "medals_from_heads_of_state": "90+",
+      "notable_honors": ["Time 100 (2008)", "Order of King Abdulaziz", "Pontifical Medal", "Star of Palestine", "Legion of Honor (France)"]
+    }
+  }
+}

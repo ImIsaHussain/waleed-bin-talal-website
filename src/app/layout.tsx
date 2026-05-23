@@ -50,6 +50,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Alpha International Group' }],
   creator: 'Alpha International Group',
   metadataBase: new URL('https://walidbintalal.com'),
+  referrer: 'strict-origin-when-cross-origin',
   openGraph: {
     type: 'website',
     locale: 'en_US',

@@ -1,28 +1,17 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from '@/lib/gsap';
 import { useTranslations } from 'next-intl';
-import { Container } from '@/components/ui';
-import {
-  EightPointStar,
-  GeometricGrid,
-  ArabesqueCorner,
-  GeometricDivider,
-} from '@/components/ui/GeometricPatterns';
-import { AnimatedHeading } from '@/components/animations/TextReveal';
-import ParallaxSection, { FadeIn } from '@/components/animations/ParallaxSection';
+import { Container, EightPointStar, GeometricGrid, ArabesqueCorner } from '@/components/ui';
+import PageHero from '@/components/layout/PageHero';
+import PageCTA from '@/components/layout/PageCTA';
+import { AnimatedHeading, ParallaxSection, FadeIn } from '@/components/animations';
 import { Award, Globe, Handshake, Trophy, Star, Medal, Crown, Users } from 'lucide-react';
-
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 export default function AchievementsPage() {
   const t = useTranslations('achievements');
-  const heroRef = useRef<HTMLDivElement>(null);
+  const tc = useTranslations('common');
   const awardsRef = useRef<HTMLDivElement>(null);
 
   const categories = [
@@ -53,75 +42,11 @@ export default function AchievementsPage() {
   ];
 
   const highlights = [
-    { icon: Star, label: 'TIME 100', desc: 'Most Influential People' },
-    { icon: Medal, label: 'Forbes', desc: 'Most Powerful People' },
-    { icon: Crown, label: 'Order of Republic', desc: 'Multiple Nations' },
-    { icon: Users, label: 'UNESCO', desc: 'Humanitarian Award' },
+    { icon: Star, label: t('highlights.time100.label'), desc: t('highlights.time100.desc') },
+    { icon: Medal, label: t('highlights.forbes.label'), desc: t('highlights.forbes.desc') },
+    { icon: Crown, label: t('highlights.orderOfRepublic.label'), desc: t('highlights.orderOfRepublic.desc') },
+    { icon: Users, label: t('highlights.unesco.label'), desc: t('highlights.unesco.desc') },
   ];
-
-  useEffect(() => {
-    if (!heroRef.current) return;
-
-    const ctx = gsap.context(() => {
-      // Hero entrance animation
-      const tl = gsap.timeline();
-
-      // Hero icon animation
-      tl.fromTo(
-        '.ach-hero-icon',
-        { scale: 0, rotation: -180, opacity: 0 },
-        { scale: 1, rotation: 0, opacity: 1, duration: 1.2, ease: 'back.out(1.7)' }
-      )
-        .fromTo(
-          '.ach-hero-line',
-          { scaleX: 0 },
-          { scaleX: 1, duration: 1, ease: 'power3.inOut' },
-          '-=0.5'
-        )
-        .fromTo(
-          '.ach-hero-title',
-          { y: 100, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
-          '-=0.5'
-        )
-        .fromTo(
-          '.ach-hero-subtitle',
-          { y: 50, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-          '-=0.5'
-        )
-        .fromTo(
-          '.ach-highlight',
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', stagger: 0.1 },
-          '-=0.3'
-        );
-
-      // Subtle floating animation for hero icon (no rotation)
-      gsap.to('.ach-hero-icon', {
-        y: -12,
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
-
-      // Parallax on decorative elements
-      gsap.to('.ach-hero-star', {
-        y: -80,
-        rotation: 90,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
 
   // Awards cards animation
   useEffect(() => {
@@ -176,103 +101,29 @@ export default function AchievementsPage() {
       {/* ============================================
           HERO SECTION
           ============================================ */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[90vh] pt-28 md:pt-24 lg:pt-24 pb-15 lg:pb-20 flex items-center bg-deep-navy overflow-hidden"
-      >
-        {/* Background Pattern */}
-        <div className="absolute inset-0">
-          <GeometricGrid className="text-regal-gold/5" />
-        </div>
-
-        {/* Decorative stars - more prominent with rotation variation */}
-        <EightPointStar
-          className="ach-hero-star absolute top-32 right-[12%] text-regal-gold/25 rotate-12"
-          size={180}
-          strokeWidth={0.8}
-        />
-        <EightPointStar
-          className="ach-hero-star absolute bottom-40 left-[8%] text-regal-gold/20 -rotate-15"
-          size={120}
-          strokeWidth={0.6}
-        />
-        <EightPointStar
-          className="ach-hero-star absolute top-1/3 left-[3%] text-regal-gold/15 rotate-[22deg]"
-          size={220}
-          strokeWidth={0.5}
-        />
-        <EightPointStar
-          className="ach-hero-star absolute top-1/2 right-[5%] text-regal-gold/10 -rotate-[30deg]"
-          size={280}
-          strokeWidth={0.4}
-        />
-        <EightPointStar
-          className="ach-hero-star absolute bottom-20 right-[25%] text-regal-gold/15 rotate-45"
-          size={90}
-          strokeWidth={0.8}
-        />
-        <EightPointStar
-          className="ach-hero-star absolute top-40 left-[20%] text-regal-gold/10 -rotate-[18deg]"
-          size={60}
-          strokeWidth={1}
-        />
-
-        {/* Corner accents */}
-        <ArabesqueCorner position="top-left" className="text-regal-gold/30" />
-        <ArabesqueCorner position="top-right" className="text-regal-gold/20" />
-        <ArabesqueCorner position="bottom-left" className="text-regal-gold/20" />
-        <ArabesqueCorner position="bottom-right" className="text-regal-gold/30" />
-
-        {/* Gradient overlay - softer */}
-        <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/20 via-deep-navy/5 to-deep-navy/40" />
-
-        <Container className="relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            {/* Hero icon */}
-            <div className="ach-hero-icon relative w-28 h-28 mx-auto mb-8">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-regal-gold/20 to-regal-gold/5 blur-xl" />
-              <div className="relative w-full h-full rounded-full bg-gradient-to-br from-regal-gold/30 to-transparent flex items-center justify-center border border-regal-gold/30">
-                <Trophy className="w-14 h-14 text-regal-gold" />
+      <PageHero
+        heroPrefix="ach"
+        icon={<Trophy className="w-14 h-14 text-regal-gold" />}
+        title={t('title')}
+        subtitle={t('subtitle')}
+        description={t('intro')}
+        minHeight="min-h-[90vh]"
+        decorativeLine
+        rightContent={
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {highlights.map((item) => (
+              <div
+                key={item.label}
+                className="ach-highlight p-4 lg:p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl text-center group hover:bg-white/10 hover:border-regal-gold/30 transition-all duration-500"
+              >
+                <item.icon className="w-8 h-8 text-regal-gold mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                <p className="text-white font-medium mb-1">{item.label}</p>
+                <p className="text-xs text-gray-400">{item.desc}</p>
               </div>
-            </div>
-
-            {/* Decorative line */}
-            <div className="ach-hero-line w-24 h-1 bg-regal-gold mb-8 mx-auto origin-center" />
-
-            {/* Title */}
-            <h1 className="ach-hero-title text-display font-serif text-white mb-6">
-              {t('title')}
-            </h1>
-
-            {/* Subtitle */}
-            <p className="ach-hero-subtitle text-subtitle text-regal-gold-light font-light mb-8">
-              {t('subtitle')}
-            </p>
-
-            {/* Intro text */}
-            <p className="ach-hero-subtitle text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto mb-16">
-              {t('intro')}
-            </p>
-
-            {/* Highlight badges */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {highlights.map((item) => (
-                <div
-                  key={item.label}
-                  className="ach-highlight p-4 lg:p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl text-center group hover:bg-white/10 hover:border-regal-gold/30 transition-all duration-500"
-                >
-                  <item.icon className="w-8 h-8 text-regal-gold mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <p className="text-white font-medium mb-1">{item.label}</p>
-                  <p className="text-xs text-gray-400">{item.desc}</p>
-                </div>
-              ))}
-            </div>
+            ))}
           </div>
-        </Container>
-
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
-      </section>
+        }
+      />
 
       {/* ============================================
           RECOGNITION CATEGORIES - CLEAN VERTICAL LAYOUT
@@ -298,10 +149,10 @@ export default function AchievementsPage() {
           {/* Section header */}
           <div className="text-center mb-16">
             <FadeIn>
-              <span className="text-label text-regal-gold mb-4 block">Recognition</span>
+              <span className="text-label text-regal-gold mb-4 block">{t('recognition.label')}</span>
             </FadeIn>
             <AnimatedHeading as="h2" className="text-title font-serif text-charcoal">
-              Areas of Achievement
+              {t('recognition.title')}
             </AnimatedHeading>
           </div>
 
@@ -321,7 +172,7 @@ export default function AchievementsPage() {
                     <h3 className="text-2xl lg:text-3xl font-serif font-medium text-charcoal group-hover:text-regal-gold transition-colors">
                       {category.title}
                     </h3>
-                    <p className="text-sm text-muted mt-1">{category.items.length} recognitions</p>
+                    <p className="text-sm text-muted mt-1">{t('recognition.recognitions', { count: category.items.length })}</p>
                   </div>
                 </div>
 
@@ -378,10 +229,10 @@ export default function AchievementsPage() {
               {/* Section header */}
               <div className="text-center mb-16">
                 <FadeIn>
-                  <span className="text-label text-regal-gold mb-4 block">Milestones</span>
+                  <span className="text-label text-regal-gold mb-4 block">{t('milestones.label')}</span>
                 </FadeIn>
                 <AnimatedHeading as="h2" className="text-title font-serif text-white">
-                  A Legacy of Recognition
+                  {t('milestones.title')}
                 </AnimatedHeading>
               </div>
 
@@ -394,13 +245,12 @@ export default function AchievementsPage() {
                         <Star className="w-8 h-8 text-regal-gold" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-serif text-white">TIME Magazine</h3>
-                        <p className="text-regal-gold text-sm">100 Most Influential</p>
+                        <h3 className="text-xl font-serif text-white">{t('featured.time.title')}</h3>
+                        <p className="text-regal-gold text-sm">{t('featured.time.subtitle')}</p>
                       </div>
                     </div>
                     <p className="text-gray-300 leading-relaxed">
-                      Recognized among the world&apos;s 100 most influential people for contributions
-                      to global business, philanthropy, and cross-cultural understanding.
+                      {t('featured.time.description')}
                     </p>
                   </div>
                 </FadeIn>
@@ -412,13 +262,12 @@ export default function AchievementsPage() {
                         <Medal className="w-8 h-8 text-regal-gold" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-serif text-white">Forbes</h3>
-                        <p className="text-regal-gold text-sm">Most Powerful People</p>
+                        <h3 className="text-xl font-serif text-white">{t('featured.forbes.title')}</h3>
+                        <p className="text-regal-gold text-sm">{t('featured.forbes.subtitle')}</p>
                       </div>
                     </div>
                     <p className="text-gray-300 leading-relaxed">
-                      Consistently ranked among Forbes&apos; World&apos;s Most Powerful People for
-                      global business influence and philanthropic leadership.
+                      {t('featured.forbes.description')}
                     </p>
                   </div>
                 </FadeIn>
@@ -430,13 +279,12 @@ export default function AchievementsPage() {
                         <Crown className="w-8 h-8 text-regal-gold" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-serif text-white">Order of the Republic</h3>
-                        <p className="text-regal-gold text-sm">Multiple Nations</p>
+                        <h3 className="text-xl font-serif text-white">{t('featured.orderOfRepublic.title')}</h3>
+                        <p className="text-regal-gold text-sm">{t('featured.orderOfRepublic.subtitle')}</p>
                       </div>
                     </div>
                     <p className="text-gray-300 leading-relaxed">
-                      Honored with the Order of the Republic from multiple nations in recognition
-                      of contributions to international relations and humanitarian causes.
+                      {t('featured.orderOfRepublic.description')}
                     </p>
                   </div>
                 </FadeIn>
@@ -448,13 +296,12 @@ export default function AchievementsPage() {
                         <Users className="w-8 h-8 text-regal-gold" />
                       </div>
                       <div>
-                        <h3 className="text-xl font-serif text-white">UNESCO</h3>
-                        <p className="text-regal-gold text-sm">Humanitarian Award</p>
+                        <h3 className="text-xl font-serif text-white">{t('featured.unesco.title')}</h3>
+                        <p className="text-regal-gold text-sm">{t('featured.unesco.subtitle')}</p>
                       </div>
                     </div>
                     <p className="text-gray-300 leading-relaxed">
-                      Recognized by UNESCO for outstanding contributions to education, cultural
-                      preservation, and humanitarian initiatives worldwide.
+                      {t('featured.unesco.description')}
                     </p>
                   </div>
                 </FadeIn>
@@ -506,9 +353,9 @@ export default function AchievementsPage() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-6">
                 {[
-                  { value: '50+', label: 'Years of Engagement' },
-                  { value: '100+', label: 'Global Partnerships' },
-                  { value: '6', label: 'Continents Reached' },
+                  { value: t('diplomacyStats.yearsOfEngagement.value'), label: t('diplomacyStats.yearsOfEngagement.label') },
+                  { value: t('diplomacyStats.globalPartnerships.value'), label: t('diplomacyStats.globalPartnerships.label') },
+                  { value: t('diplomacyStats.continentsReached.value'), label: t('diplomacyStats.continentsReached.label') },
                 ].map((stat) => (
                   <div key={stat.label} className="p-6 bg-white rounded-xl border border-border">
                     <p className="text-3xl font-display font-bold text-regal-gold mb-2">{stat.value}</p>
@@ -524,35 +371,16 @@ export default function AchievementsPage() {
       {/* ============================================
           CTA SECTION
           ============================================ */}
-      <section className="section-padding-sm bg-background relative">
-        <Container size="md">
-          <FadeIn className="text-center">
-            <GeometricDivider variant="star" className="text-regal-gold mx-auto mb-8" />
-            <h2 className="text-subtitle font-serif text-charcoal mb-4">
-              Explore the Journey
-            </h2>
-            <p className="text-muted mb-8">
-              Discover the philanthropic initiatives and family legacy behind these achievements.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/philanthropy"
-                className="btn-primary"
-                data-cursor="View"
-              >
-                View Philanthropy
-              </a>
-              <a
-                href="/family"
-                className="btn-outline"
-                data-cursor="Explore"
-              >
-                Explore Family Legacy
-              </a>
-            </div>
-          </FadeIn>
-        </Container>
-      </section>
+      <PageCTA
+        title={t('cta.title')}
+        description={t('cta.description')}
+        primaryLabel={tc('cta.explorePhilanthropy')}
+        primaryHref="/philanthropy"
+        primaryCursor={tc('cta.cursor.view')}
+        outlineLabel={tc('cta.exploreFamilyLegacy')}
+        outlineHref="/family"
+        outlineCursor={tc('cta.cursor.explore')}
+      />
     </>
   );
 }

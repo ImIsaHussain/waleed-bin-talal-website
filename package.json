@@ -10,13 +10,13 @@
     "lint:fix": "eslint src --fix",
     "type-check": "tsc --noEmit",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "validate:translations": "node scripts/validate-translations.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-slot": "^1.2.4",
     "clsx": "^2.1.1",
-    "date-fns": "^4.1.0",
     "framer-motion": "^12.23.26",
     "gsap": "^3.14.2",
     "lenis": "^1.3.16",

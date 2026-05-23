@@ -109,6 +109,7 @@ body {
 /* RTL Support */
 html[dir="rtl"] body {
   font-family: var(--font-arabic);
+  font-size: 1.05em;
 }
 
 /* ============================================
@@ -131,6 +132,26 @@ html[dir="rtl"] h5,
 html[dir="rtl"] h6 {
   font-family: var(--font-arabic);
   letter-spacing: 0;
+}
+
+/* RTL letter-spacing overrides */
+html[dir="rtl"] .text-hero,
+html[dir="rtl"] .text-display,
+html[dir="rtl"] .text-title {
+  letter-spacing: 0;
+}
+
+html[dir="rtl"] .text-label {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+/* RTL Arabic font for utility classes */
+html[dir="rtl"] .text-display,
+html[dir="rtl"] .text-hero,
+html[dir="rtl"] .text-title,
+html[dir="rtl"] .text-subtitle {
+  font-family: var(--font-arabic);
 }
 
 /* Display text - for hero headlines */
@@ -212,32 +233,6 @@ html[dir="rtl"] h6 {
 }
 
 /* ============================================
-   PAGE TRANSITIONS
-   ============================================ */
-
-.page-transition-enter {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.page-transition-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
-}
-
-.page-transition-exit {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.page-transition-exit-active {
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
-}
-
-/* ============================================
    ANIMATIONS
    ============================================ */
 
@@ -280,37 +275,6 @@ html[dir="rtl"] h6 {
   }
 }
 
-@keyframes line-draw {
-  from {
-    stroke-dashoffset: 1000;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes reveal-up {
-  from {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 .animate-spin-slow {
   animation: spin-slow 40s linear infinite;
 }
@@ -339,10 +303,8 @@ html[dir="rtl"] h6 {
   background: linear-gradient(90deg, var(--color-regal-gold), transparent);
 }
 
-.gold-line-center {
-  width: 120px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-regal-gold), transparent);
+html[dir="rtl"] .gold-line {
+  background: linear-gradient(270deg, var(--color-regal-gold), transparent);
 }
 
 /* Geometric corner accents */
@@ -357,29 +319,29 @@ html[dir="rtl"] h6 {
 
 .corner-accent--tl {
   top: 16px;
-  left: 16px;
-  border-right: none;
+  inset-inline-start: 16px;
+  border-inline-end: none;
   border-bottom: none;
 }
 
 .corner-accent--tr {
   top: 16px;
-  right: 16px;
-  border-left: none;
+  inset-inline-end: 16px;
+  border-inline-start: none;
   border-bottom: none;
 }
 
 .corner-accent--bl {
   bottom: 16px;
-  left: 16px;
-  border-right: none;
+  inset-inline-start: 16px;
+  border-inline-end: none;
   border-top: none;
 }
 
 .corner-accent--br {
   bottom: 16px;
-  right: 16px;
-  border-left: none;
+  inset-inline-end: 16px;
+  border-inline-start: none;
   border-top: none;
 }
 
@@ -492,17 +454,12 @@ html[dir="rtl"] h6 {
   transform-origin: left;
 }
 
-/* ============================================
-   CARD STYLES
-   ============================================ */
-
-.card-hover {
-  transition: all 0.5s var(--ease-out-expo);
+html[dir="rtl"] .link-underline::after {
+  transform-origin: left;
 }
 
-.card-hover:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+html[dir="rtl"] .link-underline:hover::after {
+  transform-origin: right;
 }
 
 /* ============================================
@@ -514,12 +471,6 @@ html[dir="rtl"] h6 {
     linear-gradient(rgba(197, 160, 89, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(197, 160, 89, 0.05) 1px, transparent 1px);
   background-size: 50px 50px;
-}
-
-.bg-dots {
-  background-image: radial-gradient(circle, var(--color-regal-gold) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.15;
 }
 
 /* ============================================
@@ -539,46 +490,6 @@ html[dir="rtl"] h6 {
     padding-top: var(--spacing-section-sm);
     padding-bottom: var(--spacing-section-sm);
   }
-}
-
-/* ============================================
-   UTILITY CLASSES
-   ============================================ */
-
-.overflow-clip {
-  overflow: clip;
-}
-
-.mask-gradient-b {
-  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-}
-
-.mask-gradient-t {
-  mask-image: linear-gradient(to top, black 70%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to top, black 70%, transparent 100%);
-}
-
-/* Image reveal effect */
-.img-reveal {
-  position: relative;
-  overflow: hidden;
-}
-
-.img-reveal::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--color-regal-gold);
-  transform: scaleY(1);
-  transform-origin: top;
-  transition: transform 1s var(--ease-out-expo);
-  z-index: 1;
-}
-
-.img-reveal.revealed::before {
-  transform: scaleY(0);
-  transform-origin: bottom;
 }
 
 /* Skip link */

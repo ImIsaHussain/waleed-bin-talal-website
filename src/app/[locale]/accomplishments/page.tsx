@@ -1,20 +1,12 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger } from '@/lib/gsap';
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/navigation';
-import { Container } from '@/components/ui';
-import {
-  EightPointStar,
-  GeometricGrid,
-  ArabesqueCorner,
-  GeometricDivider,
-} from '@/components/ui/GeometricPatterns';
-import { AnimatedHeading, AnimatedCounter } from '@/components/animations/TextReveal';
-import ParallaxSection, { FadeIn } from '@/components/animations/ParallaxSection';
-import { MagneticWrapper } from '@/components/animations/MagneticButton';
+import { Container, EightPointStar, GeometricGrid, ArabesqueCorner } from '@/components/ui';
+import PageHero from '@/components/layout/PageHero';
+import PageCTA from '@/components/layout/PageCTA';
+import { AnimatedHeading, AnimatedCounter, ParallaxSection, FadeIn, MagneticWrapper } from '@/components/animations';
 import {
   Landmark,
   Cpu,
@@ -28,25 +20,28 @@ import {
   Crown,
 } from 'lucide-react';
 
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 export default function AccomplishmentsPage() {
   const t = useTranslations('accomplishments');
-  const heroRef = useRef<HTMLDivElement>(null);
+  const tc = useTranslations('common');
   const sectorsRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Detect mobile for disabling stacking cards
+  // Detect mobile for disabling stacking cards (debounced)
   useEffect(() => {
+    setIsMobile(window.innerWidth < 1024);
+
+    let timeoutId: ReturnType<typeof setTimeout>;
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setIsMobile(window.innerWidth < 1024);
+      }, 150);
     };
-    checkMobile();
     window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
 
   const sectors = [
@@ -55,109 +50,54 @@ export default function AccomplishmentsPage() {
       icon: Landmark,
       title: t('sectors.finance.title'),
       description: t('sectors.finance.description'),
-      longDescription: 'Prince Alwaleed has been a transformative force in global finance, establishing Kingdom Holding Company as a major institutional investor. His strategic investments in banking institutions have consistently generated strong returns while supporting economic growth in both established and emerging markets.',
-      investments: ['Citigroup', 'Saudi Fransi', 'Bank of China', 'HSBC'],
-      highlights: ['$12B+ in financial sector investments', 'Board positions at major banks', 'Pioneer in Islamic finance integration'],
+      longDescription: t('sectors.finance.longDescription'),
+      investments: t.raw('sectors.finance.investments') as string[],
+      highlights: t.raw('sectors.finance.highlights') as string[],
     },
     {
       key: 'technology',
       icon: Cpu,
       title: t('sectors.technology.title'),
       description: t('sectors.technology.description'),
-      longDescription: 'A visionary early investor in technology, Prince Alwaleed recognized the transformative potential of digital platforms before they became mainstream. His technology investments span social media, ride-sharing, e-commerce, and enterprise software, establishing Kingdom Holding as a bridge between Silicon Valley and the Middle East.',
-      investments: ['Apple', 'X (Twitter)', 'Snap', 'Uber', 'Meta', 'JD.com'],
-      highlights: ['Early investor in Apple (1997)', 'Major stakeholder in social platforms', 'Pioneer in Middle East tech investment'],
+      longDescription: t('sectors.technology.longDescription'),
+      investments: t.raw('sectors.technology.investments') as string[],
+      highlights: t.raw('sectors.technology.highlights') as string[],
     },
     {
       key: 'hospitality',
       icon: Hotel,
       title: t('sectors.hospitality.title'),
       description: t('sectors.hospitality.description'),
-      longDescription: 'The hospitality portfolio represents some of the most prestigious properties in the world. Prince Alwaleed has redefined luxury hospitality through strategic acquisitions and partnerships with Four Seasons Hotels and Resorts, bringing world-class service standards to new markets while preserving the heritage and character of iconic properties.',
-      investments: ['Four Seasons Hotels', 'The Savoy (London)', 'The Plaza (NYC)', 'George V (Paris)', 'Mövenpick'],
-      highlights: ['Largest individual shareholder in Four Seasons', 'Owner of historic landmark hotels', '50+ luxury properties globally'],
+      longDescription: t('sectors.hospitality.longDescription'),
+      investments: t.raw('sectors.hospitality.investments') as string[],
+      highlights: t.raw('sectors.hospitality.highlights') as string[],
     },
     {
       key: 'media',
       icon: Tv,
       title: t('sectors.media.title'),
       description: t('sectors.media.description'),
-      longDescription: 'Through Rotana Group and strategic media investments, Prince Alwaleed has built the largest entertainment company in the Arab world. The media portfolio spans television broadcasting, film production, music recording, and digital content, promoting Arabic culture while fostering cross-cultural exchange.',
-      investments: ['Rotana Group', 'News Corp', '21st Century Fox', 'Euro Disney'],
-      highlights: ['Largest Arab entertainment network', '10+ TV channels reaching 300M+ viewers', 'Extensive Arabic music catalog'],
+      longDescription: t('sectors.media.longDescription'),
+      investments: t.raw('sectors.media.investments') as string[],
+      highlights: t.raw('sectors.media.highlights') as string[],
     },
     {
       key: 'realEstate',
       icon: Building2,
       title: t('sectors.realEstate.title'),
       description: t('sectors.realEstate.description'),
-      longDescription: 'The real estate portfolio includes landmark developments that have reshaped skylines and set new standards for architectural excellence. From the iconic Kingdom Centre in Riyadh to the ambitious Jeddah Tower project, these investments reflect a commitment to creating spaces that inspire and endure for generations.',
-      investments: ['Jeddah Tower', 'Kingdom Centre', 'Kingdom City', 'International properties'],
-      highlights: ['Developer of world\'s tallest tower', 'Iconic Kingdom Centre tower', 'Mixed-use developments across continents'],
+      longDescription: t('sectors.realEstate.longDescription'),
+      investments: t.raw('sectors.realEstate.investments') as string[],
+      highlights: t.raw('sectors.realEstate.highlights') as string[],
     },
   ];
 
   const stats = [
-    { number: 18, label: 'Industry Sectors', suffix: '+' },
-    { number: 50, label: 'Years of Experience', suffix: '+' },
-    { number: 6, label: 'Continents', suffix: '' },
-    { number: 100, label: 'Billion SAR Assets', suffix: '+' },
+    { number: 18, label: t('stats.industrySectors'), suffix: '+' },
+    { number: 50, label: t('stats.yearsOfExperience'), suffix: '+' },
+    { number: 6, label: t('stats.continents'), suffix: '' },
+    { number: 100, label: t('stats.billionSarAssets'), suffix: '+' },
   ];
-
-  useEffect(() => {
-    if (!heroRef.current) return;
-
-    const ctx = gsap.context(() => {
-      // Hero entrance animation
-      const tl = gsap.timeline();
-
-      // Hero icon animation
-      tl.fromTo(
-        '.acc-hero-icon',
-        { scale: 0, rotation: -180, opacity: 0 },
-        { scale: 1, rotation: 0, opacity: 1, duration: 1.2, ease: 'back.out(1.7)' }
-      )
-        .fromTo(
-          '.acc-hero-line',
-          { scaleX: 0 },
-          { scaleX: 1, duration: 1.2, ease: 'power3.inOut' },
-          '-=0.5'
-        )
-        .fromTo(
-          '.acc-hero-title',
-          { y: 100, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
-          '-=0.5'
-        )
-        .fromTo(
-          '.acc-hero-subtitle',
-          { y: 50, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-          '-=0.5'
-        )
-        .fromTo(
-          '.acc-hero-stat',
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', stagger: 0.1 },
-          '-=0.3'
-        );
-
-      // Parallax on decorative elements
-      gsap.to('.acc-hero-star', {
-        y: -100,
-        rotation: 120,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
 
   // Stacking cards animation with proper ScrollTrigger pinning (desktop only)
   useEffect(() => {
@@ -226,108 +166,32 @@ export default function AccomplishmentsPage() {
       {/* ============================================
           HERO SECTION
           ============================================ */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[85vh] pt-28 md:pt-24 lg:pt-24 pb-15 flex items-center bg-deep-navy overflow-hidden"
-      >
-        {/* Background Pattern */}
-        <div className="absolute inset-0">
-          <GeometricGrid className="text-regal-gold/5" />
-        </div>
-
-        {/* Decorative stars - more prominent with rotation variation */}
-        <EightPointStar
-          className="acc-hero-star absolute top-32 right-[15%] text-regal-gold/25 rotate-[20deg]"
-          size={180}
-          strokeWidth={0.6}
-        />
-        <EightPointStar
-          className="acc-hero-star absolute bottom-32 left-[8%] text-regal-gold/18 -rotate-[15deg]"
-          size={140}
-          strokeWidth={0.5}
-        />
-        <EightPointStar
-          className="acc-hero-star absolute top-1/2 right-[5%] text-regal-gold/12 rotate-[28deg]"
-          size={280}
-          strokeWidth={0.3}
-        />
-        <EightPointStar
-          className="acc-hero-star absolute top-40 left-[3%] text-regal-gold/15 -rotate-[22deg]"
-          size={200}
-          strokeWidth={0.4}
-        />
-        <EightPointStar
-          className="acc-hero-star absolute bottom-20 right-[30%] text-regal-gold/12 rotate-45"
-          size={80}
-          strokeWidth={0.8}
-        />
-        <EightPointStar
-          className="acc-hero-star absolute top-28 left-[22%] text-regal-gold/10 -rotate-[32deg]"
-          size={60}
-          strokeWidth={1}
-        />
-
-        {/* Corner accents */}
-        <ArabesqueCorner position="top-left" className="text-regal-gold/30" />
-        <ArabesqueCorner position="top-right" className="text-regal-gold/25" />
-        <ArabesqueCorner position="bottom-left" className="text-regal-gold/20" />
-        <ArabesqueCorner position="bottom-right" className="text-regal-gold/25" />
-
-        {/* Gradient overlay - softer and lower start */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-deep-navy/5 to-deep-navy/40" />
-
-        <Container className="relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left content */}
-            <div>
-              {/* Hero icon */}
-              <div className="acc-hero-icon relative w-28 h-28 mb-8">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-regal-gold/20 to-regal-gold/5 blur-xl" />
-                <div className="relative w-full h-full rounded-full bg-gradient-to-br from-regal-gold/30 to-transparent flex items-center justify-center border border-regal-gold/30">
-                  <Crown className="w-14 h-14 text-regal-gold" />
+      <PageHero
+        heroPrefix="acc"
+        icon={<Crown className="w-14 h-14 text-regal-gold" />}
+        layout="two-column"
+        title={t('title')}
+        subtitle={t('subtitle')}
+        description={t('intro')}
+        minHeight="min-h-[85vh]"
+        decorativeLine
+        rightContent={
+          <div className="grid grid-cols-2 gap-6">
+            {stats.map((stat, index) => (
+              <div
+                key={stat.label}
+                className="acc-hero-stat p-6 lg:p-8 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl text-center group hover:bg-white/10 hover:border-regal-gold/30 transition-all duration-500"
+              >
+                <div className="text-4xl lg:text-5xl font-display font-bold text-white mb-2">
+                  <AnimatedCounter end={stat.number} duration={2 + index * 0.3} />
+                  <span className="text-regal-gold">{stat.suffix}</span>
                 </div>
+                <p className="text-sm text-gray-400 uppercase tracking-wider">{stat.label}</p>
               </div>
-
-              {/* Decorative line */}
-              <div className="acc-hero-line w-24 h-1 bg-regal-gold mb-8 origin-left" />
-
-              {/* Title */}
-              <h1 className="acc-hero-title text-display font-serif text-white mb-6">
-                {t('title')}
-              </h1>
-
-              {/* Subtitle */}
-              <p className="acc-hero-subtitle text-xl text-gray-300 leading-relaxed max-w-xl mb-8">
-                {t('subtitle')}
-              </p>
-
-              {/* Intro text */}
-              <p className="acc-hero-subtitle text-lg text-regal-gold-light/80 leading-relaxed max-w-xl">
-                {t('intro')}
-              </p>
-            </div>
-
-            {/* Right - Stats Grid */}
-            <div className="grid grid-cols-2 gap-6">
-              {stats.map((stat, index) => (
-                <div
-                  key={stat.label}
-                  className="acc-hero-stat p-6 lg:p-8 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl text-center group hover:bg-white/10 hover:border-regal-gold/30 transition-all duration-500"
-                >
-                  <div className="text-4xl lg:text-5xl font-display font-bold text-white mb-2">
-                    <AnimatedCounter end={stat.number} duration={2 + index * 0.3} />
-                    <span className="text-regal-gold">{stat.suffix}</span>
-                  </div>
-                  <p className="text-sm text-gray-400 uppercase tracking-wider">{stat.label}</p>
-                </div>
-              ))}
-            </div>
+            ))}
           </div>
-        </Container>
-
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
-      </section>
+        }
+      />
 
       {/* ============================================
           KINGDOM HOLDING INTRO
@@ -354,12 +218,10 @@ export default function AccomplishmentsPage() {
               <div className="w-12 h-px bg-regal-gold" />
             </div>
             <h2 className="text-3xl lg:text-4xl font-serif text-charcoal mb-6">
-              Kingdom Holding Company
+              {t('khcIntro.title')}
             </h2>
             <p className="text-body-lg text-muted leading-relaxed max-w-3xl mx-auto">
-              Founded in 1980, Kingdom Holding Company has grown into one of the world&apos;s
-              most diversified investment holding companies, with strategic positions across
-              technology, hospitality, finance, real estate, and entertainment sectors.
+              {t('khcIntro.description')}
             </p>
           </FadeIn>
         </Container>
@@ -378,10 +240,10 @@ export default function AccomplishmentsPage() {
             <Container>
               <div className="text-center">
                 <FadeIn>
-                  <span className="text-label text-regal-gold mb-3 block">Investment Portfolio</span>
+                  <span className="text-label text-regal-gold mb-3 block">{t('portfolio.label')}</span>
                 </FadeIn>
                 <AnimatedHeading as="h2" className="text-title font-serif text-charcoal">
-                  Sectors of Excellence
+                  {t('portfolio.title')}
                 </AnimatedHeading>
               </div>
             </Container>
@@ -448,7 +310,7 @@ export default function AccomplishmentsPage() {
                         <div className="grid lg:grid-cols-2 gap-12">
                           {/* Left Column - Long Description */}
                           <div>
-                            <h4 className="text-lg font-semibold text-charcoal mb-4 uppercase tracking-wider">Overview</h4>
+                            <h4 className="text-lg font-semibold text-charcoal mb-4 uppercase tracking-wider">{t('columnHeaders.overview')}</h4>
                             <p className="text-muted leading-relaxed text-lg">
                               {sector.longDescription}
                             </p>
@@ -458,7 +320,7 @@ export default function AccomplishmentsPage() {
                           <div className="space-y-8">
                             {/* Key Investments */}
                             <div>
-                              <h4 className="text-lg font-semibold text-charcoal mb-4 uppercase tracking-wider">Key Investments</h4>
+                              <h4 className="text-lg font-semibold text-charcoal mb-4 uppercase tracking-wider">{t('columnHeaders.keyInvestments')}</h4>
                               <div className="flex flex-wrap gap-3">
                                 {sector.investments.map((investment) => (
                                   <span
@@ -473,7 +335,7 @@ export default function AccomplishmentsPage() {
 
                             {/* Highlights */}
                             <div>
-                              <h4 className="text-lg font-semibold text-charcoal mb-4 uppercase tracking-wider">Highlights</h4>
+                              <h4 className="text-lg font-semibold text-charcoal mb-4 uppercase tracking-wider">{t('columnHeaders.highlights')}</h4>
                               <ul className="space-y-3">
                                 {sector.highlights.map((highlight, idx) => (
                                   <li key={idx} className="flex items-start gap-3">
@@ -571,20 +433,16 @@ export default function AccomplishmentsPage() {
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Left - Content */}
               <FadeIn direction="left">
-                <span className="text-label text-regal-gold mb-4 block">Strategic Vision</span>
+                <span className="text-label text-regal-gold mb-4 block">{t('investingInTomorrow.label')}</span>
                 <h2 className="text-title font-serif text-white mb-6">
-                  Investing in Tomorrow
+                  {t('investingInTomorrow.title')}
                 </h2>
                 <div className="space-y-6 text-gray-300 leading-relaxed">
                   <p>
-                    Prince Alwaleed&apos;s investment philosophy has always been to identify companies and sectors
-                    poised for transformative growth. From early investments in Apple and
-                    Citigroup to recent ventures in artificial intelligence and social media,
-                    he seeks opportunities that combine financial returns with lasting impact.
+                    {t('investingInTomorrow.paragraph1')}
                   </p>
                   <p>
-                    Kingdom Holding&apos;s portfolio reflects a commitment to innovation,
-                    quality, and long-term value creation across six continents.
+                    {t('investingInTomorrow.paragraph2')}
                   </p>
                 </div>
 
@@ -595,9 +453,9 @@ export default function AccomplishmentsPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-6 py-3 bg-regal-gold text-deep-navy font-medium rounded-full hover:bg-regal-gold-light transition-colors"
-                      data-cursor="Visit"
+                      data-cursor={tc('cta.cursor.visit')}
                     >
-                      Kingdom Holding
+                      {t('investingInTomorrow.kingdomHolding')}
                       <ArrowUpRight className="w-4 h-4" />
                     </a>
                   </MagneticWrapper>
@@ -608,9 +466,9 @@ export default function AccomplishmentsPage() {
               <FadeIn direction="right" delay={0.2}>
                 <div className="space-y-4">
                   {[
-                    { icon: TrendingUp, title: 'Early Tech Investor', desc: 'Pioneering investments in Apple, Twitter, and emerging platforms' },
-                    { icon: Globe2, title: 'Global Presence', desc: 'Strategic holdings across Americas, Europe, Middle East, and Asia' },
-                    { icon: Briefcase, title: 'Diversified Portfolio', desc: '18+ sectors from hospitality to healthcare, finance to technology' },
+                    { icon: TrendingUp, title: t('investmentHighlights.earlyTechInvestor.title'), desc: t('investmentHighlights.earlyTechInvestor.description') },
+                    { icon: Globe2, title: t('investmentHighlights.globalPresence.title'), desc: t('investmentHighlights.globalPresence.description') },
+                    { icon: Briefcase, title: t('investmentHighlights.diversifiedPortfolio.title'), desc: t('investmentHighlights.diversifiedPortfolio.description') },
                   ].map((item) => (
                     <div
                       key={item.title}
@@ -661,9 +519,9 @@ export default function AccomplishmentsPage() {
             <FadeIn delay={0.3}>
               <div className="grid sm:grid-cols-3 gap-6">
                 {[
-                  { label: 'Jobs Created', value: 'Thousands' },
-                  { label: 'Vision 2030', value: 'Aligned' },
-                  { label: 'Economic Impact', value: 'Transformative' },
+                  { label: t('saudiStats.jobsCreated.label'), value: t('saudiStats.jobsCreated.value') },
+                  { label: t('saudiStats.vision2030.label'), value: t('saudiStats.vision2030.value') },
+                  { label: t('saudiStats.economicImpact.label'), value: t('saudiStats.economicImpact.value') },
                 ].map((item) => (
                   <div
                     key={item.label}
@@ -682,35 +540,16 @@ export default function AccomplishmentsPage() {
       {/* ============================================
           CTA SECTION
           ============================================ */}
-      <section className="section-padding-sm bg-cream relative">
-        <Container size="md">
-          <FadeIn className="text-center">
-            <GeometricDivider variant="star" className="text-regal-gold mx-auto mb-8" />
-            <h2 className="text-subtitle font-serif text-charcoal mb-4">
-              Explore More
-            </h2>
-            <p className="text-muted mb-8">
-              Discover the achievements and philanthropic initiatives that complement this investment legacy.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/achievements"
-                className="btn-primary"
-                data-cursor="View"
-              >
-                View Achievements
-              </Link>
-              <Link
-                href="/philanthropy"
-                className="btn-outline"
-                data-cursor="Explore"
-              >
-                Explore Philanthropy
-              </Link>
-            </div>
-          </FadeIn>
-        </Container>
-      </section>
+      <PageCTA
+        title={t('cta.title')}
+        description={t('cta.description')}
+        primaryLabel={tc('cta.viewAchievements')}
+        primaryHref="/achievements"
+        primaryCursor={tc('cta.cursor.view')}
+        outlineLabel={tc('cta.explorePhilanthropy')}
+        outlineHref="/philanthropy"
+        outlineCursor={tc('cta.cursor.explore')}
+      />
     </>
   );
 }

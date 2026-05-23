@@ -1,21 +1,15 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { gsap, ScrollTrigger } from '@/lib/gsap';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Container } from '@/components/ui';
-import {
-  EightPointStar,
-  GeometricGrid,
-  ArabesqueCorner,
-  GeometricDivider,
-} from '@/components/ui/GeometricPatterns';
-import { AnimatedHeading } from '@/components/animations/TextReveal';
-import ParallaxSection, { FadeIn } from '@/components/animations/ParallaxSection';
+import { Container, EightPointStar, GeometricGrid, ArabesqueCorner } from '@/components/ui';
+import PageHero from '@/components/layout/PageHero';
+import PageCTA from '@/components/layout/PageCTA';
+import { AnimatedHeading, ParallaxSection, FadeIn } from '@/components/animations';
 import { CONTACT_INFO, EXTERNAL_LINKS } from '@/lib/constants';
 import {
   Mail,
@@ -31,11 +25,6 @@ import {
   Heart,
 } from 'lucide-react';
 
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
 const guestbookSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
@@ -47,9 +36,20 @@ type GuestbookFormData = z.infer<typeof guestbookSchema>;
 
 export default function ContactPage() {
   const t = useTranslations('contact');
-  const heroRef = useRef<HTMLDivElement>(null);
+  const tc = useTranslations('common');
   const formRef = useRef<HTMLDivElement>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [honeypot, setHoneypot] = useState('');
+  const successTimeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  // Clean up success message timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (successTimeoutRef.current) {
+        clearTimeout(successTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const {
     register,
@@ -63,16 +63,23 @@ export default function ContactPage() {
     },
   });
 
-  const onSubmit = async (data: GuestbookFormData) => {
+  const onSubmit = useCallback(async (data: GuestbookFormData) => {
+    // Honeypot check — silently fake success for bots
+    if (honeypot) {
+      setIsSubmitted(true);
+      reset();
+      successTimeoutRef.current = setTimeout(() => setIsSubmitted(false), 5000);
+      return;
+    }
+
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log('Form data:', data);
     setIsSubmitted(true);
     reset();
 
     // Reset success message after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000);
-  };
+    successTimeoutRef.current = setTimeout(() => setIsSubmitted(false), 5000);
+  }, [honeypot, reset]);
 
   const categories = [
     { value: 'impact', label: t('guestbook.categories.impact') },
@@ -105,69 +112,17 @@ export default function ContactPage() {
   const externalLinks = [
     {
       icon: Building2,
-      title: 'Kingdom Holding Company',
-      description: 'Official corporate website for investment inquiries',
+      title: t('externalLinks.kingdomHolding.title'),
+      description: t('externalLinks.kingdomHolding.description'),
       url: EXTERNAL_LINKS.kingdomHolding,
     },
     {
       icon: Heart,
-      title: 'Alwaleed Philanthropies',
-      description: 'Global humanitarian initiatives and programs',
+      title: t('externalLinks.alwaleedPhilanthropies.title'),
+      description: t('externalLinks.alwaleedPhilanthropies.description'),
       url: EXTERNAL_LINKS.alwaleedPhilanthropies,
     },
   ];
-
-  // Hero animations
-  useEffect(() => {
-    if (!heroRef.current) return;
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
-
-      tl.fromTo(
-        '.contact-hero-icon',
-        { scale: 0, rotation: -90, opacity: 0 },
-        { scale: 1, rotation: 0, opacity: 1, duration: 1, ease: 'back.out(1.7)' }
-      )
-        .fromTo(
-          '.contact-hero-title',
-          { y: 100, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
-          '-=0.4'
-        )
-        .fromTo(
-          '.contact-hero-subtitle',
-          { y: 50, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-          '-=0.5'
-        );
-
-      // Floating animation
-      gsap.to('.contact-hero-icon', {
-        y: -10,
-        rotation: 5,
-        duration: 2.5,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
-
-      // Parallax stars
-      gsap.to('.contact-star', {
-        y: -70,
-        rotation: 100,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
 
   // Form section animation
   useEffect(() => {
@@ -214,61 +169,13 @@ export default function ContactPage() {
       {/* ============================================
           HERO SECTION
           ============================================ */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[70vh] flex items-center bg-deep-navy overflow-hidden"
-      >
-        {/* Background Pattern */}
-        <div className="absolute inset-0">
-          <GeometricGrid className="text-regal-gold/5" />
-        </div>
-
-        {/* Decorative stars */}
-        <EightPointStar
-          className="contact-star absolute top-24 right-[15%] text-regal-gold/20"
-          size={130}
-          strokeWidth={0.5}
-        />
-        <EightPointStar
-          className="contact-star absolute bottom-36 left-[10%] text-regal-gold/10"
-          size={180}
-          strokeWidth={0.5}
-        />
-
-        {/* Corner accents */}
-        <ArabesqueCorner position="top-left" className="text-regal-gold/30" />
-        <ArabesqueCorner position="top-right" className="text-regal-gold/30" />
-        <ArabesqueCorner position="bottom-left" className="text-regal-gold/30" />
-        <ArabesqueCorner position="bottom-right" className="text-regal-gold/30" />
-
-        {/* Gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/20 via-deep-navy/5 to-deep-navy/40" />
-
-        <Container className="relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            {/* Icon */}
-            <div className="contact-hero-icon relative w-28 h-28 mx-auto mb-8">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-regal-gold/20 to-regal-gold/5 blur-xl" />
-              <div className="relative w-full h-full rounded-full bg-gradient-to-br from-regal-gold/30 to-transparent flex items-center justify-center border border-regal-gold/20">
-                <MessageSquare className="w-14 h-14 text-regal-gold" />
-              </div>
-            </div>
-
-            {/* Title */}
-            <h1 className="contact-hero-title text-display font-serif text-white mb-6">
-              {t('title')}
-            </h1>
-
-            {/* Subtitle */}
-            <p className="contact-hero-subtitle text-subtitle text-regal-gold-light font-light max-w-2xl mx-auto">
-              {t('subtitle')}
-            </p>
-          </div>
-        </Container>
-
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
-      </section>
+      <PageHero
+        heroPrefix="contact"
+        icon={<MessageSquare className="w-14 h-14 text-regal-gold" />}
+        title={t('title')}
+        subtitle={t('subtitle')}
+        minHeight="min-h-[70vh]"
+      />
 
       {/* ============================================
           INTRO SECTION
@@ -304,7 +211,7 @@ export default function ContactPage() {
                     <h2 className="text-2xl font-serif font-medium text-charcoal">
                       {t('guestbook.title')}
                     </h2>
-                    <p className="text-sm text-muted">Share your thoughts and experiences</p>
+                    <p className="text-sm text-muted">{t('guestbook.subtitle')}</p>
                   </div>
                 </div>
 
@@ -317,6 +224,17 @@ export default function ContactPage() {
 
                 <div className="bg-white rounded-2xl border border-border p-8 shadow-sm">
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                    {/* Honeypot field — hidden from real users, traps bots */}
+                    <input
+                      type="text"
+                      name="website"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                      style={{ position: 'absolute', left: '-9999px', opacity: 0 }}
+                    />
                     {/* Name & Email Row */}
                     <div className="grid sm:grid-cols-2 gap-6">
                       {/* Name Field */}
@@ -332,7 +250,7 @@ export default function ContactPage() {
                           type="text"
                           id="name"
                           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-regal-gold/20 focus:border-regal-gold transition-all bg-gray-50 hover:bg-white"
-                          placeholder="Your name"
+                          placeholder={t('guestbook.form.placeholders.name')}
                         />
                         {errors.name && (
                           <p className="text-red-600 text-sm mt-1">
@@ -354,7 +272,7 @@ export default function ContactPage() {
                           type="email"
                           id="email"
                           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-regal-gold/20 focus:border-regal-gold transition-all bg-gray-50 hover:bg-white"
-                          placeholder="your@email.com"
+                          placeholder={t('guestbook.form.placeholders.email')}
                         />
                         {errors.email && (
                           <p className="text-red-600 text-sm mt-1">
@@ -398,7 +316,7 @@ export default function ContactPage() {
                         id="message"
                         rows={5}
                         className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-regal-gold/20 focus:border-regal-gold transition-all bg-gray-50 hover:bg-white resize-none"
-                        placeholder="Share your message..."
+                        placeholder={t('guestbook.form.placeholders.message')}
                       />
                       {errors.message && (
                         <p className="text-red-600 text-sm mt-1">
@@ -416,7 +334,7 @@ export default function ContactPage() {
                       {isSubmitting ? (
                         <>
                           <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          Sending...
+                          {tc('cta.sending')}
                         </>
                       ) : (
                         <>
@@ -479,7 +397,7 @@ export default function ContactPage() {
                   <div>
                     <h4 className="font-medium text-charcoal text-sm mb-1">{t('info.mediaInquiries')}</h4>
                     <p className="text-xs text-muted">
-                      Contact Kingdom Holding Company communications team for press inquiries.
+                      {t('mediaInquiryDesc')}
                     </p>
                   </div>
                 </div>
@@ -488,7 +406,7 @@ export default function ContactPage() {
                   <div>
                     <h4 className="font-medium text-charcoal text-sm mb-1">{t('info.businessInquiries')}</h4>
                     <p className="text-xs text-muted">
-                      Reach out to investor relations for partnership opportunities.
+                      {t('businessInquiryDesc')}
                     </p>
                   </div>
                 </div>
@@ -507,10 +425,10 @@ export default function ContactPage() {
         <Container>
           <div className="text-center mb-12">
             <FadeIn>
-              <span className="text-label text-regal-gold mb-4 block">Official Channels</span>
+              <span className="text-label text-regal-gold mb-4 block">{t('officialChannels.label')}</span>
             </FadeIn>
             <AnimatedHeading as="h2" className="text-title font-serif text-charcoal">
-              Connect With Us
+              {t('officialChannels.title')}
             </AnimatedHeading>
           </div>
 
@@ -576,7 +494,7 @@ export default function ContactPage() {
 
               {/* Title */}
               <h2 className="text-3xl lg:text-4xl font-serif text-white mb-4">
-                Visit Us
+                {t('visitUs.title')}
               </h2>
 
               {/* Address */}
@@ -588,7 +506,7 @@ export default function ContactPage() {
               <div className="w-full max-w-3xl mx-auto aspect-[16/9] rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
                 <div className="text-center">
                   <MapPin className="w-12 h-12 text-regal-gold/50 mx-auto mb-4" />
-                  <p className="text-gray-500">Interactive map coming soon</p>
+                  <p className="text-gray-500">{t('visitUs.mapComingSoon')}</p>
                 </div>
               </div>
             </FadeIn>
@@ -599,35 +517,16 @@ export default function ContactPage() {
       {/* ============================================
           CTA SECTION
           ============================================ */}
-      <section className="section-padding-sm bg-background relative">
-        <Container size="md">
-          <FadeIn className="text-center">
-            <GeometricDivider variant="star" className="text-regal-gold mx-auto mb-8" />
-            <h2 className="text-subtitle font-serif text-charcoal mb-4">
-              Continue Exploring
-            </h2>
-            <p className="text-muted mb-8">
-              Learn more about the vision, achievements, and philanthropy of Prince Alwaleed bin Talal.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/biography"
-                className="btn-primary"
-                data-cursor="Read"
-              >
-                Read Biography
-              </a>
-              <a
-                href="/philanthropy"
-                className="btn-outline"
-                data-cursor="Explore"
-              >
-                Explore Philanthropy
-              </a>
-            </div>
-          </FadeIn>
-        </Container>
-      </section>
+      <PageCTA
+        title={t('cta.title')}
+        description={t('cta.description')}
+        primaryLabel={tc('cta.readBiography')}
+        primaryHref="/biography"
+        primaryCursor={tc('cta.cursor.read')}
+        outlineLabel={tc('cta.explorePhilanthropy')}
+        outlineHref="/philanthropy"
+        outlineCursor={tc('cta.cursor.explore')}
+      />
     </>
   );
 }
